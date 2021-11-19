@@ -1,66 +1,49 @@
-import java.util.HashMap;
-import java.util.Iterator;
+package model;
 
-public class Dictionary {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.LinkedList;
+
+public abstract class Dictionary {
 
     private String name;
-    private String front;
-    private String back;
+    private LinkedList<Card> cards;
 
-    private HashMap<String, String> frontSideSelection;
-    private HashMap<String, String> backSideSelection;
-
-    public Dictionary(String name, String front, String back) {
+    public Dictionary(String name) {
         this.name = name;
-        this.front = front;
-        this.back = back;
-
-        frontSideSelection = new HashMap<>();
-        backSideSelection = new HashMap<>();
     }
-
 
     public String getName() {
         return name;
-    }
-
-    public String getFront() {
-        return front;
-    }
-
-    public String getBack() {
-        return back;
-    }
-
-    public HashMap<String, String> getFrontSideSelection() {
-        return frontSideSelection;
-    }
-
-    public HashMap<String, String> getBackSideSelection() {
-        return backSideSelection;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setFront(String front) {
-        this.front = front;
+
+    // Нужно сделать, чтобы ввод на стороны карточки происходил мз графического интерфейса
+    public void createNewCard(){
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String front = null;
+        String back = null;
+
+        try{
+            front = reader.readLine();
+            back = reader.readLine();
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        Card newCard = new Card(front, back);
+        cards.add(newCard);
     }
 
-    public void setBack(String back) {
-        this.back = back;
+    public void shuffleCards(){
+        Collections.shuffle(cards);
     }
 
-    public void setFrontSideSelection(HashMap<String, String> frontSideSelection) {
-        this.frontSideSelection = frontSideSelection;
-    }
-
-    public void setBackSideSelection(HashMap<String, String> backSideSelection) {
-        this.backSideSelection = backSideSelection;
-    }
-
-    public String printDictionaryContent(){
-         
-    }
 }
