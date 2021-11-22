@@ -1,12 +1,15 @@
-package model;
+package basicClasses;
+
+import basicClasses.Card;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public abstract class Dictionary {
+public abstract class Dictionary implements Serializable {
 
     private String name;
     private LinkedList<Card> cards;
@@ -46,4 +49,7 @@ public abstract class Dictionary {
         Collections.shuffle(cards);
     }
 
+    public void nextCard(){} // need to be realised in this class
+
+    abstract void giveAHint();
 }

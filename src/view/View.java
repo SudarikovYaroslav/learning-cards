@@ -3,9 +3,9 @@ package view;
 import controller.Controller;
 
 public class View {
-   private Controller controller;
+    private Controller controller;
 
-    public View(Controller controller) {
+    public void setController(Controller controller) {
         this.controller = controller;
     }
 }

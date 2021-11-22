@@ -1,9 +1,9 @@
-1. Доделать в Dictionary создание карточки:
-    - ввод инф с интерфейса;
+1. realise nextCard() method in Dictionary class. Perhaps need a counter or gust use a stack for run
 
-2. Проблема с DateLoader:
-    - придумать как осуществлять загрузку словарей и пользователей
-    - придумать как связать ловари с конкретным пользователем (возможно органи
-      зовать создание отдельной папки под пользователя с занесением в неё словарей)
+2. Make model
+   - create a Facade pattern to deal with interface
+   - create an Observer pattern
 
-3. Придумать, как реализовать возможность использования разных типов словарей
+3. Make interface
+
+4. Divide the interface into a view and a controller

@@ -1,4 +1,4 @@
-package model;
+package basicClasses;
 
 public class User {
 
