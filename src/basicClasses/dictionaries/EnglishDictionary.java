@@ -7,4 +7,9 @@ public class EnglishDictionary extends Dictionary {
     public EnglishDictionary(String name) {
         super(name);
     }
+
+    @Override
+    protected void giveAHint() {
+
+    }
 }

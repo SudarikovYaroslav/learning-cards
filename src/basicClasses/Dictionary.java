@@ -1,7 +1,4 @@
 package basicClasses;
-
-import basicClasses.Card;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -51,5 +48,5 @@ public abstract class Dictionary implements Serializable {
 
     public void nextCard(){} // need to be realised in this class
 
-    abstract void giveAHint();
+    protected abstract void giveAHint(); // Даёт подсказку
 }

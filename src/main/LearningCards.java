@@ -1,13 +1,8 @@
 package main;
 
-import controller.Controller;
-import model.Model;
-import view.View;
+import basicClasses.CardBuilder;
 
 public class LearningCards {
-    Model model;
-    View view;
-    Controller controller;
 
     public static void main(String[] args) {
         LearningCards learningCards = new LearningCards();
@@ -15,8 +10,7 @@ public class LearningCards {
     }
 
     public void run(){
-        controller.setModel(model);
-        model.setView(view);
-        view.setController(controller);
+        CardBuilder cardBuilder = new CardBuilder();
+        cardBuilder.go();
     }
 }
