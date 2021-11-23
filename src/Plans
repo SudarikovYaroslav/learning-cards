@@ -9,3 +9,6 @@
 4. Divide the interface into a view and a controller
 
 5. !! в классе CardBuilder сконектить метод saveFile(File file) с DataManger !!
+
+6. Разбить работу GUI по модулям View and Controller
+

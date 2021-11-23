@@ -1,6 +1,6 @@
 package main;
 
-import basicClasses.CardBuilder;
+import basicClasses.GUI.CardBuilder;
 
 public class LearningCards {
 

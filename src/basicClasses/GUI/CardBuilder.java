@@ -1,4 +1,6 @@
-package basicClasses;
+package basicClasses.GUI;
+
+import basicClasses.Card;
 
 import javax.swing.*;
 import java.awt.*;
@@ -131,12 +133,11 @@ public class CardBuilder {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             for (Card card : cardList){
-                System.out.println("Test string: " + card.getFront() + " : " + card.getBack());
                 writer.write(card.getFront() + "/");
                 writer.write(card.getBack() + "\n");
             }
             writer.close();
-            System.out.println("*********** cards have been saved ***********");
+
         } catch (IOException e){
             System.out.println("Couldn't wright the cardList out");
             e.printStackTrace();
