@@ -1,6 +1,7 @@
 package main;
 
 import basicClasses.GUI.CardBuilder;
+import basicClasses.GUI.Training;
 
 public class LearningCards {
 
@@ -10,7 +11,9 @@ public class LearningCards {
     }
 
     public void run(){
-        CardBuilder cardBuilder = new CardBuilder();
-        cardBuilder.go();
+        /*CardBuilder cardBuilder = new CardBuilder();
+        cardBuilder.go();*/
+        Training training = new Training();
+        training.go();
     }
 }

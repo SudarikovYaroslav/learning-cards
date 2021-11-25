@@ -1,14 +1,15 @@
-1. realise nextCard() method in Dictionary class. Perhaps need a counter or gust use a stack for run
+1. realise nextCard() method in Dictionary class. Perhaps need a counter or just use a stack for run
 
 2. Make model
    - create a Facade pattern to deal with interface
    - create an Observer pattern
 
-3. Make interface
+3. Make GUI
 
-4. Divide the interface into a view and a controller
+4. Divide the GUI into a view and a controller
 
 5. !! в классе CardBuilder сконектить метод saveFile(File file) с DataManger !!
 
 6. Разбить работу GUI по модулям View and Controller
 
+7. В Training нужно добавить кнопка "Показать ответ"; "Добавить к списку повторение";
