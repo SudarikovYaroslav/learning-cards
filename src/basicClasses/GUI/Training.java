@@ -6,7 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Training {
@@ -39,6 +42,17 @@ public class Training {
         mainPanel.add(qScroller);
         mainPanel.add(nextButton);
         nextButton.addActionListener(new NextCardListener());
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem loadMenuItem = new JMenuItem("Load card set");
+        loadMenuItem.addActionListener(new OpenMenuListener());
+        fileMenu.add(loadMenuItem);
+        menuBar.add(fileMenu);
+        frame.setJMenuBar(menuBar);
+        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
+        frame.setSize(640, 500);
+        frame.setVisible(true);
     }
 
     private void loadFile(File file){
@@ -46,21 +60,64 @@ public class Training {
         // вызванного из обработчика событий класса OpenMenuListener,
         // прочитать файл по одной строке за один раз
         // и вызвать метод makeCard() для создания новой карточки из строки
+        cardList = new ArrayList<>();
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = null;
+
+            while ((line = reader.readLine()) != null){
+                makeCard(line);
+            }
+            reader.close();
+        } catch (IOException e){
+            System.out.println("couldn't read the card file");
+            e.printStackTrace();
+        }
+
+        // Пришло времпоказать первую карточку
+        showNextCard();
     }
 
     private void makeCard(String lineToParse){
         // Вызывается методом loadFile, берёт строку из текстового файла,
         // делит её на две части - переднюю и заднюю и создаёт новую карточку,
         // а затем добавляет её в ArrayList с помощью CardList
+        String[] result = lineToParse.split("/");
+        Card card = new Card(result[0], result[1]);
+        cardList.add(card);
+        System.out.println("made a card");
     }
 
+
+    private void showNextCard(){
+        currentCard = cardList.get(currentCardIndex);
+        currentCardIndex++;
+        display.setText(currentCard.getBack());
+        nextButton.setText("Show answer");
+        isShowAnswer = true;
+    }
 
     class NextCardListener implements ActionListener{
         // Если это вопрос , показываем ответ, иначе показываем следующий вопрос
         // Установим флаг для того, что мы видим, - вопрос это или ответ
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (isShowAnswer){
+                // показываем ответ, так как вопрос уже был показан
+                display.setText(currentCard.getBack());
+                nextButton.setText("Next Card");
+                isShowAnswer = false;
+            } else {
+                // Показываем следующий вопрос
+                if (currentCardIndex < cardList.size()) {
+                    showNextCard();
+                } else {
+                    // Больше карточек нет
+                    display.setText("That was last card");
+                    nextButton.setEnabled(false);
+                }
+            }
         }
     }
 
@@ -69,7 +126,9 @@ public class Training {
         // какой набор карточек открыть
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            JFileChooser fileOpen = new JFileChooser();
+            fileOpen.showOpenDialog(frame);
+            loadFile(fileOpen.getSelectedFile());
         }
     }
 
