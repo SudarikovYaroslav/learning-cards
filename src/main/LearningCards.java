@@ -1,7 +1,8 @@
 package main;
 
-import basicClasses.GUI.CardBuilder;
-import basicClasses.GUI.Training;
+import controller.Controller;
+import model.Model;
+import view.View;
 
 public class LearningCards {
 
@@ -11,9 +12,12 @@ public class LearningCards {
     }
 
     public void run(){
-        /*CardBuilder cardBuilder = new CardBuilder();
-        cardBuilder.go();*/
-        Training training = new Training();
-        training.go();
+        Model model = new Model();
+        View view = new View();
+        Controller controller = new Controller();
+
+        view.setModel(model);
+
+        view.go();
     }
 }

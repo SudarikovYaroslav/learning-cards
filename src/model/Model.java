@@ -3,8 +3,8 @@ package model;
 import basicClasses.Dictionary;
 import basicClasses.User;
 import view.View;
-
 import java.util.ArrayList;
+
 
 public class Model {
     private View view;
@@ -15,10 +15,11 @@ public class Model {
     private ArrayList<String> availableDictionaryTypes;
 
     public Model() {
-        dataManager = new DataManager();
+        usersList = new ArrayList<>(); // line should be deleted after UserSelected GUI pass test successfully
+        /*dataManager = new DataManager();
         availableDictionaryTypes = dataManager.loadAvailableDictionaryTypes();
         usersList = dataManager.loadUsersList();
-        userDictionaries = new ArrayList<>();
+        userDictionaries = new ArrayList<>();*/
     }
 
     public void setView(View view) {
@@ -31,5 +32,9 @@ public class Model {
 
     public void loadUserDictionaries(){
         userDictionaries = dataManager.loadDictionaries(user.getName());
+    }
+
+    public ArrayList<User> getUsersList() {
+        return usersList;
     }
 }

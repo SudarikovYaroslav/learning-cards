@@ -1,4 +1,4 @@
-package basicClasses.GUI;
+package view.GUI;
 
 import basicClasses.Card;
 

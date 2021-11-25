@@ -1,11 +1,18 @@
 package view;
 
-import controller.Controller;
+import model.Model;
+import view.GUI.UserSelectGUI;
 
 public class View {
-    private Controller controller;
 
-    public void setController(Controller controller) {
-        this.controller = controller;
+    private Model model;
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public void go(){
+        UserSelectGUI userSelect = new UserSelectGUI(model);
+        userSelect.go();
     }
 }
