@@ -1,6 +1,8 @@
 package view.GUI;
 
 import basicClasses.Card;
+import basicClasses.Dictionary;
+import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,43 +14,63 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Training {
+public class TrainingGUI {
 
-    private JTextArea display;
-    private JTextArea answer;
+    private Model model;
+    private Dictionary currentDictionary;
+
+    private JTextArea questionArea;
+    private JTextArea answerArea; // ??
     private ArrayList<Card> cardList;
     private Card currentCard;
     private int currentCardIndex;
     private JFrame frame;
-    private JButton nextButton;
     private boolean isShowAnswer;
+
+
+    public TrainingGUI(Model model, Dictionary currentDictionary) {
+        this.model = model;
+        this.currentDictionary = currentDictionary;
+    }
+
 
     public void go(){
         // Формируем и выводим на экран GUI
         frame = new JFrame("Training");
-        JPanel mainPanel = new JPanel();
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
-        display = new JTextArea(10,20);
-        display.setFont(bigFont);
-        display.setLineWrap(true);
-        display.setEditable(false);
+        questionArea = new JTextArea(5,20);
+        questionArea.setFont(bigFont);
+        questionArea.setLineWrap(true);
+        questionArea.setEditable(false);
 
-        JScrollPane qScroller = new JScrollPane(display);
-        qScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        qScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        answerArea = new JTextArea(5,20);
+        answerArea.setFont(bigFont);
+        answerArea.setLineWrap(true);
+        answerArea.setEditable(false);
 
-        nextButton = new JButton("Show Question");
-        mainPanel.add(qScroller);
-        mainPanel.add(nextButton);
-        nextButton.addActionListener(new NextCardListener());
+        JScrollPane questionScroller = new JScrollPane(questionArea);
+        questionScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        questionScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        JScrollPane answerScroller = new JScrollPane(answerArea);
+        answerScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        answerScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.add(BorderLayout.NORTH, questionScroller);
+        mainPanel.add(BorderLayout.SOUTH, answerScroller);
+
+        JPanel buttonsPanel = new JPanel();
+        
 
         JMenuBar menuBar = new JMenuBar();
-        JMenu fileMenu = new JMenu("File");
-        JMenuItem loadMenuItem = new JMenuItem("Load card set");
-        loadMenuItem.addActionListener(new OpenMenuListener());
-        fileMenu.add(loadMenuItem);
-        menuBar.add(fileMenu);
+        JMenu main_menu = new JMenu("Main menu");
+        JMenuItem exit = new JMenuItem("Exit");
+        menuBar.add(main_menu);
+
+
         frame.setJMenuBar(menuBar);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(640, 500);
@@ -93,7 +115,7 @@ public class Training {
     private void showNextCard(){
         currentCard = cardList.get(currentCardIndex);
         currentCardIndex++;
-        display.setText(currentCard.getBack());
+        questionArea.setText(currentCard.getBack());
         nextButton.setText("Show answer");
         isShowAnswer = true;
     }
@@ -105,7 +127,7 @@ public class Training {
         public void actionPerformed(ActionEvent e) {
             if (isShowAnswer){
                 // показываем ответ, так как вопрос уже был показан
-                display.setText(currentCard.getBack());
+                questionArea.setText(currentCard.getBack());
                 nextButton.setText("Next Card");
                 isShowAnswer = false;
             } else {
@@ -114,7 +136,7 @@ public class Training {
                     showNextCard();
                 } else {
                     // Больше карточек нет
-                    display.setText("That was last card");
+                    questionArea.setText("That was last card");
                     nextButton.setEnabled(false);
                 }
             }

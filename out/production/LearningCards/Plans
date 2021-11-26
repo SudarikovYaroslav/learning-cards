@@ -4,7 +4,7 @@
    - create a Facade pattern to deal with interface
    - create an Observer pattern
 
-3. Make GUI
+3. Make GUI (in progress)
 
 4. Divide the GUI into a view and a controller
 
@@ -12,4 +12,18 @@
 
 6. Разбить работу GUI по модулям View and Controller
 
-7. В Training нужно добавить кнопка "Показать ответ"; "Добавить к списку повторение";
+7. Сделать классы базовых GUI во view;
+    done! UserSelectGUI;
+    done! UserProfileGui;
+    in progress! TrainingGUI (need update a basic class);
+    - CurrentDictionaryGUI;
+    - CreateNewCardGUI;
+
+9. Добавить слушателей для всех мнтерактивных объектов во всех базовых GUI:
+    - UserSelectGUI;
+    - UserProfileGui;
+    - TrainingGUI;
+    - CurrentDictionaryGUI;
+    - CreateNewCardGUI;
+
+8. Добавит логику в слушателей во всех базовых классах GUI в модуле view

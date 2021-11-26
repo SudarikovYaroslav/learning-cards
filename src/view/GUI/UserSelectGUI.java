@@ -16,6 +16,7 @@ public class UserSelectGUI {
     JList usersJList; // deal with the parameter
     ArrayList<User> users;
 
+
     public UserSelectGUI(Model model) {
         this.model = model;
     }
@@ -34,13 +35,17 @@ public class UserSelectGUI {
 
         JLabel label = new JLabel("Chose User ore create a new one");
 
+        Font bigFont = new Font("sanserif", Font.BOLD, 24);
+
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.LIGHT_GRAY);
+        mainPanel.setFont(bigFont);
         JScrollPane scroller = new JScrollPane();
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         mainPanel.add(scroller);
-        mainPanel.add(usersJList);
+        mainPanel.add(BorderLayout.CENTER,usersJList);
+        mainPanel.add(BorderLayout.NORTH, label);
 
         JButton chooseUserButton = new JButton("Choose User");
         JButton addNewUserButton = new JButton("Add new User");
@@ -63,7 +68,6 @@ public class UserSelectGUI {
 
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
-        frame.getContentPane().add(BorderLayout.NORTH, label); // here should be label on the NORTH too
         frame.setJMenuBar(menuBar);
         frame.setSize(500,600);
         frame.setVisible(true);

@@ -17,7 +17,6 @@ public class LearningCards {
         Controller controller = new Controller();
 
         view.setModel(model);
-
         view.go();
     }
 }

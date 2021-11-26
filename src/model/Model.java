@@ -16,6 +16,7 @@ public class Model {
 
     public Model() {
         usersList = new ArrayList<>(); // line should be deleted after UserSelected GUI pass test successfully
+        userDictionaries = new ArrayList<>(); // line should be deleted after UserProfile GUI pass test successfully
         /*dataManager = new DataManager();
         availableDictionaryTypes = dataManager.loadAvailableDictionaryTypes();
         usersList = dataManager.loadUsersList();
@@ -36,5 +37,9 @@ public class Model {
 
     public ArrayList<User> getUsersList() {
         return usersList;
+    }
+
+    public ArrayList<Dictionary> getUserDictionaries() {
+        return userDictionaries;
     }
 }
