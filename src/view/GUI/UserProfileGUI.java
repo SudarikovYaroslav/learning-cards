@@ -74,7 +74,7 @@ public class UserProfileGUI {
         frame.getContentPane().add(BorderLayout.EAST, buttonPanel);
         frame.setJMenuBar(menuBar);
 
-        frame.setSize(500, 600);
+        frame.setSize(680, 500);
         frame.setVisible(true);
     }
 

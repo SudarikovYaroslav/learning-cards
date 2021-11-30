@@ -1,6 +1,8 @@
 package view.GUI;
 
 import basicClasses.Card;
+import basicClasses.Dictionary;
+import model.Model;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CardBuilder {
+
+    Model model;
+    Dictionary dictionary;
 
     private JTextArea frontSide;
     private JTextArea backSide;
@@ -74,7 +79,7 @@ public class CardBuilder {
 
         frame.setJMenuBar(menuBar);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.setSize(500,600);
+        frame.setSize(680,500);
         frame.setVisible(true);
     }
 

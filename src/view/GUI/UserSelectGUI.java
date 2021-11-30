@@ -69,7 +69,7 @@ public class UserSelectGUI {
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
         frame.setJMenuBar(menuBar);
-        frame.setSize(500,600);
+        frame.setSize(680,500);
         frame.setVisible(true);
     }
 
