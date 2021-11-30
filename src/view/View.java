@@ -4,7 +4,7 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import basicClasses.dictionaries.EnglishDictionary;
 import model.Model;
-import view.GUI.TrainingGUI;
+import view.GUI.DictionaryGUI;
 
 
 public class View {
@@ -18,7 +18,7 @@ public class View {
     }
 
     public void go(){
-        TrainingGUI trainingGUI = new TrainingGUI(model, currentDictionary);
-        trainingGUI.go();
+        DictionaryGUI dictionaryGUI = new DictionaryGUI(model, currentDictionary);
+        dictionaryGUI.go();
     }
 }
