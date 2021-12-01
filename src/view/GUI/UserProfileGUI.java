@@ -1,4 +1,5 @@
 package view.GUI;
+import basicClasses.Dictionary;
 import basicClasses.User;
 import model.Model;
 
@@ -14,7 +15,7 @@ public class UserProfileGUI {
     private JFrame frame;
     private JPanel mainPanel;
     private JPanel buttonPanel;
-    private JList dictionariesJList;
+    private JList<Dictionary> dictionariesJList;
     private JMenuBar menuBar;
     private JLabel label;
 
@@ -33,7 +34,8 @@ public class UserProfileGUI {
 
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
-        dictionariesJList = new JList(model.getUserDictionaries().toArray());
+        Dictionary[] listEntry = model.getUserDictionaries().toArray(new Dictionary[0]);
+        dictionariesJList = new JList<>(listEntry);
         dictionariesJList.setVisibleRowCount(10);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dictionariesJList.addListSelectionListener(new JListListener());
@@ -74,7 +76,7 @@ public class UserProfileGUI {
         frame.getContentPane().add(BorderLayout.EAST, buttonPanel);
         frame.setJMenuBar(menuBar);
 
-        frame.setSize(680, 500);
+        frame.setSize(580, 500);
         frame.setVisible(true);
     }
 

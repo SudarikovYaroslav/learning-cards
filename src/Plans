@@ -12,12 +12,12 @@
 
 6. Разбить работу GUI по модулям View and Controller
 
-7. Сделать классы базовых GUI во view;
+7.  DONE!Сделать классы базовых GUI во view;
     done! UserSelectGUI;
     done! UserProfileGui;
-    in progress! TrainingGUI (need update a basic class);
-    - CurrentDictionaryGUI;
-    - CreateNewCardGUI;
+    done! progress! TrainingGUI;
+    done! progress DictionaryGUI;
+    done! progress CardBuilderGUI;
 
 9. Добавить слушателей для всех мнтерактивных объектов во всех базовых GUI:
     - UserSelectGUI;
@@ -27,3 +27,7 @@
     - CreateNewCardGUI;
 
 8. Добавит логику в слушателей во всех базовых классах GUI в модуле view
+
+9! Важно!! Сделать рефакторинг GUI (in progress):
+   - сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
+   - унаследовать все GUI от BasicGUI

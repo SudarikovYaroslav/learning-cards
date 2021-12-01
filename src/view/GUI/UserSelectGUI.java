@@ -13,7 +13,7 @@ public class UserSelectGUI {
     JFrame frame;
     JPanel mainPanel;
     JPanel buttonsPanel;
-    JList usersJList; // deal with the parameter
+    JList<User> usersJList; // deal with the parameter
     ArrayList<User> users;
 
 
@@ -28,7 +28,8 @@ public class UserSelectGUI {
 
         UsersSelectionListener usersSelectionListener = new UsersSelectionListener();
         users = model.getUsersList();
-        usersJList = new JList(users.toArray()); // deal with the parameter
+        User[] listEntry = users.toArray(new User[0]);
+        usersJList = new JList<>(listEntry);
         usersJList.setVisibleRowCount(10);
         usersJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         usersJList.addListSelectionListener(usersSelectionListener);
@@ -69,7 +70,7 @@ public class UserSelectGUI {
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
         frame.setJMenuBar(menuBar);
-        frame.setSize(680,500);
+        frame.setSize(580,500);
         frame.setVisible(true);
     }
 

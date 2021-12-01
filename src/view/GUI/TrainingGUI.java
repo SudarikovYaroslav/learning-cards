@@ -82,7 +82,7 @@ public class TrainingGUI {
         frame.setJMenuBar(menuBar);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
-        frame.setSize(680, 500);
+        frame.setSize(580, 500);
         frame.setVisible(true);
     }
 

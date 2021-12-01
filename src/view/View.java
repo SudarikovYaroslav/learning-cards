@@ -4,7 +4,7 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import basicClasses.dictionaries.EnglishDictionary;
 import model.Model;
-import view.GUI.DictionaryGUI;
+import view.GUI.CardBuilderGUI;
 
 
 public class View {
@@ -18,7 +18,7 @@ public class View {
     }
 
     public void go(){
-        DictionaryGUI dictionaryGUI = new DictionaryGUI(model, currentDictionary);
-        dictionaryGUI.go();
+        CardBuilderGUI cbGUI = new CardBuilderGUI();
+        cbGUI.go();
     }
 }

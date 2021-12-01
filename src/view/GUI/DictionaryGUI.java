@@ -1,5 +1,6 @@
 package view.GUI;
 
+import basicClasses.Card;
 import basicClasses.Dictionary;
 import model.Model;
 
@@ -31,8 +32,19 @@ public class DictionaryGUI {
         mainMenu.add(exit);
         menuBar.add(mainMenu);
 
+        Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
+        JList<Card> cardsJList = new JList<Card>(listEntries);
+        JScrollPane listScroller = new JScrollPane(cardsJList);
+        listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        cardsJList.setVisibleRowCount(10);
+
+        JLabel label = new JLabel(dictionary.getName());
+
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.LIGHT_GRAY);
+        mainPanel.add(BorderLayout.SOUTH, cardsJList);
+        mainPanel.add(BorderLayout.NORTH, label);
 
         JButton createCardButton = new JButton("Create new CArd");
         JButton editCardButton = new JButton("Edit Card");
@@ -40,6 +52,7 @@ public class DictionaryGUI {
 
         buttonsPanel = new JPanel();
         buttonsPanel.setBackground(Color.cyan);
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
         buttonsPanel.add(createCardButton);
         buttonsPanel.add(editCardButton);
         buttonsPanel.add(deleteCardButton);
@@ -47,7 +60,7 @@ public class DictionaryGUI {
         frame.setJMenuBar(menuBar);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
-        frame.setSize(680,50);
+        frame.setSize(580,50);
         frame.setVisible(true);
     }
 }

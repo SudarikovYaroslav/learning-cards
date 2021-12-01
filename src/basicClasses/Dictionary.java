@@ -13,10 +13,15 @@ public abstract class Dictionary implements Serializable {
 
     public Dictionary(String name) {
         this.name = name;
+        cards = new LinkedList<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public LinkedList<Card> getCards() {
+        return cards;
     }
 
     public void setName(String name) {
