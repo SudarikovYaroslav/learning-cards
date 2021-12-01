@@ -7,14 +7,11 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class UserSelectGUI {
+public class UserSelectGUI extends BasicGUI{
 
-    Model model;
-    JFrame frame;
-    JPanel mainPanel;
-    JPanel buttonsPanel;
-    JList<User> usersJList; // deal with the parameter
-    ArrayList<User> users;
+    private Model model;
+    private JList<User> usersJList;
+    private ArrayList<User> users;
 
 
     public UserSelectGUI(Model model) {
@@ -22,9 +19,7 @@ public class UserSelectGUI {
     }
 
     public void go(){
-        frame = new JFrame("Learning Cars");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        frame.setTitle("Learning Cars");
 
         UsersSelectionListener usersSelectionListener = new UsersSelectionListener();
         users = model.getUsersList();
@@ -59,19 +54,13 @@ public class UserSelectGUI {
         buttonsPanel.add(addNewUserButton);
         buttonsPanel.add(deleteUserButton);
 
-        JMenuBar menuBar = new JMenuBar();// Deal with menu bar and a the label location;
+        JMenuBar menuBar = new JMenuBar();
         JMenu mainMenu = new JMenu("Main menu");
         JMenuItem exit = new JMenuItem("Exit");
         mainMenu.add(exit);
         menuBar.add(mainMenu);
 
-
-
-        frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
-        frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
-        frame.setJMenuBar(menuBar);
-        frame.setSize(580,500);
-        frame.setVisible(true);
+        this.frameGo();
     }
 
 
@@ -82,4 +71,3 @@ public class UserSelectGUI {
         }
     }
 }
-

@@ -1,24 +1,76 @@
 package view.GUI;
-
-import basicClasses.Card;
 import basicClasses.Dictionary;
 import model.Model;
+import javax.swing.*;
 
+public class CardBuilderGUI extends BasicGUI{
+
+    private Model model;
+    private Dictionary dictionary;
+    private JTextArea frontSide;
+    private JTextArea backSide;
+
+
+    public void go(){
+        frame.setTitle("Card Builder");
+
+        frontSide = new JTextArea(6,20);
+        frontSide.setLineWrap(true);
+        frontSide.setWrapStyleWord(true);
+        frontSide.setFont(bigFont);
+        JScrollPane frontScroller = new JScrollPane(frontSide);
+        frontScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        frontScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+
+        backSide = new JTextArea(6 ,20);
+        backSide.setLineWrap(true);
+        backSide.setWrapStyleWord(true);
+        backSide.setFont(bigFont);
+        JScrollPane backScroller = new JScrollPane(backSide);
+        backScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        backScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        JLabel frontLabel = new JLabel("Question: ");
+        JLabel backLabel = new JLabel("Answer: ");
+
+        mainPanel.add(frontLabel);
+        mainPanel.add(frontScroller);
+        mainPanel.add(backLabel);
+        mainPanel.add(backScroller);
+
+        JButton createCardButton = new JButton("Create Card");
+        JButton editCardButton = new JButton("Edit Card");
+        JButton deleteCardButton = new JButton("Delete Card");
+        JButton cancelButton = new JButton("Cancel");
+
+        buttonsPanel.add(createCardButton);
+        buttonsPanel.add(editCardButton);
+        buttonsPanel.add(deleteCardButton);
+        buttonsPanel.add(cancelButton);
+
+        this.frameGo();
+    }
+
+
+    private void clearCard(){
+        frontSide.setText("");
+        backSide.setText("");
+        frontSide.requestFocus();
+    }
+}
+
+/*
+package view.GUI;
+import basicClasses.Dictionary;
+import model.Model;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class CardBuilderGUI {
 
-    Model model;
-    Dictionary dictionary;
-
+    private Model model;
+    private Dictionary dictionary;
     private JTextArea frontSide;
     private JTextArea backSide;
     private JFrame frame;
@@ -91,3 +143,4 @@ public class CardBuilderGUI {
         frontSide.requestFocus();
     }
 }
+}*/

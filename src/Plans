@@ -27,7 +27,17 @@
     - CreateNewCardGUI;
 
 8. Добавит логику в слушателей во всех базовых классах GUI в модуле view
+    - UserSelectGUI;
+    - UserProfileGui;
+    - TrainingGUI;
+    - CurrentDictionaryGUI;
+    - CreateNewCardGUI;
 
-9! Важно!! Сделать рефакторинг GUI (in progress):
-   - сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
-   - унаследовать все GUI от BasicGUI
+9. DONE! Сделать рефакторинг GUI:
+   done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
+   done! унаследовать все GUI от BasicGUI
+   done! UserSelectGUI;
+   done! UserProfileGui;
+   done! TrainingGUI;
+   done! DictionaryGUI;
+   done! CardBuilderGUI;
