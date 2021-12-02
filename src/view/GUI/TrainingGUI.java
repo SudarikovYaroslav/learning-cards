@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class TrainingGUI extends BasicGUI{
 
-    private Model model;
     private Dictionary currentDictionary;
     private JTextArea questionArea;
     private JTextArea answerArea; // ??
@@ -18,8 +17,7 @@ public class TrainingGUI extends BasicGUI{
     private ArrayList<Card> missedCard;
 
 
-    public TrainingGUI(Model model, Dictionary currentDictionary) {
-        this.model = model;
+    public TrainingGUI(Dictionary currentDictionary) {
         this.currentDictionary = currentDictionary;
     }
 

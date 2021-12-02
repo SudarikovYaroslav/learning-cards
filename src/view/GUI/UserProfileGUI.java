@@ -1,7 +1,6 @@
 package view.GUI;
 import basicClasses.Dictionary;
 import basicClasses.User;
-import model.Model;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,14 +8,12 @@ import java.awt.*;
 
 public class UserProfileGUI extends BasicGUI{
 
-    private Model model;
     private User user;
     private JList<Dictionary> dictionariesJList;
     private JLabel label;
 
 
-    public UserProfileGUI(Model model, User currentUser) {
-        this.model = model;
+    public UserProfileGUI(User currentUser) {
         user = currentUser;
     }
 
@@ -26,7 +23,7 @@ public class UserProfileGUI extends BasicGUI{
 
         label = new JLabel("Your Dictionaries");
 
-        Dictionary[] listEntry = model.getUserDictionaries().toArray(new Dictionary[0]);
+        Dictionary[] listEntry = facade.getUserDictionaries().toArray(new Dictionary[0]);
         dictionariesJList = new JList<>(listEntry);
         dictionariesJList.setVisibleRowCount(10);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

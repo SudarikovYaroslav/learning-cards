@@ -1,6 +1,5 @@
 package view.GUI;
 import basicClasses.User;
-import model.Model;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -9,20 +8,15 @@ import java.util.ArrayList;
 
 public class UserSelectGUI extends BasicGUI{
 
-    private Model model;
     private JList<User> usersJList;
     private ArrayList<User> users;
 
-
-    public UserSelectGUI(Model model) {
-        this.model = model;
-    }
 
     public void go(){
         frame.setTitle("Learning Cars");
 
         UsersSelectionListener usersSelectionListener = new UsersSelectionListener();
-        users = model.getUsersList();
+        users = facade.getUsersList();
         User[] listEntry = users.toArray(new User[0]);
         usersJList = new JList<>(listEntry);
         usersJList.setVisibleRowCount(10);

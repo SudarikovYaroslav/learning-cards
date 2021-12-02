@@ -2,15 +2,20 @@ package view.GUI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserBuilderGUI extends BasicGUI {
 
     JButton createUserButton = new JButton("Create User");
     JButton cancelButton = new JButton("Cancel");
+
     JTextField nameField = new JTextField(20);
     JLabel label = new JLabel("Please enter your name:");
 
     public void go(){
+        cancelButton.addActionListener(new CreateUserListener());
+
         buttonsPanel.add(createUserButton);
         buttonsPanel.add(cancelButton);
 
@@ -18,5 +23,15 @@ public class UserBuilderGUI extends BasicGUI {
         mainPanel.add(BorderLayout.CENTER, nameField);
 
         this.frameGo();
+    }
+
+
+    // Listeners:
+    static class CreateUserListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            /*UserSelectGUI usGUI = new UserSelectGUI();
+            usGUI.go();*/
+        }
     }
 }

@@ -9,11 +9,9 @@ import java.awt.*;
 
 public class DictionaryGUI extends BasicGUI{
 
-    private Model model;
     private Dictionary dictionary;
 
-    public DictionaryGUI(Model model, Dictionary dictionary) {
-        this.model = model;
+    public DictionaryGUI(Dictionary dictionary) {
         this.dictionary = dictionary;
     }
 

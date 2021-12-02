@@ -1,9 +1,14 @@
 package view.GUI;
 
+import facade.Facade;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public abstract class BasicGUI {
+    Facade facade;
     JFrame frame;
     JPanel mainPanel;
     JPanel buttonsPanel;
@@ -11,6 +16,7 @@ public abstract class BasicGUI {
     Font bigFont;
 
     public BasicGUI(){
+        facade = new Facade();
         frame = new JFrame();
         bigFont = new Font("sanserif", Font.BOLD, 24);
         mainPanel = new JPanel();
@@ -23,6 +29,7 @@ public abstract class BasicGUI {
         menuBar = new JMenuBar();
         JMenu mainMenu = new JMenu("Main menu");
         JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.addActionListener(new menuExitItemListener());
         mainMenu.add(exitMenuItem);
         menuBar.add(mainMenu);
 
@@ -36,5 +43,13 @@ public abstract class BasicGUI {
         frame.setJMenuBar(menuBar);
         frame.setSize(580,500);
         frame.setVisible(true);
+    }
+
+
+    static class menuExitItemListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
     }
 }
