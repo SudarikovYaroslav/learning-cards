@@ -1,5 +1,7 @@
 package view.GUI;
 import basicClasses.User;
+import facade.FacadeForView;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -11,6 +13,9 @@ public class UserSelectGUI extends BasicGUI{
     private JList<User> usersJList;
     private ArrayList<User> users;
 
+    public UserSelectGUI(FacadeForView facade) {
+        super(facade);
+    }
 
     public void go(){
         frame.setTitle("Learning Cars");

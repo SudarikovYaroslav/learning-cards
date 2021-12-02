@@ -1,7 +1,8 @@
 package view.GUI;
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import model.Model;
+import facade.FacadeForView;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -11,7 +12,8 @@ public class DictionaryGUI extends BasicGUI{
 
     private Dictionary dictionary;
 
-    public DictionaryGUI(Dictionary dictionary) {
+    public DictionaryGUI(FacadeForView facade, Dictionary dictionary) {
+        super(facade);
         this.dictionary = dictionary;
     }
 
@@ -33,12 +35,15 @@ public class DictionaryGUI extends BasicGUI{
         mainPanel.add(BorderLayout.NORTH, label);
 
         JButton createCardButton = new JButton("Create new Card");
-        JButton editCardButton = new JButton("Edit Card");
         JButton deleteCardButton = new JButton("Delete Card");
+        JButton editCardButton = new JButton("Edit Card");
+        JButton startTrainingButton = new JButton("Start Training");
 
         buttonsPanel.add(createCardButton);
-        buttonsPanel.add(editCardButton);
         buttonsPanel.add(deleteCardButton);
+        buttonsPanel.add(editCardButton);
+        buttonsPanel.add(startTrainingButton);
+
 
         this.frameGo();
     }

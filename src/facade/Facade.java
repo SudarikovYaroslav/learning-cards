@@ -6,19 +6,11 @@ import model.Model;
 
 import java.util.ArrayList;
 
-public class Facade {
+public abstract class Facade {
 
-    private Model model;
+    Model model;
 
     public void setModel(Model model) {
         this.model = model;
-    }
-
-    public ArrayList<Dictionary> getUserDictionaries(){
-        return model.getUserDictionaries();
-    }
-
-    public ArrayList<User> getUsersList(){
-        return model.getUsersList();
     }
 }

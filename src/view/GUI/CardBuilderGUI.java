@@ -1,6 +1,7 @@
 package view.GUI;
 import basicClasses.Dictionary;
-import model.Model;
+import facade.FacadeForView;
+
 import javax.swing.*;
 
 public class CardBuilderGUI extends BasicGUI{
@@ -9,6 +10,10 @@ public class CardBuilderGUI extends BasicGUI{
     private JTextArea frontSide;
     private JTextArea backSide;
 
+    public CardBuilderGUI(FacadeForView facade, Dictionary dictionary) {
+        super(facade);
+        this.dictionary = dictionary;
+    }
 
     public void go(){
         frame.setTitle("Card Builder");

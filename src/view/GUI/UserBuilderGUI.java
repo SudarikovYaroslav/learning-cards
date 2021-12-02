@@ -1,5 +1,6 @@
 package view.GUI;
 
+import facade.FacadeForView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,9 +10,14 @@ public class UserBuilderGUI extends BasicGUI {
 
     JButton createUserButton = new JButton("Create User");
     JButton cancelButton = new JButton("Cancel");
-
     JTextField nameField = new JTextField(20);
     JLabel label = new JLabel("Please enter your name:");
+
+
+    public UserBuilderGUI(FacadeForView facade) {
+        super(facade);
+    }
+
 
     public void go(){
         cancelButton.addActionListener(new CreateUserListener());

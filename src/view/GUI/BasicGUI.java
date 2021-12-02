@@ -1,6 +1,7 @@
 package view.GUI;
 
 import facade.Facade;
+import facade.FacadeForView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,15 +9,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class BasicGUI {
-    Facade facade;
+    FacadeForView facade;
     JFrame frame;
     JPanel mainPanel;
     JPanel buttonsPanel;
     JMenuBar menuBar;
     Font bigFont;
 
-    public BasicGUI(){
-        facade = new Facade();
+    public BasicGUI(FacadeForView facade){
+        this.facade = facade;
         frame = new JFrame();
         bigFont = new Font("sanserif", Font.BOLD, 24);
         mainPanel = new JPanel();
@@ -32,8 +33,6 @@ public abstract class BasicGUI {
         exitMenuItem.addActionListener(new menuExitItemListener());
         mainMenu.add(exitMenuItem);
         menuBar.add(mainMenu);
-
-
     }
 
     void frameGo(){
