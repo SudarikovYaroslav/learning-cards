@@ -2,7 +2,7 @@ package view.GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import facade.FacadeForView;
+import facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class TrainingGUI extends BasicGUI{
     private ArrayList<Card> missedCard;
 
 
-    public TrainingGUI(FacadeForView facade, Dictionary currentDictionary) {
+    public TrainingGUI(ViewFacade facade, Dictionary currentDictionary) {
         super(facade);
         this.currentDictionary = currentDictionary;
     }

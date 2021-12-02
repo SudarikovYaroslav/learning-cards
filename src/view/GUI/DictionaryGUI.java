@@ -1,8 +1,8 @@
 package view.GUI;
+
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import facade.FacadeForView;
-
+import facade.ViewFacade;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -12,7 +12,7 @@ public class DictionaryGUI extends BasicGUI{
 
     private Dictionary dictionary;
 
-    public DictionaryGUI(FacadeForView facade, Dictionary dictionary) {
+    public DictionaryGUI(ViewFacade facade, Dictionary dictionary) {
         super(facade);
         this.dictionary = dictionary;
     }

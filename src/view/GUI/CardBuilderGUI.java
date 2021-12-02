@@ -1,6 +1,6 @@
 package view.GUI;
 import basicClasses.Dictionary;
-import facade.FacadeForView;
+import facade.ViewFacade;
 
 import javax.swing.*;
 
@@ -10,7 +10,7 @@ public class CardBuilderGUI extends BasicGUI{
     private JTextArea frontSide;
     private JTextArea backSide;
 
-    public CardBuilderGUI(FacadeForView facade, Dictionary dictionary) {
+    public CardBuilderGUI(ViewFacade facade, Dictionary dictionary) {
         super(facade);
         this.dictionary = dictionary;
     }

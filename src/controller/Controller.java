@@ -1,14 +1,14 @@
 package controller;
 
-import facade.FacadeForController;
+import facade.ControllerFacade;
 import model.Model;
 
 public class Controller {
 
-    private FacadeForController facade;
+    private ControllerFacade facade;
 
     public void addModel(Model model){
-        facade = new FacadeForController();
+        facade = new ControllerFacade();
         facade.setModel(model);
     }
 

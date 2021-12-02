@@ -4,14 +4,14 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import basicClasses.dictionaries.EnglishDictionary;
 import controller.Controller;
-import facade.FacadeForView;
+import facade.ViewFacade;
 import model.Model;
 import view.GUI.UserBuilderGUI;
 
 
 public class View {
 
-    private FacadeForView facade;
+    private ViewFacade facade;
     private Controller controller; // ????
 
     private User testUser = new User("Yar"); // line should be deleted after test
@@ -23,7 +23,7 @@ public class View {
     }
 
     public void addModel(Model model){
-        facade = new FacadeForView();
+        facade = new ViewFacade();
         facade.setModel(model);
     }
 

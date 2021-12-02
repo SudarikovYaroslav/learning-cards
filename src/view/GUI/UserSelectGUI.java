@@ -1,6 +1,6 @@
 package view.GUI;
 import basicClasses.User;
-import facade.FacadeForView;
+import facade.ViewFacade;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,7 +13,7 @@ public class UserSelectGUI extends BasicGUI{
     private JList<User> usersJList;
     private ArrayList<User> users;
 
-    public UserSelectGUI(FacadeForView facade) {
+    public UserSelectGUI(ViewFacade facade) {
         super(facade);
     }
 

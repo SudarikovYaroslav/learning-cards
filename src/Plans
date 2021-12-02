@@ -1,4 +1,4 @@
-1. Наладить взаимодействие модулей MVC друг с другом;
+1. (In progress!) Наладить взаимодействие модулей MVC друг с другом;
 
 2. (In progress!) Make model
    (Done!) create a Facade pattern to deal with interface

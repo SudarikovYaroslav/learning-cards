@@ -1,6 +1,6 @@
 package view.GUI;
 
-import facade.FacadeForView;
+import facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +14,7 @@ public class UserBuilderGUI extends BasicGUI {
     JLabel label = new JLabel("Please enter your name:");
 
 
-    public UserBuilderGUI(FacadeForView facade) {
+    public UserBuilderGUI(ViewFacade facade) {
         super(facade);
     }
 

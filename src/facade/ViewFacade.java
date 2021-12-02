@@ -5,7 +5,7 @@ import basicClasses.User;
 
 import java.util.ArrayList;
 
-public class FacadeForView extends Facade{
+public class ViewFacade extends Facade{
 
     public ArrayList<Dictionary> getUserDictionaries(){
         return model.getUserDictionaries();

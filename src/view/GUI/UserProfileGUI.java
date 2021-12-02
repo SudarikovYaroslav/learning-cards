@@ -1,7 +1,7 @@
 package view.GUI;
 import basicClasses.Dictionary;
 import basicClasses.User;
-import facade.FacadeForView;
+import facade.ViewFacade;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -15,7 +15,7 @@ public class UserProfileGUI extends BasicGUI{
     private JLabel label;
 
 
-    public UserProfileGUI(FacadeForView facade, User currentUser) {
+    public UserProfileGUI(ViewFacade facade, User currentUser) {
         super(facade);
         user = currentUser;
     }

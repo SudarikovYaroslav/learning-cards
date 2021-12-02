@@ -1,7 +1,6 @@
 package view.GUI;
 
-import facade.Facade;
-import facade.FacadeForView;
+import facade.ViewFacade;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,14 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public abstract class BasicGUI {
-    FacadeForView facade;
+    ViewFacade facade;
     JFrame frame;
     JPanel mainPanel;
     JPanel buttonsPanel;
     JMenuBar menuBar;
     Font bigFont;
 
-    public BasicGUI(FacadeForView facade){
+    public BasicGUI(ViewFacade facade){
         this.facade = facade;
         frame = new JFrame();
         bigFont = new Font("sanserif", Font.BOLD, 24);
