@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class CardBuilderGUI extends BasicGUI{
 
-    private Model model;
     private Dictionary dictionary;
     private JTextArea frontSide;
     private JTextArea backSide;

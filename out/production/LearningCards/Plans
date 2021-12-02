@@ -1,39 +1,44 @@
-1. realise nextCard() method in Dictionary class. Perhaps need a counter or just use a stack for run
+1. Наладить взаимодействие модулей MVC друг с другом;
 
-2. Make model
-   - create a Facade pattern to deal with interface
+2. (In progress!) Make model
+   (Done!) create a Facade pattern to deal with interface
    - create an Observer pattern
+   - сделать сохранение пользовательских данных на ПК;
+   - сделать загрузку пользовательских данны из ПК в программу;
+   -
 
-3. Make GUI (in progress)
+3. (Done!) Make GUI
 
-4. Divide the GUI into a view and a controller
+4. (In progress) Divide the GUI into a view and a controller
 
-5. !! в классе CardBuilder сконектить метод saveFile(File file) с DataManger !!
-
-6. Разбить работу GUI по модулям View and Controller
-
-7.  DONE!Сделать классы базовых GUI во view;
+5.  DONE!Сделать классы базовых GUI во view;
+    done! BasicGUI;
     done! UserSelectGUI;
     done! UserProfileGui;
     done! progress! TrainingGUI;
     done! progress DictionaryGUI;
     done! progress CardBuilderGUI;
+    done! UserBuilderGUI;
 
-9. Добавить слушателей для всех интерактивных объектов во всех базовых GUI:
+6. Добавить слушателей для всех интерактивных объектов во всех базовых GUI:
+    done! BasicGUI;
+    - UserSelectGUI;
+    - UserProfileGui;
+    - TrainingGUI;
+    - CurrentDictionaryGUI;
+    - CreateNewCardGUI;
+    - UserBuilderGUI;
+
+7. Добавить логику в слушателей во всех базовых классах GUI в модуле view
+    done! BasicGUI;
+    - UserBuilderGUI;
     - UserSelectGUI;
     - UserProfileGui;
     - TrainingGUI;
     - CurrentDictionaryGUI;
     - CreateNewCardGUI;
 
-8. Добавит логику в слушателей во всех базовых классах GUI в модуле view
-    - UserSelectGUI;
-    - UserProfileGui;
-    - TrainingGUI;
-    - CurrentDictionaryGUI;
-    - CreateNewCardGUI;
-
-9. DONE! Сделать рефакторинг GUI:
+8. DONE! Сделать рефакторинг GUI:
    done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
    done! унаследовать все GUI от BasicGUI
    done! UserSelectGUI;

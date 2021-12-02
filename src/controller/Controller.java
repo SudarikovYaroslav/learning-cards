@@ -1,16 +1,9 @@
 package controller;
 
-import model.Model;
+import facade.Facade;
 
 public class Controller {
 
-    private Model model;
+    private Facade facade = new Facade();
 
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-    }
 }

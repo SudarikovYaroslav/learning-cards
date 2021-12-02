@@ -4,23 +4,22 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import basicClasses.dictionaries.EnglishDictionary;
 import controller.Controller;
-import model.Model;
+import facade.Facade;
 import view.GUI.*;
 
 
 public class View {
 
-    private Model model;
-    private Controller controller;
+    private Facade facade;
+    private Controller controller; // ????
 
     private User testUser = new User("Yar"); // line should be deleted after test
     private Dictionary currentDictionary = new EnglishDictionary("English Cards"); // line only for tests. Should be deleted
 
 
-    public void setModel(Model model) {
-        this.model = model;
+    public View() {
+        facade = new Facade();
     }
-
 
     public void setController(Controller controller){
         this.controller = controller;
@@ -28,10 +27,10 @@ public class View {
 
 
     public void go(){
-       /*UserSelectGUI usGUI = new UserSelectGUI(model);
+       /*UserSelectGUI usGUI = new UserSelectGUI();
        usGUI.go();*/
 
-        UserBuilderGUI userBuilderGUI = new UserBuilderGUI();
-        userBuilderGUI.go();
+        /*UserBuilderGUI userBuilderGUI = new UserBuilderGUI();
+        userBuilderGUI.go();*/
     }
 }
