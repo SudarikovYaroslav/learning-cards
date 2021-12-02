@@ -19,7 +19,7 @@
     done! progress DictionaryGUI;
     done! progress CardBuilderGUI;
 
-9. Добавить слушателей для всех мнтерактивных объектов во всех базовых GUI:
+9. Добавить слушателей для всех интерактивных объектов во всех базовых GUI:
     - UserSelectGUI;
     - UserProfileGui;
     - TrainingGUI;
