@@ -1,4 +1,4 @@
-package facade;
+package model.facade;
 
 import basicClasses.Dictionary;
 import basicClasses.User;

@@ -1,6 +1,6 @@
 package view.GUI;
 
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 
 import javax.swing.*;
 import java.awt.*;

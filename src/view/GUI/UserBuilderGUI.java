@@ -1,6 +1,6 @@
 package view.GUI;
 
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 
 public class UserBuilderGUI extends BasicGUI {
 
-    JButton createUserButton = new JButton("Create User");
-    JButton cancelButton = new JButton("Cancel");
-    JTextField nameField = new JTextField(20);
-    JLabel label = new JLabel("Please enter your name:");
+    JButton createUserButton;
+    JButton cancelButton;
+    JTextField nameField;
+    JLabel label;
 
 
     public UserBuilderGUI(ViewFacade facade) {
@@ -20,7 +20,15 @@ public class UserBuilderGUI extends BasicGUI {
 
 
     public void go(){
-        cancelButton.addActionListener(new CreateUserListener());
+
+        createUserButton = new JButton("Create User");
+        cancelButton = new JButton("Cancel");
+
+        createUserButton.addActionListener(new CreateUserListener());
+        cancelButton.addActionListener(new CancelListener());
+
+        nameField = new JTextField(20);
+        label = new JLabel("Please enter your name:");
 
         buttonsPanel.add(createUserButton);
         buttonsPanel.add(cancelButton);
@@ -32,12 +40,18 @@ public class UserBuilderGUI extends BasicGUI {
     }
 
 
-    // Listeners:
-    static class CreateUserListener implements ActionListener {
+    private static class CreateUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             /*UserSelectGUI usGUI = new UserSelectGUI();
             usGUI.go();*/
+        }
+    }
+
+    private static class CancelListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 }

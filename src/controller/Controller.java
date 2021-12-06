@@ -1,6 +1,6 @@
 package controller;
 
-import facade.ControllerFacade;
+import model.facade.ControllerFacade;
 import model.Model;
 
 public class Controller {

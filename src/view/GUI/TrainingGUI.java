@@ -2,9 +2,11 @@ package view.GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class TrainingGUI extends BasicGUI{
@@ -54,6 +56,13 @@ public class TrainingGUI extends BasicGUI{
         JButton nexCardButton = new JButton("Next Card");
         JButton missCardButton = new JButton("Miss the Card");
 
+        showAnswerButton.addActionListener(new ShowAnswerListener());
+        givHintButton.addActionListener(new GiveHintListener());
+        failsListButton.addActionListener(new FailsListListener());
+        finishTrainingButton.addActionListener(new FinishTrainingListener());
+        nexCardButton.addActionListener(new NextCardListener());
+        missCardButton.addActionListener(new MissCardListener());
+
         buttonsPanel.add(showAnswerButton);
         buttonsPanel.add(givHintButton);
         buttonsPanel.add(failsListButton);
@@ -65,4 +74,45 @@ public class TrainingGUI extends BasicGUI{
     }
 
 
+    private static class ShowAnswerListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class  GiveHintListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class FailsListListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class FinishTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class NextCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class MissCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
 }

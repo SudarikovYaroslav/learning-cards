@@ -1,4 +1,4 @@
-1. Наладить взаимодействие модулей MVC друг с другом;
+1. (In progress!) Наладить взаимодействие модулей MVC друг с другом;
 
 2. (In progress!) Make model
    (Done!) create a Facade pattern to deal with interface
@@ -20,7 +20,7 @@
     done! progress CardBuilderGUI;
     done! UserBuilderGUI;
 
-6. Добавить слушателей для всех интерактивных объектов во всех базовых GUI:
+6. Добавить внутренние классы слушателей для всех интерактивных объектов во всех базовых GUI:
     done! BasicGUI;
     - UserSelectGUI;
     - UserProfileGui;
@@ -28,6 +28,7 @@
     - CurrentDictionaryGUI;
     - CreateNewCardGUI;
     - UserBuilderGUI;
+    - ExceptionsGUI;
 
 7. Добавить логику в слушателей во всех базовых классах GUI в модуле view
     done! BasicGUI;
@@ -37,6 +38,7 @@
     - TrainingGUI;
     - CurrentDictionaryGUI;
     - CreateNewCardGUI;
+    - ExceptionsGUI;
 
 8. DONE! Сделать рефакторинг GUI:
    done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью

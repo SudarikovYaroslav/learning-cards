@@ -1,12 +1,14 @@
 package view.GUI;
 import basicClasses.Dictionary;
 import basicClasses.User;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserProfileGUI extends BasicGUI{
 
@@ -46,6 +48,12 @@ public class UserProfileGUI extends BasicGUI{
         JButton createNewDictionaryButton = new JButton("Create new Dictionary");
         JButton startFailsRepetitionButton = new JButton("Start fails repetition");
 
+        changeUserButton.addActionListener(new ChangeUserListener());
+        startTrainingButton.addActionListener(new StartTrainingListener());
+        removeDictionaryButton.addActionListener(new RemoveDictionaryListener());
+        createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
+        startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
+
         buttonsPanel.add(createNewDictionaryButton);
         buttonsPanel.add(removeDictionaryButton);
         buttonsPanel.add(startTrainingButton);
@@ -57,9 +65,45 @@ public class UserProfileGUI extends BasicGUI{
 
 
 
-    private class JListListener implements ListSelectionListener {
+    private static class JListListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
+
+        }
+    }
+
+    private static class ChangeUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class StartTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class RemoveDictionaryListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class CreateNewDictionaryListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class StartFailsRepetitionListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
 
         }
     }

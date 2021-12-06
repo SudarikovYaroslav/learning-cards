@@ -2,11 +2,13 @@ package view.GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class DictionaryGUI extends BasicGUI{
 
@@ -39,6 +41,11 @@ public class DictionaryGUI extends BasicGUI{
         JButton editCardButton = new JButton("Edit Card");
         JButton startTrainingButton = new JButton("Start Training");
 
+        createCardButton.addActionListener(new CreateCardListener());
+        deleteCardButton.addActionListener(new DeleteCardListener());
+        editCardButton.addActionListener(new EditCardListener());
+        startTrainingButton.addActionListener(new StartTrainingListener());
+
         buttonsPanel.add(createCardButton);
         buttonsPanel.add(deleteCardButton);
         buttonsPanel.add(editCardButton);
@@ -49,10 +56,41 @@ public class DictionaryGUI extends BasicGUI{
     }
 
 
-    private class CardListSelectionListener implements ListSelectionListener {
-
+    private static class CardListSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
+
+        }
+    }
+
+
+    private static class CreateCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class DeleteCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class EditCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class StartTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
         }
     }

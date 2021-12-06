@@ -4,8 +4,9 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import basicClasses.dictionaries.EnglishDictionary;
 import controller.Controller;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 import model.Model;
+import view.GUI.ExceptionsGUI;
 import view.GUI.UserBuilderGUI;
 
 
@@ -31,7 +32,7 @@ public class View {
        /*UserSelectGUI usGUI = new UserSelectGUI();
        usGUI.go();*/
 
-        UserBuilderGUI userBuilderGUI = new UserBuilderGUI(facade);
-        userBuilderGUI.go();
+        ExceptionsGUI exGUI = new ExceptionsGUI(facade, "Something wrong ((( ");
+        exGUI.go();
     }
 }

@@ -1,11 +1,13 @@
 package view.GUI;
 import basicClasses.User;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class UserSelectGUI extends BasicGUI{
@@ -46,6 +48,10 @@ public class UserSelectGUI extends BasicGUI{
         JButton addNewUserButton = new JButton("Add new User");
         JButton deleteUserButton = new JButton("Delete User");
 
+        chooseUserButton.addActionListener(new ChooseUserListener());
+        addNewUserButton.addActionListener(new AddNewUserListener());
+        deleteUserButton.addActionListener(new DeleteUserListener());
+
         buttonsPanel = new JPanel();
         buttonsPanel.setBackground(Color.CYAN);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
@@ -63,10 +69,31 @@ public class UserSelectGUI extends BasicGUI{
     }
 
 
-    private class UsersSelectionListener implements ListSelectionListener{
+    private static class UsersSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
             // should open a selected user profile
+        }
+    }
+
+    private static class ChooseUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class AddNewUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+    private static class DeleteUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 }

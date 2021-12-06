@@ -1,8 +1,10 @@
 package view.GUI;
 import basicClasses.Dictionary;
-import facade.ViewFacade;
+import model.facade.ViewFacade;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CardBuilderGUI extends BasicGUI{
 
@@ -48,6 +50,11 @@ public class CardBuilderGUI extends BasicGUI{
         JButton deleteCardButton = new JButton("Delete Card");
         JButton cancelButton = new JButton("Cancel");
 
+        createCardButton.addActionListener(new CreateCardListener());
+        editCardButton.addActionListener(new EditCardListener());
+        deleteCardButton.addActionListener(new DeleteCardListener());
+        cancelButton.addActionListener(new CancelListener());
+
         buttonsPanel.add(createCardButton);
         buttonsPanel.add(editCardButton);
         buttonsPanel.add(deleteCardButton);
@@ -61,6 +68,39 @@ public class CardBuilderGUI extends BasicGUI{
         frontSide.setText("");
         backSide.setText("");
         frontSide.requestFocus();
+    }
+
+
+    private static class CreateCardListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class EditCardListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class DeleteCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class CancelListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 }
 
