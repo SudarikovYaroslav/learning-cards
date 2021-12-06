@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class DataManager {
+
     private User user;
     private final String usersListPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/UsersList.txt";
     private final String availableDictionariesListPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/AvailableDictionaries.txt";
@@ -106,13 +107,13 @@ public class DataManager {
 
     }
 
-    ArrayList<Dictionary> loadDictionaries(String userName){
+    ArrayList<Dictionary> loadDictionaries(){
         ArrayList<Dictionary> dictionaries = new ArrayList<>();
         FileInputStream fis;
         ObjectInputStream ois;
 
         try{
-            fis = new FileInputStream(userData + "/" + userName);
+            fis = new FileInputStream(userData + "/" + user.getName());
             ois = new ObjectInputStream(fis);
 
             while (ois.available() > 0){

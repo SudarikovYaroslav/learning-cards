@@ -40,17 +40,18 @@ public class DictionaryGUI extends BasicGUI{
         JButton deleteCardButton = new JButton("Delete Card");
         JButton editCardButton = new JButton("Edit Card");
         JButton startTrainingButton = new JButton("Start Training");
+        JButton changeDictionaryName = new JButton("Change Dictionary name");
 
         createCardButton.addActionListener(new CreateCardListener());
         deleteCardButton.addActionListener(new DeleteCardListener());
         editCardButton.addActionListener(new EditCardListener());
         startTrainingButton.addActionListener(new StartTrainingListener());
+        changeDictionaryName.addActionListener(new ChangeNameListener());
 
         buttonsPanel.add(createCardButton);
         buttonsPanel.add(deleteCardButton);
         buttonsPanel.add(editCardButton);
         buttonsPanel.add(startTrainingButton);
-
 
         this.frameGo();
     }
@@ -89,6 +90,14 @@ public class DictionaryGUI extends BasicGUI{
 
 
     private static class StartTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
+
+
+    private static class ChangeNameListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 

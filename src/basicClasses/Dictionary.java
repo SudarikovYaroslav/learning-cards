@@ -6,27 +6,31 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public abstract class Dictionary implements Serializable {
+public class Dictionary implements Serializable {
 
     private String name;
     private LinkedList<Card> cards;
+
 
     public Dictionary(String name) {
         this.name = name;
         cards = new LinkedList<>();
     }
 
+
     public String getName() {
         return name;
     }
+
 
     public LinkedList<Card> getCards() {
         return cards;
     }
 
+
     public void setName(String name) {
         this.name = name;
-    }
+    } // possibly used to change dictionary name in DictionaryGUI
 
 
     // Нужно сделать, чтобы ввод на стороны карточки происходил мз графического интерфейса
@@ -53,5 +57,7 @@ public abstract class Dictionary implements Serializable {
 
     public void nextCard(){} // need to be realised in this class
 
-    protected abstract void giveAHint(); // Даёт подсказку
+    public String giveAHint(){
+        return "";
+    }; // Даёт подсказку
 }

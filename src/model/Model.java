@@ -6,28 +6,29 @@ import java.util.ArrayList;
 
 
 public class Model {
-    private User user;
-    private ArrayList<Dictionary> userDictionaries;
-    private DataManager dataManager;
+
     private ArrayList<User> usersList;
-    private ArrayList<String> availableDictionaryTypes;
+    private DataManager dataManager;
+
+    private User currentUser;
+    private ArrayList<Dictionary> userDictionaries;
+
 
     public Model() {
-        usersList = new ArrayList<>(); // line should be deleted after UserSelected GUI pass test successfully
-        userDictionaries = new ArrayList<>(); // line should be deleted after UserProfile GUI pass test successfully
-        /*dataManager = new DataManager();
-        availableDictionaryTypes = dataManager.loadAvailableDictionaryTypes();
+        usersList = new ArrayList<>();
+        dataManager = new DataManager();
+
         usersList = dataManager.loadUsersList();
-        userDictionaries = new ArrayList<>();*/
     }
 
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+        dataManager.setUser(currentUser);
     }
 
     public void loadUserDictionaries(){
-        userDictionaries = dataManager.loadDictionaries(user.getName());
+        userDictionaries = dataManager.loadDictionaries();
     }
 
     public ArrayList<User> getUsersList() {

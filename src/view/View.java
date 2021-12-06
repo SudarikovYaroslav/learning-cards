@@ -2,26 +2,18 @@ package view;
 
 import basicClasses.Dictionary;
 import basicClasses.User;
-import basicClasses.dictionaries.EnglishDictionary;
-import controller.Controller;
 import model.facade.ViewFacade;
 import model.Model;
-import view.GUI.ExceptionsGUI;
-import view.GUI.UserBuilderGUI;
+import view.GUI.UserSelectGUI;
 
 
 public class View {
 
     private ViewFacade facade;
-    private Controller controller; // ????
 
     private User testUser = new User("Yar"); // line should be deleted after test
-    private Dictionary currentDictionary = new EnglishDictionary("English Cards"); // line only for tests. Should be deleted
+    private Dictionary currentDictionary = new Dictionary("English Cards"); // line only for tests. Should be deleted
 
-
-    public void setController(Controller controller){
-        this.controller = controller;
-    }
 
     public void addModel(Model model){
         facade = new ViewFacade();
@@ -29,10 +21,7 @@ public class View {
     }
 
     public void go(){
-       /*UserSelectGUI usGUI = new UserSelectGUI();
-       usGUI.go();*/
-
-        ExceptionsGUI exGUI = new ExceptionsGUI(facade, "Something wrong ((( ");
-        exGUI.go();
+        UserSelectGUI userSelectGUI = new UserSelectGUI(facade);
+        userSelectGUI.go();
     }
 }
