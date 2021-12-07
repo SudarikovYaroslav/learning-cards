@@ -49,13 +49,13 @@
 
 7. Добавить логику в слушателей во всех базовых классах GUI в модуле view
     done! BasicGUI;
-    - UserBuilderGUI;
-    - UserSelectGUI;
+    in progress UserBuilderGUI;
+    in progress UserSelectGUI;
     - UserProfileGui;
     - TrainingGUI;
     - CurrentDictionaryGUI;
     - CardBuilderGUI;
-    - ExceptionsGUI;
+    in progress ExceptionsGUI; (Не показывает сообщение об ошибке);
 
 8. ( DONE! ) Сделать рефакторинг GUI:
    done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью

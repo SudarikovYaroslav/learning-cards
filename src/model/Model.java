@@ -3,20 +3,18 @@ package model;
 import basicClasses.Dictionary;
 import basicClasses.User;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 
 public class Model {
 
     private ArrayList<User> availableUsersList;
-    private DataManager dataManager;
     private User currentUser;
     private ArrayList<Dictionary> userDictionaries;
 
-    private final String allUsersPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/AllUsersList.txt";
+    private final String allUsersListPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/AllUsersList.txt";
+    private final String usersFolderPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/Users";
 
 
     public Model() {
@@ -40,7 +38,7 @@ public class Model {
         String line = null;
 
         try {
-            reader = new BufferedReader(new FileReader(allUsersPath));
+            reader = new BufferedReader(new FileReader(allUsersListPath));
 
             while ((line = reader.readLine()) != null){
                 availableUsersList.add(new User(line));
@@ -52,6 +50,22 @@ public class Model {
         }
     }
 
+
+    public void createUser(User user){
+        // Create a user.name folder if it doesn't exist
+        File newUser = new File(usersFolderPath + "/" + user.getName());
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(allUsersListPath, true));
+            writer.write(newUser.getName() + "\n");
+            writer.close();
+
+            newUser.mkdir();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
 
     private void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
