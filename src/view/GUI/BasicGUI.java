@@ -15,6 +15,11 @@ public abstract class BasicGUI {
     JMenuBar menuBar;
     Font bigFont;
 
+
+    public ViewFacade getFacade() {
+        return facade;
+    }
+
     public BasicGUI(ViewFacade facade){
         this.facade = facade;
         frame = new JFrame();
@@ -43,11 +48,11 @@ public abstract class BasicGUI {
         frame.setVisible(true);
     }
 
-
     static class menuExitItemListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
+
 }

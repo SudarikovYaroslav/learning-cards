@@ -12,9 +12,6 @@ import java.util.ArrayList;
 
 public class UserSelectGUI extends BasicGUI{
 
-    private JList<User> usersJList;
-    private ArrayList<User> users;
-
     public UserSelectGUI(ViewFacade facade) {
         super(facade);
     }
@@ -22,13 +19,13 @@ public class UserSelectGUI extends BasicGUI{
     public void go(){
         frame.setTitle("Learning Cars");
 
-        UsersSelectionListener usersSelectionListener = new UsersSelectionListener();
-        users = facade.getUsersList();
+        ArrayList<User> users = facade.getUsersList();
         User[] listEntry = users.toArray(new User[0]);
-        usersJList = new JList<>(listEntry);
+
+        JList<User> usersJList = new JList<>(listEntry);
         usersJList.setVisibleRowCount(10);
         usersJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        usersJList.addListSelectionListener(usersSelectionListener);
+        usersJList.addListSelectionListener(new UsersSelectionListener());
 
         JLabel label = new JLabel("Chose User ore create a new one");
 
@@ -41,10 +38,10 @@ public class UserSelectGUI extends BasicGUI{
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         mainPanel.add(scroller);
-        mainPanel.add(BorderLayout.CENTER,usersJList);
+        mainPanel.add(BorderLayout.CENTER, usersJList);
         mainPanel.add(BorderLayout.NORTH, label);
 
-        JButton chooseUserButton = new JButton("Choose User");
+        JButton chooseUserButton = new JButton("Select User");
         JButton addNewUserButton = new JButton("Add new User");
         JButton deleteUserButton = new JButton("Delete User");
 
@@ -83,10 +80,11 @@ public class UserSelectGUI extends BasicGUI{
         }
     }
 
-    private static class AddNewUserListener implements ActionListener{
+    private class AddNewUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            frameGo();
+            //userBuilderGUI.go();
         }
     }
 
