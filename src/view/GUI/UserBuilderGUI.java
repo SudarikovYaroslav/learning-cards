@@ -1,21 +1,21 @@
 package view.GUI;
 
-import model.facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserBuilderGUI extends BasicGUI {
+public class UserBuilderGUI {
 
-    JButton createUserButton;
-    JButton cancelButton;
-    JTextField nameField;
-    JLabel label;
+    private final BasicGUI basicGUI;
+    private JButton createUserButton;
+    private JButton cancelButton;
+    private JTextField nameField;
+    private JLabel label;
 
 
-    public UserBuilderGUI(ViewFacade facade) {
-        super(facade);
+    public UserBuilderGUI(BasicGUI basicGUI) {
+        this.basicGUI = basicGUI;
     }
 
 
@@ -30,21 +30,20 @@ public class UserBuilderGUI extends BasicGUI {
         nameField = new JTextField(20);
         label = new JLabel("Please enter your name:");
 
-        buttonsPanel.add(createUserButton);
-        buttonsPanel.add(cancelButton);
+        basicGUI.buttonsPanel.add(createUserButton);
+        basicGUI.buttonsPanel.add(cancelButton);
 
-        mainPanel.add(BorderLayout.WEST, label);
-        mainPanel.add(BorderLayout.CENTER, nameField);
+        basicGUI.mainPanel.add(BorderLayout.WEST, label);
+        basicGUI.mainPanel.add(BorderLayout.CENTER, nameField);
 
-        this.frameGo();
+        basicGUI.frameGo();
     }
 
 
     private static class CreateUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            /*UserSelectGUI usGUI = new UserSelectGUI();
-            usGUI.go();*/
+
         }
     }
 

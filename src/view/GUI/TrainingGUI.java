@@ -2,15 +2,15 @@ package view.GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import model.facade.ViewFacade;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class TrainingGUI extends BasicGUI{
+public class TrainingGUI {
 
+    private final BasicGUI basicGUI;
     private Dictionary currentDictionary;
     private JTextArea questionArea;
     private JTextArea answerArea; // ??
@@ -19,22 +19,22 @@ public class TrainingGUI extends BasicGUI{
     private ArrayList<Card> missedCard;
 
 
-    public TrainingGUI(ViewFacade facade, Dictionary currentDictionary) {
-        super(facade);
+    public TrainingGUI(BasicGUI basicGUI, Dictionary currentDictionary) {
+        this.basicGUI = basicGUI;
         this.currentDictionary = currentDictionary;
     }
 
 
     public void go(){
-        frame.setTitle("Training");
+        basicGUI.frame.setTitle("Training");
 
         questionArea = new JTextArea(5,15);
-        questionArea.setFont(bigFont);
+        questionArea.setFont(basicGUI.bigFont);
         questionArea.setLineWrap(true);
         questionArea.setEditable(false);
 
         answerArea = new JTextArea(5,15);
-        answerArea.setFont(bigFont);
+        answerArea.setFont(basicGUI.bigFont);
         answerArea.setLineWrap(true);
         answerArea.setEditable(false);
 
@@ -46,8 +46,8 @@ public class TrainingGUI extends BasicGUI{
         answerScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         answerScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        mainPanel.add(BorderLayout.NORTH, questionScroller);
-        mainPanel.add(BorderLayout.SOUTH, answerScroller);
+        basicGUI.mainPanel.add(BorderLayout.NORTH, questionScroller);
+        basicGUI.mainPanel.add(BorderLayout.SOUTH, answerScroller);
 
         JButton showAnswerButton = new JButton("Show an answer");
         JButton givHintButton = new JButton("Give a hint");
@@ -63,14 +63,14 @@ public class TrainingGUI extends BasicGUI{
         nexCardButton.addActionListener(new NextCardListener());
         missCardButton.addActionListener(new MissCardListener());
 
-        buttonsPanel.add(showAnswerButton);
-        buttonsPanel.add(givHintButton);
-        buttonsPanel.add(failsListButton);
-        buttonsPanel.add(finishTrainingButton);
-        buttonsPanel.add(nexCardButton);
-        buttonsPanel.add(missCardButton);
+        basicGUI.buttonsPanel.add(showAnswerButton);
+        basicGUI.buttonsPanel.add(givHintButton);
+        basicGUI.buttonsPanel.add(failsListButton);
+        basicGUI.buttonsPanel.add(finishTrainingButton);
+        basicGUI.buttonsPanel.add(nexCardButton);
+        basicGUI.buttonsPanel.add(missCardButton);
 
-        this.frameGo();
+        basicGUI.frameGo();
     }
 
 

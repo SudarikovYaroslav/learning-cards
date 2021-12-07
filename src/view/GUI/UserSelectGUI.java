@@ -10,16 +10,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UserSelectGUI extends BasicGUI{
+public class UserSelectGUI {
 
-    public UserSelectGUI(ViewFacade facade) {
-        super(facade);
+    private final BasicGUI basicGUI;
+
+    public UserSelectGUI(BasicGUI basicGUI) {
+        this.basicGUI = basicGUI;
     }
 
     public void go(){
-        frame.setTitle("Learning Cars");
+        basicGUI.frame.setTitle("Learning Cars");
 
-        ArrayList<User> users = facade.getUsersList();
+        ArrayList<User> users = basicGUI.facade.getUsersList();
         User[] listEntry = users.toArray(new User[0]);
 
         JList<User> usersJList = new JList<>(listEntry);
@@ -31,15 +33,15 @@ public class UserSelectGUI extends BasicGUI{
 
         Font bigFont = new Font("sanserif", Font.BOLD, 24);
 
-        mainPanel = new JPanel();
-        mainPanel.setBackground(Color.LIGHT_GRAY);
-        mainPanel.setFont(bigFont);
+        basicGUI.mainPanel = new JPanel();
+        basicGUI.mainPanel.setBackground(Color.LIGHT_GRAY);
+        basicGUI.mainPanel.setFont(bigFont);
         JScrollPane scroller = new JScrollPane();
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        mainPanel.add(scroller);
-        mainPanel.add(BorderLayout.CENTER, usersJList);
-        mainPanel.add(BorderLayout.NORTH, label);
+        basicGUI.mainPanel.add(scroller);
+        basicGUI.mainPanel.add(BorderLayout.CENTER, usersJList);
+        basicGUI.mainPanel.add(BorderLayout.NORTH, label);
 
         JButton chooseUserButton = new JButton("Select User");
         JButton addNewUserButton = new JButton("Add new User");
@@ -49,12 +51,12 @@ public class UserSelectGUI extends BasicGUI{
         addNewUserButton.addActionListener(new AddNewUserListener());
         deleteUserButton.addActionListener(new DeleteUserListener());
 
-        buttonsPanel = new JPanel();
-        buttonsPanel.setBackground(Color.CYAN);
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
-        buttonsPanel.add(chooseUserButton);
-        buttonsPanel.add(addNewUserButton);
-        buttonsPanel.add(deleteUserButton);
+        basicGUI.buttonsPanel = new JPanel();
+        basicGUI.buttonsPanel.setBackground(Color.CYAN);
+        basicGUI.buttonsPanel.setLayout(new BoxLayout(basicGUI.buttonsPanel, BoxLayout.Y_AXIS));
+        basicGUI.buttonsPanel.add(chooseUserButton);
+        basicGUI.buttonsPanel.add(addNewUserButton);
+        basicGUI.buttonsPanel.add(deleteUserButton);
 
         JMenuBar menuBar = new JMenuBar();
         JMenu mainMenu = new JMenu("Main menu");
@@ -62,7 +64,7 @@ public class UserSelectGUI extends BasicGUI{
         mainMenu.add(exit);
         menuBar.add(mainMenu);
 
-        this.frameGo();
+        basicGUI.frameGo();
     }
 
 
@@ -83,8 +85,8 @@ public class UserSelectGUI extends BasicGUI{
     private class AddNewUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            frameGo();
-            //userBuilderGUI.go();
+            UserBuilderGUI userBuilderGUI = new UserBuilderGUI(basicGUI);
+            userBuilderGUI.go();
         }
     }
 

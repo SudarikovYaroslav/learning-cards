@@ -2,7 +2,6 @@ package view.GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
-import model.facade.ViewFacade;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -10,17 +9,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DictionaryGUI extends BasicGUI{
+public class DictionaryGUI {
 
+    private final BasicGUI basicGUI;
     private Dictionary dictionary;
 
-    public DictionaryGUI(ViewFacade facade, Dictionary dictionary) {
-        super(facade);
+    public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary) {
+        this.basicGUI = basicGUI;
         this.dictionary = dictionary;
     }
 
     public void go(){
-        frame.setTitle("Dictionary: " + dictionary.getName());
+        basicGUI.frame.setTitle("Dictionary: " + dictionary.getName());
 
         Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
         JList<Card> cardsJList = new JList<>(listEntries);
@@ -33,8 +33,8 @@ public class DictionaryGUI extends BasicGUI{
 
         JLabel label = new JLabel(dictionary.getName());
 
-        mainPanel.add(BorderLayout.SOUTH, cardsJList);
-        mainPanel.add(BorderLayout.NORTH, label);
+        basicGUI.mainPanel.add(BorderLayout.SOUTH, cardsJList);
+        basicGUI.mainPanel.add(BorderLayout.NORTH, label);
 
         JButton createCardButton = new JButton("Create new Card");
         JButton deleteCardButton = new JButton("Delete Card");
@@ -48,12 +48,12 @@ public class DictionaryGUI extends BasicGUI{
         startTrainingButton.addActionListener(new StartTrainingListener());
         changeDictionaryName.addActionListener(new ChangeNameListener());
 
-        buttonsPanel.add(createCardButton);
-        buttonsPanel.add(deleteCardButton);
-        buttonsPanel.add(editCardButton);
-        buttonsPanel.add(startTrainingButton);
+        basicGUI.buttonsPanel.add(createCardButton);
+        basicGUI.buttonsPanel.add(deleteCardButton);
+        basicGUI.buttonsPanel.add(editCardButton);
+        basicGUI.buttonsPanel.add(startTrainingButton);
 
-        this.frameGo();
+        basicGUI.frameGo();
     }
 
 

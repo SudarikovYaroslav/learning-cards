@@ -4,6 +4,7 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import model.facade.ViewFacade;
 import model.Model;
+import view.GUI.BasicGUI;
 import view.GUI.UserSelectGUI;
 
 
@@ -21,7 +22,8 @@ public class View {
     }
 
     public void go(){
-        UserSelectGUI userSelectGUI = new UserSelectGUI(facade);
+        BasicGUI basicGUI = new BasicGUI(facade);
+        UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI);
         userSelectGUI.go();
     }
 }

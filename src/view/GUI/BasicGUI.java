@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class BasicGUI {
+public class BasicGUI {
     ViewFacade facade;
     JFrame frame;
     JPanel mainPanel;

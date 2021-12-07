@@ -7,24 +7,25 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ExceptionsGUI extends BasicGUI{
+public class ExceptionsGUI {
 
-    JTextArea textArea;
-    JButton okButton;
+    private final BasicGUI basicGUI;
+    private final String message;
 
 
-    public ExceptionsGUI(ViewFacade facade, String message) {
-        super(facade);
-        textArea = new JTextArea(message);
-        okButton = new JButton("OK");
-        okButton.addActionListener(new OKListener());
+    public ExceptionsGUI(BasicGUI basicGUI, String message) {
+        this.basicGUI = basicGUI;
+        this.message = message;
     }
 
 
     public void go(){
-        mainPanel.add(BorderLayout.CENTER, textArea);
-        mainPanel.add(BorderLayout.SOUTH, okButton);
-        frameGo();
+        JTextArea textArea = new JTextArea(message);
+        JButton okButton = new JButton("OK");
+        okButton.addActionListener(new OKListener());
+        basicGUI.mainPanel.add(BorderLayout.CENTER, textArea);
+        basicGUI.mainPanel.add(BorderLayout.SOUTH, okButton);
+        basicGUI.frameGo();
     }
 
 
