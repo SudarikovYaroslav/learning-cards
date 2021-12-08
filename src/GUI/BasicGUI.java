@@ -38,8 +38,10 @@ public class BasicGUI implements GUI {
         menuBar.add(mainMenu);
     }
 
+
+    // Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
+    // серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК
     public void go(){
-        view.setCurrentGUI(this);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);

@@ -12,8 +12,8 @@ public class LearningCards {
     }
 
     public void run(){
-        Model model = new Model();
         View view = new View();
+        Model model = new Model();
         Controller controller = new Controller();
 
         view.addModel(model);

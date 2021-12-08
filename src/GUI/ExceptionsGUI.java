@@ -22,14 +22,16 @@ public class ExceptionsGUI implements GUI {
     }
 
 
+
+    // Важно ! При запуске ExceptionsGUI не передавать во view.currentGUI на него ссылку, инача не получиться
+    // вернуться на предыдущий GUI
     public void go(){
-        view.setCurrentGUI(this);
         basicGUI.clear();
         JTextArea textArea = new JTextArea(message);
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new OKListener());
         basicGUI.mainPanel.add(BorderLayout.CENTER, textArea);
-        basicGUI.mainPanel.add(BorderLayout.SOUTH, okButton);
+        basicGUI.buttonsPanel.add(BorderLayout.SOUTH, okButton);
         basicGUI.go();
     }
 

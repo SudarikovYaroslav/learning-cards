@@ -52,19 +52,16 @@ public class UserBuilderGUI implements GUI {
         public void actionPerformed(ActionEvent e) {
             User newUser = new User(nameField.getText());
 
-            // There should be controller's call to create newUser
-            controller.addNewUser(newUser);
-
-            basicGUI.clear();
-            UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);
-            userSelectGUI.go();
+            if (controller.addNewUser(newUser)) {
+                UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);
+                userSelectGUI.go();
+            }
         }
     }
 
     private class CancelListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            // It doesn't work yet (( I don't understand why )) Tet!!
             UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);
             userSelectGUI.go();
         }

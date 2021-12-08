@@ -30,9 +30,9 @@ public class UserSelectGUI implements GUI {
         basicGUI.frame.setTitle("Learning Cars");
 
         ArrayList<User> users = basicGUI.facade.getUsersList();
-        User[] listEntry = users.toArray(new User[0]);
+        String[] availableUsers = getUsersNames(users);
 
-        JList<User> usersJList = new JList<>(listEntry);
+        JList<String> usersJList = new JList<>(availableUsers);
         usersJList.setVisibleRowCount(10);
         usersJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         usersJList.addListSelectionListener(new UsersSelectionListener());
@@ -51,38 +51,44 @@ public class UserSelectGUI implements GUI {
         basicGUI.mainPanel.add(BorderLayout.CENTER, usersJList);
         basicGUI.mainPanel.add(BorderLayout.NORTH, label);
 
-        JButton chooseUserButton = new JButton("Select User");
+        JButton selectUserButton = new JButton("Select User");
         JButton addNewUserButton = new JButton("Add new User");
         JButton deleteUserButton = new JButton("Delete User");
 
-        chooseUserButton.addActionListener(new ChooseUserListener());
+        selectUserButton.addActionListener(new SelectUserListener());
         addNewUserButton.addActionListener(new AddNewUserListener());
         deleteUserButton.addActionListener(new DeleteUserListener());
 
         basicGUI.buttonsPanel = new JPanel();
         basicGUI.buttonsPanel.setBackground(Color.CYAN);
         basicGUI.buttonsPanel.setLayout(new BoxLayout(basicGUI.buttonsPanel, BoxLayout.Y_AXIS));
-        basicGUI.buttonsPanel.add(chooseUserButton);
+        basicGUI.buttonsPanel.add(selectUserButton);
         basicGUI.buttonsPanel.add(addNewUserButton);
         basicGUI.buttonsPanel.add(deleteUserButton);
-
-        /*JMenuBar menuBar = new JMenuBar();
-        JMenu mainMenu = new JMenu("Main menu");
-        JMenuItem exit = new JMenuItem("Exit");
-        mainMenu.add(exit);
-        menuBar.add(mainMenu);*/
 
         basicGUI.go();
     }
 
-    private static class UsersSelectionListener implements ListSelectionListener{
+
+    private String[] getUsersNames(ArrayList<User> users){
+        String[] usersNames = new String[users.size()];
+
+        for (int i = 0; i < users.size(); i++) {
+            usersNames[i] = users.get(i).getName();
+        }
+
+        return usersNames;
+    }
+
+
+    private class UsersSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            // should open a selected user profile
+
         }
     }
 
-    private static class ChooseUserListener implements ActionListener{
+    private class SelectUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -97,7 +103,7 @@ public class UserSelectGUI implements GUI {
         }
     }
 
-    private static class DeleteUserListener implements ActionListener{
+    private class DeleteUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 

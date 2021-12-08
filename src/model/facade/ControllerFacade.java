@@ -2,6 +2,8 @@ package model.facade;
 
 import basicClasses.User;
 
+import java.util.ArrayList;
+
 public class ControllerFacade extends Facade{
 
 
@@ -10,4 +12,7 @@ public class ControllerFacade extends Facade{
     }
 
 
+    public ArrayList<User> getUsersList(){
+       return model.getAvailableUsersList();
+    }
 }
