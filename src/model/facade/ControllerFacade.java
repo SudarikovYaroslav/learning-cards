@@ -15,4 +15,9 @@ public class ControllerFacade extends Facade{
     public ArrayList<User> getUsersList(){
        return model.getAvailableUsersList();
     }
+
+
+    public void saveUsers(){
+        model.saveUsers();
+    }
 }

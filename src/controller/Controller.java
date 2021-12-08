@@ -46,6 +46,9 @@ public class Controller {
         if (alreadyExists){
             view.printException("User with this name already exist! Please choose another user  name");
             return false;
+        } else if(user.getName().length() == 0){
+            view.printException("User name should contain at list a one symbol!");
+            return false;
         } else {
             facade.createUser(user);
             return true;

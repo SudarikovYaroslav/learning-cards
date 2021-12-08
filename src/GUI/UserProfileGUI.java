@@ -32,7 +32,7 @@ public class UserProfileGUI implements GUI {
 
         label = new JLabel("Your Dictionaries");
 
-        Dictionary[] listEntry = basicGUI.facade.getUserDictionaries().toArray(new Dictionary[0]);
+        Dictionary[] listEntry = basicGUI.viewFacade.getUserDictionaries().toArray(new Dictionary[0]);
         dictionariesJList = new JList<>(listEntry);
         dictionariesJList.setVisibleRowCount(10);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

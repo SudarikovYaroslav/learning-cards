@@ -1,5 +1,6 @@
 package GUI;
 
+import controller.Controller;
 import model.facade.ViewFacade;
 import view.View;
 
@@ -9,7 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BasicGUI implements GUI {
-    ViewFacade facade;
+    ViewFacade viewFacade;
+    Controller controller;
     JFrame frame;
     JPanel mainPanel;
     JPanel buttonsPanel;
@@ -18,12 +20,12 @@ public class BasicGUI implements GUI {
     View view;
 
 
-    public ViewFacade getFacade() {
-        return facade;
+    public ViewFacade getViewFacade() {
+        return viewFacade;
     }
 
     public BasicGUI(ViewFacade facade, View view){
-        this.facade = facade;
+        this.viewFacade = facade;
         this.view = view;
         frame = new JFrame();
         bigFont = new Font("sanserif", Font.BOLD, 24);
@@ -50,7 +52,7 @@ public class BasicGUI implements GUI {
         frame.setVisible(true);
     }
 
-    static class menuExitItemListener implements ActionListener {
+    class menuExitItemListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);

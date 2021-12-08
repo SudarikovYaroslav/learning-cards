@@ -41,8 +41,6 @@ public class View {
 
 
     public void printException(String message){
-        // Во Viw в переменную currentGUI передавать ссылку при каждом переходе на новый GUI
-        // Передать ссылку на View во все GUI
         ExceptionsGUI exceptionsGUI = new ExceptionsGUI(basicGUI, currentGUI, message, this);
         exceptionsGUI.go();
     }

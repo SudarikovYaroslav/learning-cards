@@ -67,6 +67,12 @@ public class Model {
 
     }
 
+
+    public void saveUsers(){
+
+    }
+
+
     private void setCurrentUser(User currentUser) {
         this.currentUser = currentUser;
     }
