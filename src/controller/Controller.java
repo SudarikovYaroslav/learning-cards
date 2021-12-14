@@ -7,7 +7,7 @@ import model.Model;
 import view.View;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Controller {
 
@@ -59,4 +59,10 @@ public class Controller {
     public ArrayList<User> getUsersList(){
         return facade.getUsersList();
     }
+
+
+    public User getUser(String userName){
+        return facade.getUser(userName);
+    }
+
 }

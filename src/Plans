@@ -15,7 +15,7 @@
 
 4. ( In progress ) Divide the GUI into a view and a controller
 
-5.  DONE!Сделать классы базовых GUI во view;
+5.  ( DONE! ) Сделать классы базовых GUI во view;
     done! BasicGUI;
     done! UserSelectGUI;
     done! UserProfileGui;
@@ -26,7 +26,7 @@
 
 
 6. ( DONE! )
-  a) Добавить внутренние классы слушателей для всех интерактивных объектов во всех базовых GUI:
+  a) (DONE!) Добавить внутренние классы слушателей для всех интерактивных объектов во всех базовых GUI:
     done! BasicGUI;
     done! CardBuilderGUI;
     done! DictionaryGUI;
@@ -36,7 +36,7 @@
     done! UserProfileGuI;
     done! UserSelectGUI;
 
-  b) Назначить всем интерактивным объектам слушателей
+  b) (DONE!) Назначить всем интерактивным объектам слушателей
     done! BasicGUI;
     done! CardBuilderGUI;
     done! DictionaryGUI;
@@ -69,3 +69,5 @@
 9. Наладить взаимодейтвие Controller с фасадом модели
 
 10. Наладить наблюдение View за состоянием модели
+
+11. ( Важно!! ) Solve problem with UserProfileGUI. Check problem in class comments

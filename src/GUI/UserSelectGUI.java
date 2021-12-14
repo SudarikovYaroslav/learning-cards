@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.channels.SelectionKey;
 import java.util.ArrayList;
 
 public class UserSelectGUI implements GUI {
@@ -16,6 +17,8 @@ public class UserSelectGUI implements GUI {
     private final BasicGUI basicGUI;
     private final Controller controller;
     private View view;
+    private JList<String> usersJList;
+    private User chosenUser; // Used in JList
 
     public UserSelectGUI(BasicGUI basicGUI, Controller controller, View view) {
         this.basicGUI = basicGUI;
@@ -34,7 +37,7 @@ public class UserSelectGUI implements GUI {
         ArrayList<User> users = basicGUI.viewFacade.getUsersList();
         String[] availableUsers = getUsersNames(users);
 
-        JList<String> usersJList = new JList<>(availableUsers);
+        usersJList = new JList<>(availableUsers);
         usersJList.setVisibleRowCount(10);
         usersJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         usersJList.addListSelectionListener(new UsersSelectionListener());
@@ -57,7 +60,7 @@ public class UserSelectGUI implements GUI {
         JButton addNewUserButton = new JButton("Add new User");
         JButton deleteUserButton = new JButton("Delete User");
 
-        selectUserButton.addActionListener(new SelectUserListener());
+        selectUserButton.addActionListener(new SelectUserButtonListener());
         addNewUserButton.addActionListener(new AddNewUserListener());
         deleteUserButton.addActionListener(new DeleteUserListener());
 
@@ -86,14 +89,20 @@ public class UserSelectGUI implements GUI {
     private class UsersSelectionListener implements ListSelectionListener{
         @Override
         public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()){
+                String selectedUserName = (String) usersJList.getSelectedValue();
+                // Нужно подгрузить из модели пользователя с выбраннным именем с помощья контроллера
+                chosenUser = controller.getUser(selectedUserName);
 
+            }
         }
     }
 
-    private class SelectUserListener implements ActionListener{
+    private class SelectUserButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, chosenUser, view);
+            userProfileGUI.go();
         }
     }
 

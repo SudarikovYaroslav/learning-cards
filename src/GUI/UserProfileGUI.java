@@ -10,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// ( ВАЖНО!!! ) There is a problem with displaying buttons and a label.
+
 public class UserProfileGUI implements GUI {
 
     private View view;
@@ -32,7 +34,7 @@ public class UserProfileGUI implements GUI {
 
         label = new JLabel("Your Dictionaries");
 
-        Dictionary[] listEntry = basicGUI.viewFacade.getUserDictionaries().toArray(new Dictionary[0]);
+        Dictionary[] listEntry = user.getDictionaries().toArray(new Dictionary[0]);
         dictionariesJList = new JList<>(listEntry);
         dictionariesJList.setVisibleRowCount(10);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

@@ -20,4 +20,8 @@ public class ControllerFacade extends Facade{
     public void saveUsers(){
         model.saveUsers();
     }
+
+    public User getUser(String userName){
+       return model.getUser(userName);
+    }
 }

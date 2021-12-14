@@ -30,7 +30,7 @@ public class Dictionary implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    } // possibly used to change dictionary name in DictionaryGUI
+    }
 
 
     // Нужно сделать, чтобы ввод на стороны карточки происходил мз графического интерфейса
@@ -49,6 +49,11 @@ public class Dictionary implements Serializable {
 
         Card newCard = new Card(front, back);
         cards.add(newCard);
+    }
+
+
+    public void addCard(Card card){
+        cards.add(card);
     }
 
     public void shuffleCards(){
