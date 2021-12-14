@@ -9,8 +9,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.nio.channels.SelectionKey;
 import java.util.ArrayList;
+
+// Problem with updating available users list after creating new user
 
 public class UserSelectGUI implements GUI {
 

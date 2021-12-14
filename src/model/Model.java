@@ -63,6 +63,7 @@ public class Model {
             writer.close();
 
             newUser.mkdir();
+            availableUsersList.add(user); // trying to solve bug with updating users list *** There is big problem with selecting brand new User. Suppose problem with Dictionaries init
         } catch (IOException e){
             e.printStackTrace();
         }

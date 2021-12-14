@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// ( ВАЖНО!!! ) There is a problem with displaying buttons and a label.
 
 public class UserProfileGUI implements GUI {
 
@@ -29,6 +28,7 @@ public class UserProfileGUI implements GUI {
 
 
     public void go(){
+        basicGUI.clear();
         view.setCurrentGUI(this);
         basicGUI.frame.setTitle(user.getName() + " profile");
 
@@ -50,7 +50,7 @@ public class UserProfileGUI implements GUI {
 
         JButton changeUserButton = new JButton("Change User");
         JButton startTrainingButton = new JButton("Start Training");
-        JButton removeDictionaryButton = new JButton("Create new Dictionary");
+        JButton removeDictionaryButton = new JButton("Remove Dictionary");
         JButton createNewDictionaryButton = new JButton("Create new Dictionary");
         JButton startFailsRepetitionButton = new JButton("Start fails repetition");
 

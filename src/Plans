@@ -70,4 +70,8 @@
 
 10. Наладить наблюдение View за состоянием модели
 
-11. ( Важно!! ) Solve problem with UserProfileGUI. Check problem in class comments
+11. ( Done! ) Solve problem with UserProfileGUI. Check problem in class comments
+
+12. ( Важно !) Problem with updating available users list after creating new user
+
+13. (*** !!! ***) createUser() in model troubles with adding new User in UserSelectGUI usersList
