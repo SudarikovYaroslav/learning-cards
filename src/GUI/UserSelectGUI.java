@@ -9,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 
 // Problem with updating available users list after creating new user
@@ -20,6 +21,7 @@ public class UserSelectGUI implements GUI {
     private View view;
     private JList<String> usersJList;
     private User chosenUser; // Used in JList
+
 
     public UserSelectGUI(BasicGUI basicGUI, Controller controller, View view) {
         this.basicGUI = basicGUI;
@@ -92,9 +94,7 @@ public class UserSelectGUI implements GUI {
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()){
                 String selectedUserName = (String) usersJList.getSelectedValue();
-                // Нужно подгрузить из модели пользователя с выбраннным именем с помощья контроллера
                 chosenUser = controller.getUser(selectedUserName);
-
             }
         }
     }
@@ -102,8 +102,10 @@ public class UserSelectGUI implements GUI {
     private class SelectUserButtonListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, chosenUser, view);
-            userProfileGUI.go();
+            if (chosenUser != null) {
+                UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, controller, chosenUser, view);
+                userProfileGUI.go();
+            }
         }
     }
 
@@ -115,10 +117,17 @@ public class UserSelectGUI implements GUI {
         }
     }
 
+    // It work, but JList in GUI doesn't change after successful delete user
     private class DeleteUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (chosenUser != null) {
+                boolean success = false;
+                success = controller.deleteUser(chosenUser);
+                if (success){
+                    view.printException("User: " + chosenUser.getName() + " has been successfully deleted!");
+                }
+            }
         }
     }
 

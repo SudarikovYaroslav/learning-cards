@@ -49,10 +49,6 @@ public class Model {
     }
 
 
-    // ВАЖНО !!! При сохранении состояния пользователей, заменить логику:
-    // * Новый пользователь должен добавляться в список доступных пользователей
-    // * Создание на ПК папки пользователя и ТХТ словарей должно происходить только
-    //   во время сохранения данных, при выходе из программы
     public void createUser(User user){
         // Create a user.name folder if it doesn't exist
         File newUser = new File(usersFolderPath + "/" + user.getName());
@@ -63,7 +59,7 @@ public class Model {
             writer.close();
 
             newUser.mkdir();
-            availableUsersList.add(user); // trying to solve bug with updating users list *** There is big problem with selecting brand new User. Suppose problem with Dictionaries init
+            availableUsersList.add(user);
         } catch (IOException e){
             e.printStackTrace();
         }
@@ -83,8 +79,6 @@ public class Model {
         loadedUsersHash.add(user);
         return user;
     }
-
-    public void saveUsers(){}
 
 
     private User loadUser(String userName){
@@ -137,6 +131,48 @@ public class Model {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+
+
+    // Bug because listUsers.TXT didn't changed
+    public boolean deleteUser(User user){
+        boolean successful = false;
+        File userToDelete = new File(usersFolderPath + "/" + user.getName());
+        File[] dictionaries = userToDelete.listFiles();
+
+       if (dictionaries != null) {
+           for (File dictionary : dictionaries) {
+               dictionary.delete();
+           }
+       }
+
+        successful = userToDelete.delete();
+
+
+
+       // Очевидно проблема гдето в этом кусочке
+        if (successful){
+            availableUsersList.remove(user);
+            BufferedWriter writer;
+
+            try {
+                writer = new BufferedWriter(new FileWriter(allUsersListPath));
+
+                for (User us : availableUsersList){
+                    System.out.println("Try to write: " + us.getName()); // This line should be deleted after tests
+                    writer.write(us.getName() + "\n");
+                }
+
+                writer.close();
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        // ищи выше
+
+        return successful;
     }
 
 }

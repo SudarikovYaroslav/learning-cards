@@ -1,6 +1,7 @@
 package GUI;
 import basicClasses.Dictionary;
 import basicClasses.User;
+import controller.Controller;
 import view.View;
 
 import javax.swing.*;
@@ -14,14 +15,16 @@ import java.awt.event.ActionListener;
 public class UserProfileGUI implements GUI {
 
     private View view;
+    private Controller controller;
     private final BasicGUI basicGUI;
     private User user;
     private JList<Dictionary> dictionariesJList;
     private JLabel label;
 
 
-    public UserProfileGUI(BasicGUI basicGUI, User currentUser, View view) {
+    public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
         this.basicGUI = basicGUI;
+        this.controller = controller;
         user = currentUser;
         this.view = view;
     }
@@ -71,42 +74,43 @@ public class UserProfileGUI implements GUI {
 
 
 
-    private static class JListListener implements ListSelectionListener {
+    private class JListListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
 
         }
     }
 
-    private static class ChangeUserListener implements ActionListener{
+    private class ChangeUserListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);
+            userSelectGUI.go();
+        }
+    }
+
+    private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private static class StartTrainingListener implements ActionListener{
+    private class RemoveDictionaryListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private static class RemoveDictionaryListener implements ActionListener{
+    private class CreateNewDictionaryListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-    private static class CreateNewDictionaryListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
-    private static class StartFailsRepetitionListener implements ActionListener{
+    private class StartFailsRepetitionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 

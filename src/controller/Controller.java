@@ -33,9 +33,6 @@ public class Controller {
         File[] files = root.listFiles();
         boolean alreadyExists = false;
 
-        for (int i = 0; i < files.length; i++) {
-            System.out.println(files[i].getName());
-        }
 
         for (File file : files) {
             if (file.getName().equals(user.getName())) {
@@ -55,6 +52,10 @@ public class Controller {
         }
     }
 
+
+    public boolean deleteUser(User user){
+       return facade.deleteUser(user);
+    }
 
     public ArrayList<User> getUsersList(){
         return facade.getUsersList();

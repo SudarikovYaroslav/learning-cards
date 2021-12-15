@@ -74,4 +74,6 @@
 
 12. ( Важно !) Problem with updating available users list after creating new user
 
-13. (*** !!! ***) createUser() in model troubles with adding new User in UserSelectGUI usersList
+13. ( DONE! ) createUser() in model troubles with adding new User in UserSelectGUI usersList
+
+14. ( In progress ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user. Trouble in model deleteUser();
