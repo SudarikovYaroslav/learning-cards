@@ -7,6 +7,7 @@ import basicClasses.User;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,8 +17,8 @@ public class Model {
     private ArrayList<User> availableUsersList;
     private Set<User> loadedUsersHash = new HashSet<>();
 
-    private final String allUsersListPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/AllUsersList.txt";
-    private final String usersFolderPath = "C:/Users/Ярослав/Desktop/Repo/LearningCards/data/Users";
+    private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
+    private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
 
 
     public Model() {
@@ -32,6 +33,7 @@ public class Model {
 
 
     private void loadUsersList(){
+        availableUsersList.clear();
         BufferedReader reader;
         String line;
 
@@ -141,7 +143,7 @@ public class Model {
         File userToDelete = new File(usersFolderPath + "/" + user.getName());
         File[] dictionaries = userToDelete.listFiles();
 
-       if (dictionaries != null) {
+       if (dictionaries.length != 0) {
            for (File dictionary : dictionaries) {
                dictionary.delete();
            }
@@ -149,30 +151,56 @@ public class Model {
 
         successful = userToDelete.delete();
 
-
-
-       // Очевидно проблема гдето в этом кусочке
         if (successful){
-            availableUsersList.remove(user);
-            BufferedWriter writer;
 
-            try {
-                writer = new BufferedWriter(new FileWriter(allUsersListPath));
-
-                for (User us : availableUsersList){
-                    System.out.println("Try to write: " + us.getName()); // This line should be deleted after tests
-                    writer.write(us.getName() + "\n");
+            //availableUsersList.remove(user); не понимаю в чём проблема, но пользователь user не удаляется этой строчкой!!
+            //!! CROOKED CRUTCH!! But it's worked correctly!!
+            for (int i = 0; i < availableUsersList.size(); i++){
+                if (availableUsersList.get(i).getName().equals(user.getName())){
+                    availableUsersList.remove(i);
                 }
+            }
+            //
 
-                writer.close();
+            if (availableUsersList.size() != 0) {
+                BufferedWriter writer;
+                try {
+                    writer = new BufferedWriter(new FileWriter(allUsersListPath, false));
 
-            } catch (IOException e){
-                e.printStackTrace();
+                    for (User u : availableUsersList){
+                        writer.write(u.getName() + "\n");
+                    }
+
+                    writer.close();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            } else {
+                recreateAvailableUsersListFile();
             }
         }
         // ищи выше
 
         return successful;
+    }
+
+    // only for test method
+    private void printConsoleUsersList(List<User> usersList){
+        for (User user :usersList) {
+            System.out.println(user.getName());
+        }
+    }
+
+    private void recreateAvailableUsersListFile(){
+        File toDelete = new File(allUsersListPath);
+        toDelete.delete();
+        File newUserList = new File(allUsersListPath);
+
+        try {
+            newUserList.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

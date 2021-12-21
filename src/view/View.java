@@ -2,8 +2,6 @@ package view;
 
 import GUI.ExceptionsGUI;
 import GUI.GUI;
-import basicClasses.Dictionary;
-import basicClasses.User;
 import controller.Controller;
 import model.facade.ViewFacade;
 import model.Model;
@@ -17,9 +15,6 @@ public class View {
     private Controller controller;
     private BasicGUI basicGUI;
     private GUI currentGUI;
-
-    private User testUser = new User("Yar"); // line should be deleted after test
-    private Dictionary currentDictionary = new Dictionary("English Cards"); // line only for tests. Should be deleted
 
 
     public void addModel(Model model){
