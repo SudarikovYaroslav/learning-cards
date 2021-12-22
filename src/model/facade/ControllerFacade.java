@@ -21,7 +21,13 @@ public class ControllerFacade extends Facade{
        return model.getUser(userName);
     }
 
+
     public boolean deleteUser(User user){
         return model.deleteUser(user);
+    }
+
+
+    public void createDictionary(User user, String dictionaryName){
+        model.createDictionary(user, dictionaryName);
     }
 }

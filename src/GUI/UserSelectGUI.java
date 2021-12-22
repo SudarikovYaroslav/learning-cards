@@ -17,7 +17,7 @@ public class UserSelectGUI implements GUI {
 
     private final BasicGUI basicGUI;
     private final Controller controller;
-    private View view;
+    private final View view;
     private JList<String> usersJList;
     private User chosenUser; // Used in JList
 

@@ -184,12 +184,28 @@ public class Model {
         return successful;
     }
 
+
+    public void createDictionary(User user,String dictionaryName){
+        Dictionary dictionary = new Dictionary(dictionaryName);
+        user.addDictionary(dictionary);
+
+        File newDictionaryTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionaryName + ".txt");
+
+        try {
+           newDictionaryTXT.createNewFile();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+
     // only for test method
     private void printConsoleUsersList(List<User> usersList){
         for (User user :usersList) {
             System.out.println(user.getName());
         }
     }
+
 
     private void recreateAvailableUsersListFile(){
         File toDelete = new File(allUsersListPath);

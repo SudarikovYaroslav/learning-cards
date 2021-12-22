@@ -1,3 +1,9 @@
+Comments:
+Чую, делаю неправильно. Сейчас вью получает всю необходимую информацию о состоянии модели путём запросов
+через модел/вьюФасад. Но на сколько я понимаю, это должно быть реализовано с помощью паттерна наблюдатель
+и у вью не должно быть никакой возможности обращаться к модел. В общем нужно будет разобраться с этим вопросом.
+
+
 1. ( In progress! ) Наладить взаимодействие модулей MVC друг с другом;
 
 2. ( In progress! ) Make model
@@ -17,12 +23,15 @@
 
 5.  ( DONE! ) Сделать классы базовых GUI во view;
     done! BasicGUI;
-    done! UserSelectGUI;
-    done! UserProfileGui;
-    done! progress! TrainingGUI;
-    done! progress DictionaryGUI;
-    done! progress CardBuilderGUI;
+    done! CardBuilderGUI;
+    done! DictionaryGUI;
+    done! ExceptionsGUI;
+    done! TrainingGUI;
     done! UserBuilderGUI;
+    done! UserProfileGuI;
+    done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
+
 
 
 6. ( DONE! )
@@ -35,6 +44,7 @@
     done! UserBuilderGUI;
     done! UserProfileGuI;
     done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
 
   b) (DONE!) Назначить всем интерактивным объектам слушателей
     done! BasicGUI;
@@ -45,16 +55,19 @@
     done! UserBuilderGUI;
     done! UserProfileGuI;
     done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
 
 
 7. Добавить логику в слушателей во всех базовых классах GUI в модуле view
     done! BasicGUI;
-    in progress UserBuilderGUI;
-    in progress UserSelectGUI;
-    - UserProfileGui;
+    done! progress UserBuilderGUI;
+    done! progress UserSelectGUI;
+    in progress UserProfileGui;
+    in progress DictionaryBuilderGUI;
     - TrainingGUI;
     - CurrentDictionaryGUI;
     - CardBuilderGUI;
+    - DictionaryBuilderGUI
     in progress ExceptionsGUI; (Не показывает сообщение об ошибке);
 
 8. ( DONE! ) Сделать рефакторинг GUI:
@@ -76,4 +89,12 @@
 
 13. ( DONE! ) createUser() in model troubles with adding new User in UserSelectGUI usersList
 
-14. ( In progress ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user. Trouble in model deleteUser();
+14. ( DONE! ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user. Trouble in model deleteUser();
+
+15. Perhaps model method createDictionary() should return boolean success
+
+16. BUG !!!
+    ( fixed! ) it seems some troubles with text area! It list there is no null checking!!!
+    - DictionaryBuilderGUI/ button "Create new Dictionary": nothing happens;
+      !!! try to use "boolean success" field in model/ createDictionary() method instead void
+      and in DictionaryBuilder/ button/ Action + if(success){userProfileGUI.go()}

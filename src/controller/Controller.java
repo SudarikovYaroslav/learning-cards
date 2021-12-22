@@ -1,6 +1,7 @@
 package controller;
 
 import GUI.ExceptionsGUI;
+import basicClasses.Dictionary;
 import basicClasses.User;
 import model.facade.ControllerFacade;
 import model.Model;
@@ -37,11 +38,12 @@ public class Controller {
         for (File file : files) {
             if (file.getName().equals(user.getName())) {
                 alreadyExists = true;
+                break;
             }
         }
 
         if (alreadyExists){
-            view.printException("User with this name already exist! Please choose another user  name");
+            view.printException("User with this name already exist! Please choose another user name");
             return false;
         } else if(user.getName().length() == 0){
             view.printException("User name should contain at list a one symbol!");
@@ -64,6 +66,27 @@ public class Controller {
 
     public User getUser(String userName){
         return facade.getUser(userName);
+    }
+
+
+    public void createDictionary(User user, String newDictionaryName){
+        ArrayList<Dictionary> existsDictionaries = user.getDictionaries();
+        boolean alreadyExist = false;
+
+        for (Dictionary dictionary : existsDictionaries){
+            if (dictionary.getName().equals(newDictionaryName)){
+                alreadyExist = true;
+                break;
+            }
+        }
+
+        if (newDictionaryName.length() == 0){
+            view.printException("The Dictionary name should contains at list one symbol!");
+        } else if (alreadyExist){
+            view.printException("The Dictionary with this name already exist! Choose another name please.");
+        } else {
+            facade.createDictionary(user, newDictionaryName);
+        }
     }
 
 }

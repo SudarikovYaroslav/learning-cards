@@ -106,7 +106,8 @@ public class UserProfileGUI implements GUI {
     private class CreateNewDictionaryListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            DictionaryBuilderGUI dictionaryBuilderGUI = new DictionaryBuilderGUI(basicGUI, controller,view, user);
+            dictionaryBuilderGUI.go();
         }
     }
 
