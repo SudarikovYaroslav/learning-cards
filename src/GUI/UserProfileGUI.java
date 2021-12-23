@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class UserProfileGUI implements GUI {
@@ -18,15 +19,17 @@ public class UserProfileGUI implements GUI {
     private Controller controller;
     private final BasicGUI basicGUI;
     private User user;
-    private JList<Dictionary> dictionariesJList;
+    private JList<String> dictionariesJList;
     private JLabel label;
-
+    private ArrayList<Dictionary> userDictionaries;
 
     public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
         this.basicGUI = basicGUI;
         this.controller = controller;
         user = currentUser;
         this.view = view;
+        userDictionaries = currentUser.getDictionaries();
+        createDictionariesJList();
     }
 
 
@@ -37,8 +40,7 @@ public class UserProfileGUI implements GUI {
 
         label = new JLabel("Your Dictionaries");
 
-        Dictionary[] listEntry = user.getDictionaries().toArray(new Dictionary[0]);
-        dictionariesJList = new JList<>(listEntry);
+        createDictionariesJList();
         dictionariesJList.setVisibleRowCount(10);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dictionariesJList.addListSelectionListener(new JListListener());
@@ -72,6 +74,17 @@ public class UserProfileGUI implements GUI {
         basicGUI.go();
     }
 
+
+    private void createDictionariesJList(){
+        String[] dictionariesNames = new String[userDictionaries.size()];
+
+        for (int i = 0; i < dictionariesNames.length; i++) {
+            String[] arr = userDictionaries.get(i).getName().split(".txt");
+            dictionariesNames[i] = arr[0];
+        }
+
+        dictionariesJList = new JList<>(dictionariesNames);
+    }
 
 
     private class JListListener implements ListSelectionListener {

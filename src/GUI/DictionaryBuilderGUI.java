@@ -18,6 +18,7 @@ public class DictionaryBuilderGUI implements GUI{
     private final User currentUser;
     private String dictionaryName;
     private JTextField jTextField;
+    private JLabel messageLabel;
 
     public DictionaryBuilderGUI(BasicGUI basicGUI, Controller controller, View view, User currentUser) {
         this.basicGUI = basicGUI;
@@ -32,7 +33,7 @@ public class DictionaryBuilderGUI implements GUI{
         basicGUI.clear();
         view.setCurrentGUI(this);
 
-        JLabel label = new JLabel("Enter Dictionary name please:");
+        JLabel label = new JLabel("Enter Dictionary name please and push \"Enter\" button:");
 
         jTextField = new JTextField(20);
         jTextField.requestFocus();
@@ -43,8 +44,11 @@ public class DictionaryBuilderGUI implements GUI{
         createButton.addActionListener(new CreateButtonListener());
         cancelButton.addActionListener(new CancelButtonListener());
 
+        messageLabel = new JLabel();
+
         basicGUI.mainPanel.add(BorderLayout.NORTH, label);
         basicGUI.mainPanel.add(BorderLayout.CENTER, jTextField);
+        basicGUI.mainPanel.add(BorderLayout.SOUTH, messageLabel);
 
         basicGUI.buttonsPanel.add(createButton);
         basicGUI.buttonsPanel.add(cancelButton);
@@ -57,6 +61,8 @@ public class DictionaryBuilderGUI implements GUI{
         @Override
         public void actionPerformed(ActionEvent e) {
             dictionaryName = jTextField.getText();
+            messageLabel .setText("Dictionary name accepted!");
+            basicGUI.go();
         }
     }
 
@@ -66,6 +72,12 @@ public class DictionaryBuilderGUI implements GUI{
         public void actionPerformed(ActionEvent e) {
             if (dictionaryName != null) {
                 controller.createDictionary(currentUser, dictionaryName);
+                // YES !!!! need boolean result instead void
+                /*UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI,controller,currentUser,view);
+                userProfileGUI.go();*/
+            } else {
+                messageLabel.setText("PUSH \"ENTER\"BUTTON !!!");
+                basicGUI.go();
             }
         }
     }

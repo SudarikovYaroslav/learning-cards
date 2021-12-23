@@ -1,6 +1,5 @@
 package controller;
 
-import GUI.ExceptionsGUI;
 import basicClasses.Dictionary;
 import basicClasses.User;
 import model.facade.ControllerFacade;
@@ -70,16 +69,23 @@ public class Controller {
 
 
     public void createDictionary(User user, String newDictionaryName){
+        System.out.println("Trying validate");
         ArrayList<Dictionary> existsDictionaries = user.getDictionaries();
         boolean alreadyExist = false;
 
+
         for (Dictionary dictionary : existsDictionaries){
-            if (dictionary.getName().equals(newDictionaryName)){
+            System.out.println("Try to find coincidence");
+            System.out.println("Now check Dictionary: " + dictionary.getName() + "; Comparing with " + newDictionaryName + ".txt");
+            if (dictionary.getName().equals(newDictionaryName + ".txt")){
                 alreadyExist = true;
+                System.out.println("Coincidence has been found");
                 break;
             }
         }
 
+
+        System.out.println("Now is try to create new Dictionary");
         if (newDictionaryName.length() == 0){
             view.printException("The Dictionary name should contains at list one symbol!");
         } else if (alreadyExist){
