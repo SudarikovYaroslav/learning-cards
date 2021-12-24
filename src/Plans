@@ -4,7 +4,7 @@ Comments:
 и у вью не должно быть никакой возможности обращаться к модел. В общем нужно будет разобраться с этим вопросом.
 
 
-1. ( In progress! ) Наладить взаимодействие модулей MVC друг с другом;
+1. ( DONE! ) Наладить взаимодействие модулей MVC друг с другом;
 
 2. ( In progress! ) Make model
    (Done!) create a Facade pattern to deal with interface
@@ -19,7 +19,7 @@ Comments:
 
 3. ( DONE! ) Make GUI
 
-4. ( In progress ) Divide the GUI into a view and a controller
+4. ( DONE! ) Divide the GUI into a view and a controller
 
 5.  ( DONE! ) Сделать классы базовых GUI во view;
     done! BasicGUI;
@@ -63,12 +63,12 @@ Comments:
     done! progress UserBuilderGUI;
     done! progress UserSelectGUI;
     in progress UserProfileGui;
-    in progress DictionaryBuilderGUI;
+    done! DictionaryBuilderGUI;
     - TrainingGUI;
     - CurrentDictionaryGUI;
     - CardBuilderGUI;
     - DictionaryBuilderGUI
-    in progress ExceptionsGUI; (Не показывает сообщение об ошибке);
+    done! ExceptionsGUI;
 
 8. ( DONE! ) Сделать рефакторинг GUI:
    done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
@@ -79,7 +79,7 @@ Comments:
    done! DictionaryGUI;
    done! CardBuilderGUI;
 
-9. Наладить взаимодейтвие Controller с фасадом модели
+9. ( DONE! ) Наладить взаимодейтвие Controller с фасадом модели
 
 10. Наладить наблюдение View за состоянием модели
 
@@ -95,6 +95,6 @@ Comments:
     ( fixed! ) it seems some troubles with text area! It list there is no null checking!!!
     ( fixed! ) DictionaryBuilderGUI/ button "Create new Dictionary": nothing happens;
 
-16. BUG!!! validation after entered Dictionary name doesn't work at all cases
+16. ( FIXED! ) validation after entered Dictionary name doesn't work at all cases
 
-17. In userProfileGUI should add an "Edit Dictionary" button
+17. In userProfileGUI should add an "Edit Dictionary" button. Доделать экшен лисенер

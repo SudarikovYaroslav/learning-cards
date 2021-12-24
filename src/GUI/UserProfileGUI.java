@@ -22,6 +22,7 @@ public class UserProfileGUI implements GUI {
     private JList<String> dictionariesJList;
     private JLabel label;
     private ArrayList<Dictionary> userDictionaries;
+    private Dictionary currentDictionary;
 
     public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
         this.basicGUI = basicGUI;
@@ -30,6 +31,7 @@ public class UserProfileGUI implements GUI {
         this.view = view;
         userDictionaries = currentUser.getDictionaries();
         createDictionariesJList();
+        currentDictionary = null;
     }
 
 
@@ -41,26 +43,28 @@ public class UserProfileGUI implements GUI {
         label = new JLabel("Your Dictionaries");
 
         createDictionariesJList();
-        dictionariesJList.setVisibleRowCount(10);
+        dictionariesJList.setVisibleRowCount(16);
         dictionariesJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         dictionariesJList.addListSelectionListener(new JListListener());
 
-        JScrollPane scroller = new JScrollPane();
+        JScrollPane scroller = new JScrollPane(dictionariesJList);
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         basicGUI.mainPanel.add(BorderLayout.NORTH, label);
-        basicGUI.mainPanel.add(BorderLayout.CENTER, dictionariesJList);
+        basicGUI.mainPanel.add(BorderLayout.CENTER, scroller);
         basicGUI.mainPanel.add(scroller);
 
         JButton changeUserButton = new JButton("Change User");
         JButton startTrainingButton = new JButton("Start Training");
+        JButton editDictionaryButton = new JButton("Edit Dictionary");
         JButton removeDictionaryButton = new JButton("Remove Dictionary");
         JButton createNewDictionaryButton = new JButton("Create new Dictionary");
         JButton startFailsRepetitionButton = new JButton("Start fails repetition");
 
         changeUserButton.addActionListener(new ChangeUserListener());
         startTrainingButton.addActionListener(new StartTrainingListener());
+        editDictionaryButton.addActionListener(new EditDictionaryListener());
         removeDictionaryButton.addActionListener(new RemoveDictionaryListener());
         createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
         startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
@@ -84,6 +88,17 @@ public class UserProfileGUI implements GUI {
         }
 
         dictionariesJList = new JList<>(dictionariesNames);
+    }
+
+
+    private class EditDictionaryListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (currentDictionary != null) {
+                DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, currentDictionary, view);
+                dictionaryGUI.go();
+            }
+        }
     }
 
 
