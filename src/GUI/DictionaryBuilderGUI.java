@@ -68,19 +68,24 @@ public class DictionaryBuilderGUI implements GUI{
 
 
     private class CreateButtonListener implements ActionListener{
+        boolean success = false;
         @Override
         public void actionPerformed(ActionEvent e) {
             if (dictionaryName != null) {
-                controller.createDictionary(currentUser, dictionaryName);
-                // YES !!!! need boolean result instead void
-                /*UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI,controller,currentUser,view);
-                userProfileGUI.go();*/
+                success = controller.createDictionary(currentUser, dictionaryName);
+
+                if (success) {
+                    UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI,controller,currentUser,view);
+                    userProfileGUI.go();
+                }
+
             } else {
                 messageLabel.setText("PUSH \"ENTER\"BUTTON !!!");
                 basicGUI.go();
             }
         }
     }
+
 
     private class CancelButtonListener implements ActionListener{
         @Override

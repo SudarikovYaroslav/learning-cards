@@ -68,31 +68,28 @@ public class Controller {
     }
 
 
-    public void createDictionary(User user, String newDictionaryName){
-        System.out.println("Trying validate");
+    public boolean createDictionary(User user, String newDictionaryName){
         ArrayList<Dictionary> existsDictionaries = user.getDictionaries();
         boolean alreadyExist = false;
+        boolean success = false;
 
 
         for (Dictionary dictionary : existsDictionaries){
-            System.out.println("Try to find coincidence");
-            System.out.println("Now check Dictionary: " + dictionary.getName() + "; Comparing with " + newDictionaryName + ".txt");
             if (dictionary.getName().equals(newDictionaryName + ".txt")){
                 alreadyExist = true;
-                System.out.println("Coincidence has been found");
                 break;
             }
         }
 
-
-        System.out.println("Now is try to create new Dictionary");
         if (newDictionaryName.length() == 0){
             view.printException("The Dictionary name should contains at list one symbol!");
         } else if (alreadyExist){
             view.printException("The Dictionary with this name already exist! Choose another name please.");
         } else {
-            facade.createDictionary(user, newDictionaryName);
+           success = facade.createDictionary(user, newDictionaryName);
         }
+
+        return success;
     }
 
 }

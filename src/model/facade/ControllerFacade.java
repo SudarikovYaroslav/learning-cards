@@ -27,7 +27,7 @@ public class ControllerFacade extends Facade{
     }
 
 
-    public void createDictionary(User user, String dictionaryName){
-        model.createDictionary(user, dictionaryName);
+    public boolean createDictionary(User user, String dictionaryName){
+        return model.createDictionary(user, dictionaryName);
     }
 }

@@ -185,7 +185,8 @@ public class Model {
     }
 
 
-    public void createDictionary(User user,String dictionaryName){
+    public boolean createDictionary(User user,String dictionaryName){
+        boolean success = false;
         Dictionary dictionary = new Dictionary(dictionaryName);
         user.addDictionary(dictionary);
 
@@ -193,9 +194,11 @@ public class Model {
 
         try {
            newDictionaryTXT.createNewFile();
+           success = true;
         }catch (IOException e){
             e.printStackTrace();
         }
+        return success;
     }
 
 
