@@ -116,7 +116,7 @@ public class UserSelectGUI implements GUI {
         }
     }
 
-    // It work, but JList in GUI doesn't change after successful delete user
+
     private class DeleteUserListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {

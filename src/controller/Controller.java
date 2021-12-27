@@ -92,4 +92,28 @@ public class Controller {
         return success;
     }
 
+
+
+    // !!!! throws Null pointerException from 105 line!!!
+    public boolean deleteDictionary(User user, Dictionary dictionary){
+        boolean checkExistence = false;
+        boolean success = false;
+
+        File userFolder = new File(usersFolderPath + "/" + user.getName());
+        File[] usersDictionaries = userFolder.listFiles();
+
+        for (File file : usersDictionaries){
+            if (file.getName().equals(dictionary.getName())){
+                checkExistence = true;
+                break;
+            }
+        }
+
+        if (checkExistence){
+            success = facade.deleteDictionary(user, dictionary);
+        }
+
+        return success;
+    }
+
 }

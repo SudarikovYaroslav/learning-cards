@@ -58,19 +58,20 @@ public class UserProfileGUI implements GUI {
         JButton changeUserButton = new JButton("Change User");
         JButton startTrainingButton = new JButton("Start Training");
         JButton editDictionaryButton = new JButton("Edit Dictionary");
-        JButton removeDictionaryButton = new JButton("Remove Dictionary");
+        JButton deleteDictionaryButton = new JButton("Delete Dictionary");
         JButton createNewDictionaryButton = new JButton("Create new Dictionary");
         JButton startFailsRepetitionButton = new JButton("Start fails repetition");
 
         changeUserButton.addActionListener(new ChangeUserListener());
         startTrainingButton.addActionListener(new StartTrainingListener());
         editDictionaryButton.addActionListener(new EditDictionaryListener());
-        removeDictionaryButton.addActionListener(new RemoveDictionaryListener());
+        deleteDictionaryButton.addActionListener(new DeleteDictionaryListener());
         createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
         startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
 
         basicGUI.buttonsPanel.add(createNewDictionaryButton);
-        basicGUI.buttonsPanel.add(removeDictionaryButton);
+        basicGUI.buttonsPanel.add(editDictionaryButton);
+        basicGUI.buttonsPanel.add(deleteDictionaryButton);
         basicGUI.buttonsPanel.add(startTrainingButton);
         basicGUI.buttonsPanel.add(startFailsRepetitionButton);
         basicGUI.buttonsPanel.add(changeUserButton);
@@ -91,23 +92,34 @@ public class UserProfileGUI implements GUI {
     }
 
 
-    private class EditDictionaryListener implements ActionListener{
+    private class JListListener implements ListSelectionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
-            if (currentDictionary != null) {
-                DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, currentDictionary, view);
-                dictionaryGUI.go();
+        public void valueChanged(ListSelectionEvent e) {
+            if (! e.getValueIsAdjusting()){
+                String selectedDictionaryName = dictionariesJList.getSelectedValue();
+
+                for (Dictionary dic : userDictionaries){
+                    if (dic.getName().equals(selectedDictionaryName + ".txt")){
+                        currentDictionary = dic;
+                        return;
+                    }
+                }
+
             }
         }
     }
 
 
-    private class JListListener implements ListSelectionListener {
+    private class EditDictionaryListener implements ActionListener{
         @Override
-        public void valueChanged(ListSelectionEvent e) {
-
+        public void actionPerformed(ActionEvent e) {
+            if (currentDictionary != null) {
+                DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, currentDictionary, user, view, controller);
+                dictionaryGUI.go();
+            }
         }
     }
+
 
     private class ChangeUserListener implements ActionListener{
         @Override
@@ -117,6 +129,7 @@ public class UserProfileGUI implements GUI {
         }
     }
 
+
     private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -124,12 +137,16 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-    private class RemoveDictionaryListener implements ActionListener{
+    // in progress
+    private class DeleteDictionaryListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            //boolean success = false;
+            controller.deleteDictionary(user, currentDictionary);
+            go();
         }
     }
+
 
     private class CreateNewDictionaryListener implements ActionListener{
         @Override
@@ -138,6 +155,7 @@ public class UserProfileGUI implements GUI {
             dictionaryBuilderGUI.go();
         }
     }
+
 
     private class StartFailsRepetitionListener implements ActionListener{
         @Override

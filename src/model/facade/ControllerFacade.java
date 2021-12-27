@@ -1,5 +1,6 @@
 package model.facade;
 
+import basicClasses.Dictionary;
 import basicClasses.User;
 
 import java.util.ArrayList;
@@ -29,5 +30,10 @@ public class ControllerFacade extends Facade{
 
     public boolean createDictionary(User user, String dictionaryName){
         return model.createDictionary(user, dictionaryName);
+    }
+
+
+    public boolean deleteDictionary(User user, Dictionary dictionary){
+        return model.deleteDictionary(user, dictionary);
     }
 }

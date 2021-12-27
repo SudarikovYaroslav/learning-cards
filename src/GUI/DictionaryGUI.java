@@ -2,6 +2,8 @@ package GUI;
 
 import basicClasses.Card;
 import basicClasses.Dictionary;
+import basicClasses.User;
+import controller.Controller;
 import view.View;
 
 import javax.swing.*;
@@ -16,16 +18,22 @@ public class DictionaryGUI implements GUI {
     private final BasicGUI basicGUI;
     private Dictionary dictionary;
     private View view;
+    private Controller controller;
+    private User currentUser;
 
-    public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, View view) {
+    public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
         this.basicGUI = basicGUI;
         this.dictionary = dictionary;
+        this.currentUser = currentUser;
         this.view = view;
+        this.controller = controller;
     }
 
     public void go(){
         view.setCurrentGUI(this);
-        basicGUI.frame.setTitle("Dictionary: " + dictionary.getName());
+        basicGUI.clear();
+
+        basicGUI.frame.setTitle("Dictionary: " + dictionary.getName().substring(0, dictionary.getName().length() - 4));
 
         Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
         JList<Card> cardsJList = new JList<>(listEntries);
@@ -46,17 +54,20 @@ public class DictionaryGUI implements GUI {
         JButton editCardButton = new JButton("Edit Card");
         JButton startTrainingButton = new JButton("Start Training");
         JButton changeDictionaryName = new JButton("Change Dictionary name");
+        JButton cancelButton = new JButton("Cancel");
 
         createCardButton.addActionListener(new CreateCardListener());
         deleteCardButton.addActionListener(new DeleteCardListener());
         editCardButton.addActionListener(new EditCardListener());
         startTrainingButton.addActionListener(new StartTrainingListener());
         changeDictionaryName.addActionListener(new ChangeNameListener());
+        cancelButton.addActionListener(new CancelListener());
 
         basicGUI.buttonsPanel.add(createCardButton);
         basicGUI.buttonsPanel.add(deleteCardButton);
         basicGUI.buttonsPanel.add(editCardButton);
         basicGUI.buttonsPanel.add(startTrainingButton);
+        basicGUI.buttonsPanel.add(cancelButton);
 
         basicGUI.go();
     }
@@ -106,6 +117,15 @@ public class DictionaryGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+        }
+    }
+
+
+    private class CancelListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, controller, currentUser, view);
+            userProfileGUI.go();
         }
     }
 }

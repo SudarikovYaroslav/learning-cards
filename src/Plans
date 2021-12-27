@@ -65,9 +65,9 @@ Comments:
     in progress UserProfileGui;
     done! DictionaryBuilderGUI;
     - TrainingGUI;
-    - CurrentDictionaryGUI;
+    - DictionaryGUI;
     - CardBuilderGUI;
-    - DictionaryBuilderGUI
+    done! DictionaryBuilderGUI
     done! ExceptionsGUI;
 
 8. ( DONE! ) Сделать рефакторинг GUI:
@@ -85,7 +85,7 @@ Comments:
 
 11. ( Done! ) Solve problem with UserProfileGUI. Check problem in class comments
 
-12. ( Важно !) Problem with updating available users list after creating new user
+12. ( DONE! ) Problem with updating available users list after creating new user
 
 13. ( DONE! ) createUser() in model troubles with adding new User in UserSelectGUI usersList
 
@@ -97,4 +97,12 @@ Comments:
 
 16. ( FIXED! ) validation after entered Dictionary name doesn't work at all cases
 
-17. In userProfileGUI should add an "Edit Dictionary" button. Доделать экшен лисенер
+17. ( DONE! ) In userProfileGUI should add an "Edit Dictionary" button. Доделать экшен лисенер
+
+18. ( DONE! )Troubles with DictionaryGUI: when it runs from UserProfileGUI, GUI doesn't repaints.
+
+19. ( DONE! ) DictionaryGUI add CancelButton
+
+20. ( in progress )Доделать UserProfileGUI
+
+21. Попробовать заменить модификаторы доступа модели на package, чтобы они были доступны только для фасадов

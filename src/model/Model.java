@@ -179,7 +179,6 @@ public class Model {
                 recreateAvailableUsersListFile();
             }
         }
-        // ищи выше
 
         return successful;
     }
@@ -202,11 +201,20 @@ public class Model {
     }
 
 
-    // only for test method
-    private void printConsoleUsersList(List<User> usersList){
-        for (User user :usersList) {
-            System.out.println(user.getName());
+
+
+    public boolean deleteDictionary(User user, Dictionary dictionary){
+        File removingDictionary = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+        ArrayList<Dictionary> dictionaries = user.getDictionaries();
+
+        for (Dictionary dic : dictionaries) {
+            if (dic.getName().equals(dictionary.getName())) {
+                dictionaries.remove(dic);
+                break;
+            }
         }
+
+        return removingDictionary.delete();
     }
 
 
@@ -223,5 +231,3 @@ public class Model {
     }
 
 }
-
-// C:/Users/Ярослав/Desktop/Repo/LearningCards/data/AllUsersList.txt
