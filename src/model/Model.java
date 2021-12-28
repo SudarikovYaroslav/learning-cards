@@ -186,7 +186,7 @@ public class Model {
 
     public boolean createDictionary(User user,String dictionaryName){
         boolean success = false;
-        Dictionary dictionary = new Dictionary(dictionaryName);
+        Dictionary dictionary = new Dictionary(dictionaryName + ".txt");
         user.addDictionary(dictionary);
 
         File newDictionaryTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionaryName + ".txt");

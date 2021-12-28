@@ -95,6 +95,8 @@ public class Controller {
 
 
     // !!!! throws Null pointerException from 105 line!!!
+    // It happens only with brand new Dictionary. With Dictionaries that was created during previous program runs it
+    // bug doesn't happens
     public boolean deleteDictionary(User user, Dictionary dictionary){
         boolean checkExistence = false;
         boolean success = false;
