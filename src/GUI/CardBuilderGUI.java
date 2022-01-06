@@ -1,41 +1,55 @@
 package GUI;
+import basicClasses.Card;
 import basicClasses.Dictionary;
+import basicClasses.User;
+import controller.Controller;
 import view.View;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CardBuilderGUI implements GUI {
 
     private final BasicGUI basicGUI;
+    private final Font font = new Font("TimesRoman", Font.BOLD, 16);
     private Dictionary dictionary;
     private JTextArea frontSide;
     private JTextArea backSide;
     private View view;
+    private Controller controller;
+    private User currentUser;
 
-    public CardBuilderGUI(BasicGUI basicGUI, Dictionary dictionary, View view) {
+    public CardBuilderGUI(BasicGUI basicGUI, User currentUser, Dictionary dictionary, View view, Controller controller) {
         this.basicGUI = basicGUI;
         this.dictionary = dictionary;
         this.view = view;
+        this.currentUser = currentUser;
+        this.controller = controller;
     }
+
 
     public void go(){
         view.setCurrentGUI(this);
+        basicGUI.clear();
         basicGUI.frame.setTitle("Card Builder");
-        frontSide = new JTextArea(6,20);
+
+        frontSide = new JTextArea(9,30);
         frontSide.setLineWrap(true);
         frontSide.setWrapStyleWord(true);
-        frontSide.setFont(basicGUI.bigFont);
+        frontSide.setFont(font);
+        //frontSide.setFont(basicGUI.bigFont);
         JScrollPane frontScroller = new JScrollPane(frontSide);
         frontScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         frontScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
 
-        backSide = new JTextArea(6 ,20);
+        backSide = new JTextArea(9 ,30);
         backSide.setLineWrap(true);
         backSide.setWrapStyleWord(true);
-        backSide.setFont(basicGUI.bigFont);
+        backSide.setFont(font);
+        //backSide.setFont(basicGUI.bigFont);
         JScrollPane backScroller = new JScrollPane(backSide);
         backScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         backScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -74,8 +88,25 @@ public class CardBuilderGUI implements GUI {
     }
 
 
-    private static class CreateCardListener implements ActionListener {
+    private class CreateCardListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String front = frontSide.getText();
+            String back = backSide.getText();
 
+            if ((front.length() > 0) && (back.length() > 0)) {
+                if (controller.createCard(currentUser, dictionary, front, back)) {
+                    DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
+                    dictionaryGUI.go();
+                } else {
+                    view.printException("Can't create new card (((");
+                }
+            }
+        }
+    }
+
+
+    private class EditCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -83,7 +114,7 @@ public class CardBuilderGUI implements GUI {
     }
 
 
-    private static class EditCardListener implements ActionListener {
+    private class DeleteCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -91,18 +122,11 @@ public class CardBuilderGUI implements GUI {
     }
 
 
-    private static class DeleteCardListener implements ActionListener{
+    private class CancelListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
-
-    private static class CancelListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
+            DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
+            dictionaryGUI.go();
         }
     }
 }

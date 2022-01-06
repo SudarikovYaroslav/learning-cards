@@ -62,11 +62,11 @@ Comments:
     done! BasicGUI;
     done! progress UserBuilderGUI;
     done! progress UserSelectGUI;
-    in progress UserProfileGui;
+    (in progress) UserProfileGui;
     done! DictionaryBuilderGUI;
     - TrainingGUI;
-    - DictionaryGUI;
-    - CardBuilderGUI;
+    (in progress) DictionaryGUI;
+    (in progress) CardBuilderGUI;
     done! DictionaryBuilderGUI
     done! ExceptionsGUI;
 
@@ -107,5 +107,13 @@ Comments:
 
 21. Попробовать заменить модификаторы доступа модели на package, чтобы они были доступны только для фасадов
 
-22. ( BUG!!! ) UserProfileGUI: при нажатии на кнопку "редактировать словарь" на только что созданном словаре,
+22. ( FIXED! ) UserProfileGUI: при нажатии на кнопку "редактировать словарь" на только что созданном словаре,
     не переходит в интерфейс словаря
+
+23. ( FIXED!) In CardBuilderGUI double buttons set
+
+24. ( FIXED! ) In CardBuilderGUI in JTextAreas font size is too big
+
+25. ( FIXED!) In CardBuilderGUI in JList shows cards binary names instead card's sizes
+
+26. ( DONE! ) Добавить в кардбилдер проверку на пустые поля

@@ -230,4 +230,33 @@ public class Model {
         }
     }
 
+
+    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide){
+        File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+        BufferedWriter writer;
+        boolean success = false;
+
+        if (!dicTXT.exists()){
+            try {
+                dicTXT.createNewFile();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+
+        Card card = new Card(frontSide, backSide);
+        dictionary.addCard(card);
+
+        try {
+            writer = new BufferedWriter(new FileWriter(dicTXT, true));
+            writer.write(frontSide + dividerKey + backSide + "\n");
+            success = true;
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
 }

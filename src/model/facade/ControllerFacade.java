@@ -36,4 +36,9 @@ public class ControllerFacade extends Facade{
     public boolean deleteDictionary(User user, Dictionary dictionary){
         return model.deleteDictionary(user, dictionary);
     }
+
+
+    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide){
+        return model.createCard(user, dictionary, frontSide, backSide);
+    }
 }

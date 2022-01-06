@@ -1,5 +1,6 @@
 package controller;
 
+import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
 import model.facade.ControllerFacade;
@@ -93,10 +94,6 @@ public class Controller {
     }
 
 
-
-    // !!!! throws Null pointerException from 105 line!!!
-    // It happens only with brand new Dictionary. With Dictionaries that was created during previous program runs it
-    // bug doesn't happens
     public boolean deleteDictionary(User user, Dictionary dictionary){
         boolean checkExistence = false;
         boolean success = false;
@@ -113,6 +110,27 @@ public class Controller {
 
         if (checkExistence){
             success = facade.deleteDictionary(user, dictionary);
+        }
+
+        return success;
+    }
+
+
+    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide){
+        boolean isExist = false;
+        boolean success = false;
+
+        for (Card card : dictionary.getCards()){
+            if (card.getFront().equals(frontSide)){
+                isExist = true;
+                break;
+            }
+        }
+
+        if (isExist){
+            view.printException("The card with such question already exists! Please, choose the other question");
+        } else {
+            success = facade.createCard(user, dictionary, frontSide, backSide);
         }
 
         return success;

@@ -12,6 +12,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DictionaryGUI implements GUI {
 
@@ -20,6 +22,7 @@ public class DictionaryGUI implements GUI {
     private View view;
     private Controller controller;
     private User currentUser;
+    private LinkedList<Card> cards;
 
     public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
         this.basicGUI = basicGUI;
@@ -27,6 +30,7 @@ public class DictionaryGUI implements GUI {
         this.currentUser = currentUser;
         this.view = view;
         this.controller = controller;
+        cards = dictionary.getCards();
     }
 
     public void go(){
@@ -35,8 +39,10 @@ public class DictionaryGUI implements GUI {
 
         basicGUI.frame.setTitle("Dictionary: " + dictionary.getName().substring(0, dictionary.getName().length() - 4));
 
+        // переделать, выводятся бинарные име карточек
         Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
-        JList<Card> cardsJList = new JList<>(listEntries);
+        String[] jListEntry = getCardText(listEntries);
+        JList<String> cardsJList = new JList<>(jListEntry);
         JScrollPane listScroller = new JScrollPane(cardsJList);
         listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -73,7 +79,18 @@ public class DictionaryGUI implements GUI {
     }
 
 
-    private static class CardListSelectionListener implements ListSelectionListener {
+    private String[] getCardText(Card[] cards){
+        String[] cardText = new String[cards.length];
+
+        for (int i = 0; i < cards.length; i++) {
+            cardText[i] = cards[i].getFront() + " \\\\\n " + cards[i].getBack();
+        }
+
+        return cardText;
+    }
+
+
+    private class CardListSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
 
@@ -81,7 +98,16 @@ public class DictionaryGUI implements GUI {
     }
 
 
-    private static class CreateCardListener implements ActionListener{
+    private class CreateCardListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            CardBuilderGUI cardBuilderGUI = new CardBuilderGUI(basicGUI, currentUser,dictionary, view, controller);
+            cardBuilderGUI.go();
+        }
+    }
+
+
+    private class DeleteCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -89,7 +115,7 @@ public class DictionaryGUI implements GUI {
     }
 
 
-    private static class DeleteCardListener implements ActionListener{
+    private class EditCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -97,7 +123,7 @@ public class DictionaryGUI implements GUI {
     }
 
 
-    private static class EditCardListener implements ActionListener{
+    private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -105,15 +131,7 @@ public class DictionaryGUI implements GUI {
     }
 
 
-    private static class StartTrainingListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
-
-    private static class ChangeNameListener implements ActionListener{
+    private class ChangeNameListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -128,4 +146,5 @@ public class DictionaryGUI implements GUI {
             userProfileGUI.go();
         }
     }
+
 }
