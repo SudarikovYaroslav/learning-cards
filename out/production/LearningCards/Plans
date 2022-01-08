@@ -117,3 +117,7 @@ Comments:
 25. ( FIXED!) In CardBuilderGUI in JList shows cards binary names instead card's sizes
 
 26. ( DONE! ) Добавить в кардбилдер проверку на пустые поля
+
+27. ( BUGS! ):
+    (fixed) new card sometimes wrights in one line;
+    - удалённая карточка не удаляется из списка карточек словаря;

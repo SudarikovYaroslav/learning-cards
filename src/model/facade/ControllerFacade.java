@@ -1,8 +1,10 @@
 package model.facade;
 
+import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ControllerFacade extends Facade{
@@ -40,5 +42,10 @@ public class ControllerFacade extends Facade{
 
     public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide){
         return model.createCard(user, dictionary, frontSide, backSide);
+    }
+
+
+    public boolean deleteCard(File dicTXT, Card card){
+        return model.deleteCard(dicTXT, card);
     }
 }

@@ -259,4 +259,36 @@ public class Model {
         return success;
     }
 
+
+    public boolean deleteCard(File dicTXT, Card card){
+        boolean success = false;
+        ArrayList<String> strCards = new ArrayList<>();
+        BufferedReader reader;
+        BufferedWriter writer;
+
+        try {
+            reader = new BufferedReader(new FileReader(dicTXT));
+            String line;
+            while ((line = reader.readLine()) != null){
+
+                String[] arr = line.split(dividerKey);
+
+                if (!arr[0].equals(card.getFront())) {
+                    strCards.add(line);
+                }
+            }
+            reader.close();
+
+            writer = new BufferedWriter(new FileWriter(dicTXT, false));
+            for (String str : strCards){
+                writer.write(str + "\n");
+            }
+            writer.close();
+            success = true;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return success;
+    }
 }

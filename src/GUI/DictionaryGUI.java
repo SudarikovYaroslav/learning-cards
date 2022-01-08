@@ -12,7 +12,6 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DictionaryGUI implements GUI {
@@ -22,6 +21,8 @@ public class DictionaryGUI implements GUI {
     private View view;
     private Controller controller;
     private User currentUser;
+    private JList<String> cardsJList;
+    private Card currentCard;
     private LinkedList<Card> cards;
 
     public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
@@ -30,6 +31,8 @@ public class DictionaryGUI implements GUI {
         this.currentUser = currentUser;
         this.view = view;
         this.controller = controller;
+        currentCard = null;
+        cardsJList = null;
         cards = dictionary.getCards();
     }
 
@@ -39,10 +42,10 @@ public class DictionaryGUI implements GUI {
 
         basicGUI.frame.setTitle("Dictionary: " + dictionary.getName().substring(0, dictionary.getName().length() - 4));
 
-        // переделать, выводятся бинарные име карточек
-        Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
-        String[] jListEntry = getCardText(listEntries);
-        JList<String> cardsJList = new JList<>(jListEntry);
+        // JList
+        /*Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
+        String[] jListEntry = getCardText(listEntries);*/
+        cardsJList = new JList<>(getJListEntry(dictionary));
         JScrollPane listScroller = new JScrollPane(cardsJList);
         listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         listScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -83,17 +86,33 @@ public class DictionaryGUI implements GUI {
         String[] cardText = new String[cards.length];
 
         for (int i = 0; i < cards.length; i++) {
-            cardText[i] = cards[i].getFront() + " \\\\\n " + cards[i].getBack();
+            cardText[i] = cards[i].getFront();
         }
 
         return cardText;
     }
 
 
+    private String[] getJListEntry(Dictionary dictionary){
+        Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
+        String[] jListEntry = getCardText(listEntries);
+        return jListEntry;
+    }
+
+
     private class CardListSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
+            if (!e.getValueIsAdjusting()) {
+                String cardFront = cardsJList.getSelectedValue();
 
+                for (Card card : cards){
+                    if (card.getFront().equals(cardFront)){
+                        currentCard = card;
+                        return;
+                    }
+                }
+            }
         }
     }
 
@@ -110,7 +129,18 @@ public class DictionaryGUI implements GUI {
     private class DeleteCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            if (currentCard != null) {
 
+                boolean success = controller.deleteCard(currentUser, dictionary, currentCard);
+
+                if (!success){
+                    view.printException("The card hasn't been deleted! Something wrong (((");
+                } else {
+                    dictionary.getCards().remove(currentCard);
+                    go();
+                }
+
+            }
         }
     }
 

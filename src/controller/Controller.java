@@ -136,4 +136,17 @@ public class Controller {
         return success;
     }
 
+
+    public boolean deleteCard(User user, Dictionary dictionary, Card card){
+        boolean success = false;
+
+        File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+
+        if (dicTXT.exists()){
+            success = facade.deleteCard(dicTXT, card);
+        }
+
+        return success;
+    }
+
 }
