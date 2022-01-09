@@ -4,7 +4,6 @@ import basicClasses.Dictionary;
 import basicClasses.User;
 import controller.Controller;
 import view.View;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +19,7 @@ public class CardBuilderGUI implements GUI {
     private View view;
     private Controller controller;
     private User currentUser;
+    private Card editableCard;
 
     public CardBuilderGUI(BasicGUI basicGUI, User currentUser, Dictionary dictionary, View view, Controller controller) {
         this.basicGUI = basicGUI;
@@ -27,6 +27,7 @@ public class CardBuilderGUI implements GUI {
         this.view = view;
         this.currentUser = currentUser;
         this.controller = controller;
+        editableCard = null;
     }
 
 
@@ -81,13 +82,6 @@ public class CardBuilderGUI implements GUI {
     }
 
 
-    private void clearCard(){
-        frontSide.setText("");
-        backSide.setText("");
-        frontSide.requestFocus();
-    }
-
-
     private class CreateCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -99,7 +93,7 @@ public class CardBuilderGUI implements GUI {
                     DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
                     dictionaryGUI.go();
                 } else {
-                    view.printException("Can't create new card (((");
+                    view.printMessage("Can't create new card (((");
                 }
             }
         }
@@ -109,7 +103,19 @@ public class CardBuilderGUI implements GUI {
     private class EditCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            String front = frontSide.getText();
+            String back = backSide.getText();
 
+            if ((front.length() > 0) && (back.length() > 0)) {
+                boolean success = controller.editCard(currentUser, dictionary, front, back);
+                if (success){
+                    dictionary.editCard(editableCard, front, back);
+                    DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
+                    dictionaryGUI.go();
+                } else {
+                    view.printMessage("Edit doesn't success! There' some troubles in process ((");
+                }
+            }
         }
     }
 
@@ -128,5 +134,14 @@ public class CardBuilderGUI implements GUI {
             DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
             dictionaryGUI.go();
         }
+    }
+
+
+    //This method called from DictionaryGUI to start editCard process
+    protected void editCard(Card card){
+        editableCard = card;
+        go();
+        frontSide.setText(card.getFront());
+        backSide.setText(card.getBack());
     }
 }

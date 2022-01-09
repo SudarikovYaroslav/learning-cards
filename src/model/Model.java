@@ -291,4 +291,42 @@ public class Model {
 
         return success;
     }
+
+
+    public boolean editCard(File dictionaryTXT, String front, String back){
+        boolean success = false;
+        ArrayList<String> cardsStr = new ArrayList<>();
+        BufferedReader reader;
+        BufferedWriter writer;
+        String line;
+
+        try {
+            reader = new BufferedReader(new FileReader(dictionaryTXT));
+
+            while ((line = reader.readLine()) != null){
+                String[] arr = line.split(dividerKey);
+
+                if (arr[0].equals(front)){
+                    line = front + dividerKey + back;
+                }
+
+                cardsStr.add(line);
+            }
+
+            reader.close();
+
+            writer = new BufferedWriter(new FileWriter(dictionaryTXT, false));
+
+            for (String data : cardsStr){
+                writer.write(data + "\n");
+            }
+
+            writer.close();
+            success = true;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return success;
+    }
 }

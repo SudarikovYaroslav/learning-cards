@@ -51,6 +51,15 @@ public class Dictionary implements Serializable {
         cards.add(newCard);
     }
 
+    public void editCard(Card changedCard, String front, String back){
+        for (Card card : cards){
+            if (card.getFront().equals(changedCard.getFront())){
+                card.setFront(front);
+                card.setBack(back);
+                return;
+            }
+        }
+    }
 
     public void addCard(Card card){
         cards.add(card);

@@ -35,7 +35,7 @@ public class View {
     }
 
 
-    public void printException(String message){
+    public void printMessage(String message){
         ExceptionsGUI exceptionsGUI = new ExceptionsGUI(basicGUI, currentGUI, message, this);
         exceptionsGUI.go();
     }

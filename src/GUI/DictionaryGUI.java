@@ -134,7 +134,7 @@ public class DictionaryGUI implements GUI {
                 boolean success = controller.deleteCard(currentUser, dictionary, currentCard);
 
                 if (!success){
-                    view.printException("The card hasn't been deleted! Something wrong (((");
+                    view.printMessage("The card hasn't been deleted! Something wrong (((");
                 } else {
                     dictionary.getCards().remove(currentCard);
                     go();
@@ -144,11 +144,14 @@ public class DictionaryGUI implements GUI {
         }
     }
 
-
+    
     private class EditCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (currentCard != null){
+                CardBuilderGUI cardBuilderGUI = new CardBuilderGUI(basicGUI, currentUser, dictionary, view, controller);
+                cardBuilderGUI.editCard(currentCard);
+            }
         }
     }
 

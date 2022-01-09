@@ -124,7 +124,7 @@ public class UserSelectGUI implements GUI {
                 boolean success = false;
                 success = controller.deleteUser(chosenUser);
                 if (success){
-                    view.printException("User: " + chosenUser.getName() + " has been successfully deleted!");
+                    view.printMessage("User: " + chosenUser.getName() + " has been successfully deleted!");
                 }
             }
         }

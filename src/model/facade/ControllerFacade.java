@@ -48,4 +48,9 @@ public class ControllerFacade extends Facade{
     public boolean deleteCard(File dicTXT, Card card){
         return model.deleteCard(dicTXT, card);
     }
+
+
+    public boolean editCard(File dictionaryTXT, String front, String back){
+        return model.editCard(dictionaryTXT, front, back);
+    }
 }

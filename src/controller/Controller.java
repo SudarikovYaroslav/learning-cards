@@ -43,10 +43,10 @@ public class Controller {
         }
 
         if (alreadyExists){
-            view.printException("User with this name already exist! Please choose another user name");
+            view.printMessage("User with this name already exist! Please choose another user name");
             return false;
         } else if(user.getName().length() == 0){
-            view.printException("User name should contain at list a one symbol!");
+            view.printMessage("User name should contain at list a one symbol!");
             return false;
         } else {
             facade.createUser(user);
@@ -83,9 +83,9 @@ public class Controller {
         }
 
         if (newDictionaryName.length() == 0){
-            view.printException("The Dictionary name should contains at list one symbol!");
+            view.printMessage("The Dictionary name should contains at list one symbol!");
         } else if (alreadyExist){
-            view.printException("The Dictionary with this name already exist! Choose another name please.");
+            view.printMessage("The Dictionary with this name already exist! Choose another name please.");
         } else {
            success = facade.createDictionary(user, newDictionaryName);
         }
@@ -128,7 +128,7 @@ public class Controller {
         }
 
         if (isExist){
-            view.printException("The card with such question already exists! Please, choose the other question");
+            view.printMessage("The card with such question already exists! Please, choose the other question");
         } else {
             success = facade.createCard(user, dictionary, frontSide, backSide);
         }
@@ -139,13 +139,23 @@ public class Controller {
 
     public boolean deleteCard(User user, Dictionary dictionary, Card card){
         boolean success = false;
-
         File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
 
         if (dicTXT.exists()){
             success = facade.deleteCard(dicTXT, card);
         }
 
+        return success;
+    }
+
+
+    public boolean editCard(User user, Dictionary dictionary, String front, String back){
+        boolean success = false;
+        File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+
+        if (dicTXT.exists()){
+            success = facade.editCard(dicTXT, front, back);
+        }
         return success;
     }
 
