@@ -65,7 +65,7 @@ Comments:
     (in progress) UserProfileGui;
     done! DictionaryBuilderGUI;
     - TrainingGUI;
-    (in progress) DictionaryGUI;
+    done! DictionaryGUI;
     (in progress) CardBuilderGUI;
     done! DictionaryBuilderGUI
     done! ExceptionsGUI;
@@ -81,7 +81,7 @@ Comments:
 
 9. ( DONE! ) Наладить взаимодейтвие Controller с фасадом модели
 
-10. Наладить наблюдение View за состоянием модели
+10. (пока решил не делать, может в обновлении добавлю) Наладить наблюдение View за состоянием модели
 
 11. ( Done! ) Solve problem with UserProfileGUI. Check problem in class comments
 
@@ -121,3 +121,13 @@ Comments:
 27. ( FIXED! ):
     (fixed) new card sometimes wrights in one line;
     (fixed) удалённая карточка не удаляется из списка карточек словаря;
+
+28. В тренингГУИ поменять местами кнопки
+
+29. TrainingGUI make all buttons - processes:
+        () ("Show an answer");
+        () ("Give a hint");
+        () ("Add to the Fails repetition list");
+        () ("Finish Training");
+        () ("Next Card");
+        () ("Miss the Card");

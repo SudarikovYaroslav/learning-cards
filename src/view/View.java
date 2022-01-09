@@ -43,4 +43,6 @@ public class View {
     public void setCurrentGUI(GUI gui){
         currentGUI = gui;
     }
+
+    public GUI getCurrentGUI(){ return currentGUI; }
 }

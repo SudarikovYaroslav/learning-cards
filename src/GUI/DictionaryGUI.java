@@ -144,7 +144,7 @@ public class DictionaryGUI implements GUI {
         }
     }
 
-    
+
     private class EditCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -159,7 +159,8 @@ public class DictionaryGUI implements GUI {
     private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI());
+            trainingGUI.simpleTrainingGO();
         }
     }
 

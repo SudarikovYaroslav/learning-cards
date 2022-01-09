@@ -59,16 +59,20 @@ public class UserProfileGUI implements GUI {
         JButton startTrainingButton = new JButton("Start Training");
         JButton editDictionaryButton = new JButton("Edit Dictionary");
         JButton deleteDictionaryButton = new JButton("Delete Dictionary");
+        JButton startMultiTrainingButton = new JButton("Start MultiTraining");
         JButton createNewDictionaryButton = new JButton("Create new Dictionary");
         JButton startFailsRepetitionButton = new JButton("Start fails repetition");
 
         changeUserButton.addActionListener(new ChangeUserListener());
         startTrainingButton.addActionListener(new StartTrainingListener());
         editDictionaryButton.addActionListener(new EditDictionaryListener());
+        startMultiTrainingButton.addActionListener(new MultiTrainingListener());
         deleteDictionaryButton.addActionListener(new DeleteDictionaryListener());
         createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
         startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
 
+        // Пожалуй нужно поменять местами кнопки
+        basicGUI.buttonsPanel.add(startMultiTrainingButton);
         basicGUI.buttonsPanel.add(createNewDictionaryButton);
         basicGUI.buttonsPanel.add(editDictionaryButton);
         basicGUI.buttonsPanel.add(deleteDictionaryButton);
@@ -133,7 +137,8 @@ public class UserProfileGUI implements GUI {
     private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI());
+            trainingGUI.simpleTrainingGO();
         }
     }
 
@@ -162,6 +167,15 @@ public class UserProfileGUI implements GUI {
         public void actionPerformed(ActionEvent e) {
 
 
+        }
+    }
+
+
+    private class MultiTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries);
+            trainingGUI.multiTrainingGO();
         }
     }
 }
