@@ -1,16 +1,19 @@
 package GUI;
-
 import basicClasses.Card;
 import basicClasses.Dictionary;
+import basicClasses.User;
 import controller.Controller;
 import view.View;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
+// Perhaps this class designed not correctly, because during training time it won't be ask controller to show
+// next card for example. I decided to do most operations directly inside this class because it have all information
+// to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in the next program update.
 public class TrainingGUI implements GUI {
 
     private View view;
@@ -25,6 +28,9 @@ public class TrainingGUI implements GUI {
     private ArrayList<Dictionary> dictionaries;
     private ArrayList<Card> missedCards;
     private ArrayList<Card> fails;
+    private User user; // ?
+    private int availableCards; // ?
+    private int counter; // ?
 
 
 
@@ -34,16 +40,27 @@ public class TrainingGUI implements GUI {
         this.controller = controller;
         currentDictionary = dictionary;
         this.previousGUI = previousGUI;
+        availableCards = dictionary.getSize(); // ?
     }
 
 
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries) {
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI) {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
         this.dictionaries = dictionaries;
+        this.previousGUI = previousGUI;
+        availableCards = getDictionariesSize(dictionaries); // ? getDictionariesSize() method is below
     }
 
+
+    // have to get fails repetition list from user
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, User user){
+        this.basicGUI = basicGUI;
+        this.view = view;
+        this.controller = controller;
+        this.user = user;
+    }
 
     public void go(){
         view.setCurrentGUI(basicGUI);
@@ -72,25 +89,25 @@ public class TrainingGUI implements GUI {
         basicGUI.mainPanel.add(BorderLayout.SOUTH, answerScroller);
 
         JButton showAnswerButton = new JButton("Show an answer");
-        JButton givHintButton = new JButton("Give a hint");
+        JButton giveHintButton = new JButton("Give a hint");
         JButton failsListButton = new JButton("Add to the Fails repetition list");
         JButton finishTrainingButton = new JButton("Finish Training");
         JButton nexCardButton = new JButton("Next Card");
         JButton missCardButton = new JButton("Miss the Card");
 
         showAnswerButton.addActionListener(new ShowAnswerListener());
-        givHintButton.addActionListener(new GiveHintListener());
+        giveHintButton.addActionListener(new GiveHintListener());
         failsListButton.addActionListener(new FailsListListener());
         finishTrainingButton.addActionListener(new FinishTrainingListener());
         nexCardButton.addActionListener(new NextCardListener());
         missCardButton.addActionListener(new MissCardListener());
 
-        basicGUI.buttonsPanel.add(showAnswerButton);
-        basicGUI.buttonsPanel.add(givHintButton);
-        basicGUI.buttonsPanel.add(failsListButton);
-        basicGUI.buttonsPanel.add(finishTrainingButton);
         basicGUI.buttonsPanel.add(nexCardButton);
         basicGUI.buttonsPanel.add(missCardButton);
+        basicGUI.buttonsPanel.add(giveHintButton);
+        basicGUI.buttonsPanel.add(showAnswerButton);
+        basicGUI.buttonsPanel.add(failsListButton);
+        basicGUI.buttonsPanel.add(finishTrainingButton);
 
         basicGUI.go();
     }
@@ -103,22 +120,39 @@ public class TrainingGUI implements GUI {
 
     public void simpleTrainingGO(){
         go();
+        frontArea.setText(currentDictionary.nextCard());
+    }
+
+
+    public void failsRepetitionGO(){ go(); }
+
+
+    private int getDictionariesSize(ArrayList<Dictionary> dictionaries){
+        int totalSize = 0;
+
+        for (Dictionary dictionary : dictionaries){
+            totalSize += dictionary.getSize();
+        }
+
+        return totalSize;
     }
 
 
     private class ShowAnswerListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            backArea.setText(currentDictionary.giveAnswer());
         }
     }
+
 
     private class  GiveHintListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            backArea.setText(currentDictionary.giveHint());
         }
     }
+
 
     private class FailsListListener implements ActionListener{
         @Override
@@ -127,6 +161,7 @@ public class TrainingGUI implements GUI {
         }
     }
 
+
     private class FinishTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -134,17 +169,20 @@ public class TrainingGUI implements GUI {
         }
     }
 
+
     private class NextCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            frontArea.setText(currentDictionary.nextCard());
+            backArea.setText("");
         }
     }
+
 
     private class MissCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            currentDictionary.missCard();
         }
     }
 }

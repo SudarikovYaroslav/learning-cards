@@ -9,8 +9,8 @@ Comments:
 2. ( In progress! ) Make model
    (Done!) create a Facade pattern to deal with interface
    - create an Observer pattern
-   - сделать сохранение пользовательских данных на ПК;
-   - сделать загрузку пользовательских данны из ПК в программу;
+   done! сделать сохранение пользовательских данных на ПК;
+   done! сделать загрузку пользовательских данны из ПК в программу;
    - сделать проверку на наличие рабочих папок и файлов и их создание (по умолчанию в моих документах):
       // При инициализации модели должен проверить наличие папки "Learning Cards" в папке "Repo" на рабочем столе, при необходимости создать её; (Есть план дальнейшей модернизации)
       // Внутри "Learning Cards" проверяем наличие папки "Users", при отсутствии создать.
@@ -62,11 +62,11 @@ Comments:
     done! BasicGUI;
     done! progress UserBuilderGUI;
     done! progress UserSelectGUI;
-    (in progress) UserProfileGui;
+    done! UserProfileGui;
     done! DictionaryBuilderGUI;
     - TrainingGUI;
     done! DictionaryGUI;
-    (in progress) CardBuilderGUI;
+    done! CardBuilderGUI;
     done! DictionaryBuilderGUI
     done! ExceptionsGUI;
 
@@ -122,12 +122,24 @@ Comments:
     (fixed) new card sometimes wrights in one line;
     (fixed) удалённая карточка не удаляется из списка карточек словаря;
 
-28. В тренингГУИ поменять местами кнопки
+28. ( DONE! ) В тренингГУИ поменять местами кнопки
 
-29. TrainingGUI make all buttons - processes:
-        () ("Show an answer");
+29. () TrainingGUI make all buttons - processes:
+        (done) ("Show an answer");
         () ("Give a hint");
         () ("Add to the Fails repetition list");
-        () ("Finish Training");
-        () ("Next Card");
+        (done) ("Finish Training");
+        (done) ("Next Card");
         () ("Miss the Card");
+
+30. ( FIXED! ) Start Training in UserProfileGUI mast't begin without select dictionary!
+
+31. ( FIXED! ) In multiTraining NullPointerException when the button "Finish Training" pressed
+
+32. ( Exception ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue press the button
+
+33. ( BUG! ) GiveHintButton: works after second press
+
+34. ( BUG! ) GiveHintButton: works incorrectly with long one word answer
+
+35. ( BUG! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead previous word plus next word;

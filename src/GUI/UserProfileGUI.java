@@ -71,12 +71,12 @@ public class UserProfileGUI implements GUI {
         createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
         startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
 
-        // Пожалуй нужно поменять местами кнопки
-        basicGUI.buttonsPanel.add(startMultiTrainingButton);
+
         basicGUI.buttonsPanel.add(createNewDictionaryButton);
         basicGUI.buttonsPanel.add(editDictionaryButton);
         basicGUI.buttonsPanel.add(deleteDictionaryButton);
         basicGUI.buttonsPanel.add(startTrainingButton);
+        basicGUI.buttonsPanel.add(startMultiTrainingButton);
         basicGUI.buttonsPanel.add(startFailsRepetitionButton);
         basicGUI.buttonsPanel.add(changeUserButton);
 
@@ -137,16 +137,26 @@ public class UserProfileGUI implements GUI {
     private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI());
-            trainingGUI.simpleTrainingGO();
+            if (currentDictionary != null) {
+                TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI());
+                trainingGUI.simpleTrainingGO();
+            }
         }
     }
 
-    // in progress
+
+    private class MultiTrainingListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI());
+            trainingGUI.multiTrainingGO();
+        }
+    }
+
+
     private class DeleteDictionaryListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            //boolean success = false;
             controller.deleteDictionary(user, currentDictionary);
             go();
         }
@@ -165,17 +175,9 @@ public class UserProfileGUI implements GUI {
     private class StartFailsRepetitionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, user);
+            trainingGUI.failsRepetitionGO();
 
-
-        }
-    }
-
-
-    private class MultiTrainingListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries);
-            trainingGUI.multiTrainingGO();
         }
     }
 }

@@ -7,7 +7,6 @@ import basicClasses.User;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -136,8 +135,6 @@ public class Model {
     }
 
 
-
-    // Bug because listUsers.TXT didn't changed
     public boolean deleteUser(User user){
         boolean successful = false;
         File userToDelete = new File(usersFolderPath + "/" + user.getName());
@@ -218,7 +215,7 @@ public class Model {
     }
 
 
-    private void recreateAvailableUsersListFile(){
+     private void recreateAvailableUsersListFile(){
         File toDelete = new File(allUsersListPath);
         toDelete.delete();
         File newUserList = new File(allUsersListPath);
