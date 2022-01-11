@@ -14,6 +14,8 @@ public class Dictionary implements Serializable {
     private int counter;
     private int hintCounter;
     private ArrayList<Card> missedCards;
+    private boolean isCardsRunOut;
+    private boolean isAnswerShown;
 
 
     public Dictionary(String name) {
@@ -22,6 +24,21 @@ public class Dictionary implements Serializable {
         missedCards = new ArrayList<>();
         counter = 0;
         hintCounter = 0;
+        isCardsRunOut = false;
+        isAnswerShown = false;
+    }
+
+
+    // This constructor used to build clone of dicForCloning
+    public Dictionary(Dictionary dicForCloning){
+        name = dicForCloning.getName();
+        cards = new LinkedList<>();
+        cards.addAll(dicForCloning.getCards());
+        missedCards = new ArrayList<>();
+        counter = 0;
+        hintCounter = 0;
+        isCardsRunOut = false;
+        isAnswerShown = false;
     }
 
 
@@ -76,6 +93,7 @@ public class Dictionary implements Serializable {
 
     public String nextCard(){
         hintCounter = 0;
+        isAnswerShown = false;
         String front = "";
 
         if (counter < cards.size()){
@@ -89,6 +107,7 @@ public class Dictionary implements Serializable {
         }
 
         if (front.length() == 0){
+            isCardsRunOut = true;
             front = "All cards run out";
         }
 
@@ -97,7 +116,16 @@ public class Dictionary implements Serializable {
 
 
     public String giveAnswer(){
-        return cards.get(counter - 1).getBack();
+        isAnswerShown = true;
+        if (!isCardsRunOut) {
+            if (counter > cards.size()) {
+                return "";
+            } else {
+                return cards.get(counter - 1).getBack();
+            }
+        } else {
+            return "";
+        }
     }
 
 
@@ -107,32 +135,62 @@ public class Dictionary implements Serializable {
     }
 
 
+    // Throws IndexOutOfBoundsException from one word section when pushed after answer completely shown
     public String giveHint(){
         String hint = "";
-        String[] answer = giveAnswer().split(" ");
 
-        if (answer.length > 1 && hintCounter < answer.length){
-            hint = answer[hintCounter];
-            hintCounter++;
-        } else {
-            int wordSize = answer[0].length();
+        if ((!isCardsRunOut) && (!isAnswerShown)){
+            String[] arr = giveAnswer().split(" ");
 
-            if (wordSize == 1){
-                giveAnswer();
-            } else if (wordSize < 6){
-                hint = answer[0].substring(0, hintCounter);
+            // one word in answer
+            if (arr.length == 1){
                 hintCounter++;
-            } else if (wordSize > 6){
-                hintCounter = 3;
-                hint = answer[0].substring(0, hintCounter);
-                hintCounter += 3;
+                String word = arr[0];
 
-                while (hintCounter >= answer.length){
-                    hintCounter--;
+                if (word.length() < 6){ // short word
+
+                    hint = word.substring(0, hintCounter);
+
+                } else { // long word
+
+                    int pos = 2;
+
+                    while (hintCounter + pos > word.length()){
+                        pos--;
+                    }
+
+                    hint = word.substring(0, hintCounter += pos);
                 }
+
+            } else { // Answer contains more then one word (In progress!!! Other part works correctly !!!)
+                hintCounter++;
+                int wordNumber = 0;
+                StringBuilder answerBuilder = new StringBuilder();
+
+                while (wordNumber < hintCounter){
+                    answerBuilder.append(arr[wordNumber]);
+                    if (wordNumber < arr.length){
+                        answerBuilder.append(" ");
+                    }
+                    wordNumber++;
+                }
+
+                return ;
+            }
+        } else {
+            if (isCardsRunOut){
+                return "";
+            } else {
+                return giveAnswer();
             }
         }
-        return hint;
+
+        if (hint.length() != giveAnswer().length()){
+            isAnswerShown = false;
+            return hint;
+        } else {
+            return giveAnswer();
+        }
     }
 
 

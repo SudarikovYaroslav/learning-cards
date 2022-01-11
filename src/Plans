@@ -64,7 +64,7 @@ Comments:
     done! progress UserSelectGUI;
     done! UserProfileGui;
     done! DictionaryBuilderGUI;
-    - TrainingGUI;
+    (in process) TrainingGUI;
     done! DictionaryGUI;
     done! CardBuilderGUI;
     done! DictionaryBuilderGUI
@@ -126,7 +126,7 @@ Comments:
 
 29. () TrainingGUI make all buttons - processes:
         (done) ("Show an answer");
-        () ("Give a hint");
+        (in process) ("Give a hint");
         () ("Add to the Fails repetition list");
         (done) ("Finish Training");
         (done) ("Next Card");
@@ -136,14 +136,19 @@ Comments:
 
 31. ( FIXED! ) In multiTraining NullPointerException when the button "Finish Training" pressed
 
-32. ( Exception ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue press the button
+32. ( FIXED! ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue press the button
 
-33. ( BUG! ) GiveHintButton: works after second press
+33. ( FIXED! ) GiveHintButton: works after second press
 
 34. ( BUG! ) GiveHintButton: works incorrectly with long one word answer
 
-35. ( BUG! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead previous word plus next word;
+35. ( BUG! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead: previous word plus next word;
 
-36. ( Exception ) TrainingGUI: when cards run out and the button Give a Hint pushed: throws IndexOutOfBoundsException
+36. ( FIXED! ) TrainingGUI: when cards run out and the button Show an Answer pushed: throws IndexOutOfBoundsException
 
-37. ( Exception ) TrainingGUI: when cards run out and the button Show an Answer pushed: throws IndexOutOfBoundsException
+37. ( FIXED! ) If you finished a training in some Dictionary. If you try to repeat training with this dictionary in the same session
+             when it'll starts, you'll see "Cards run out";
+
+38. ( BUG! ) CardBuilderGUI after editCard in GUI Shows both cards: old and new. It doesn't changed after reload program
+
+39. (Exception) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed after answer completely shown

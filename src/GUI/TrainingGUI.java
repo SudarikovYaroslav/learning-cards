@@ -24,7 +24,7 @@ public class TrainingGUI implements GUI {
     private JTextArea backArea;
     private Card currentCard;
     private int currentCardIndex;
-    private Dictionary currentDictionary;
+    private Dictionary trainingDictionary;
     private ArrayList<Dictionary> dictionaries;
     private ArrayList<Card> missedCards;
     private ArrayList<Card> fails;
@@ -38,7 +38,7 @@ public class TrainingGUI implements GUI {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
-        currentDictionary = dictionary;
+        trainingDictionary = copyFoTraining(dictionary);
         this.previousGUI = previousGUI;
         availableCards = dictionary.getSize(); // ?
     }
@@ -59,7 +59,7 @@ public class TrainingGUI implements GUI {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
-        this.user = user;
+        this.user = user; // perhaps instead user field it should init field ArrayList<Card> fails = user.getFailsList();
     }
 
     public void go(){
@@ -120,7 +120,7 @@ public class TrainingGUI implements GUI {
 
     public void simpleTrainingGO(){
         go();
-        frontArea.setText(currentDictionary.nextCard());
+        frontArea.setText(trainingDictionary.nextCard());
     }
 
 
@@ -138,10 +138,15 @@ public class TrainingGUI implements GUI {
     }
 
 
+    private Dictionary copyFoTraining(Dictionary dictionary){
+       return new Dictionary(dictionary);
+    }
+
+
     private class ShowAnswerListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            backArea.setText(currentDictionary.giveAnswer());
+            backArea.setText(trainingDictionary.giveAnswer());
         }
     }
 
@@ -149,7 +154,7 @@ public class TrainingGUI implements GUI {
     private class  GiveHintListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            backArea.setText(currentDictionary.giveHint());
+            backArea.setText(trainingDictionary.giveHint());
         }
     }
 
@@ -173,7 +178,7 @@ public class TrainingGUI implements GUI {
     private class NextCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            frontArea.setText(currentDictionary.nextCard());
+            frontArea.setText(trainingDictionary.nextCard());
             backArea.setText("");
         }
     }
@@ -182,7 +187,7 @@ public class TrainingGUI implements GUI {
     private class MissCardListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            currentDictionary.missCard();
+            trainingDictionary.missCard();
         }
     }
 }
