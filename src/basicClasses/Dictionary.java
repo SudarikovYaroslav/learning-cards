@@ -96,17 +96,21 @@ public class Dictionary implements Serializable {
         isAnswerShown = false;
         String front = "";
 
-        if (counter < cards.size()){
-            front = cards.get(counter).getFront();
-            counter++;
-        } else {
-            cards.clear();
-            cards.addAll(missedCards);
-            missedCards.clear();
-            counter = 0;
+        if (counter >= cards.size()) {
+            if (!missedCards.isEmpty()) {
+                cards.clear();
+                cards.addAll(missedCards);
+                missedCards.clear();
+                counter = 0;
+            }
         }
 
-        if (front.length() == 0){
+        if (counter < cards.size()) {
+            front = cards.get(counter).getFront();
+            counter++;
+        }
+
+        if ( front.length() == 0 ){
             isCardsRunOut = true;
             front = "All cards run out";
         }
@@ -130,8 +134,7 @@ public class Dictionary implements Serializable {
 
 
     public void missCard(){
-        missedCards.add(cards.get(counter));
-        nextCard();
+       missedCards.add(cards.get(counter - 1));
     }
 
 

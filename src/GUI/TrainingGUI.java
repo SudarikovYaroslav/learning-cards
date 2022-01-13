@@ -188,6 +188,8 @@ public class TrainingGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             trainingDictionary.missCard();
+            frontArea.setText(trainingDictionary.nextCard());
+            backArea.setText("");
         }
     }
 }

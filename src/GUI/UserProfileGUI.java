@@ -177,7 +177,6 @@ public class UserProfileGUI implements GUI {
         public void actionPerformed(ActionEvent e) {
             TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, user);
             trainingGUI.failsRepetitionGO();
-
         }
     }
 }

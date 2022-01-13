@@ -1,7 +1,3 @@
-Dog151-De.V,i,D.eR-546Собачка
-3151-De.V,i,D.eR-546123
-6151-De.V,i,D.eR-546123456
-7151-De.V,i,D.eR-5461234567
+Dog151-De.V,i,D.eR-546Собака
 Cat151-De.V,i,D.eR-546котик
-Several wors test151-De.V,i,D.eR-546One Two Three
-Second several words test151-De.V,i,D.eR-546One two three four
+Pet151-De.V,i,D.eR-546Home animal
