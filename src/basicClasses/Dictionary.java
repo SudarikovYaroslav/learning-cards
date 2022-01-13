@@ -171,13 +171,13 @@ public class Dictionary implements Serializable {
                     hintCounter++;
                     while (nextWordIndex < hintCounter) {
                         answerBuilder.append(arr[nextWordIndex]);
-                        if (hintCounter < arr.length){
+                        if (nextWordIndex < arr.length){
                             answerBuilder.append(" ");
                         }
                         nextWordIndex++;
                     }
                 }
-
+                if (nextWordIndex == arr.length) isAnswerShown = true;
                 return answerBuilder.toString();
             }
         } else {

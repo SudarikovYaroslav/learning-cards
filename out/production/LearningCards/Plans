@@ -142,7 +142,7 @@ Comments:
 
 34. ( FIXED! ) GiveHintButton: works incorrectly with long one word answer
 
-35. ( BUG! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead: previous word plus next word;
+35. ( FIXED! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead: previous word plus next word;
 
 36. ( FIXED! ) TrainingGUI: when cards run out and the button Show an Answer pushed: throws IndexOutOfBoundsException
 
@@ -151,6 +151,10 @@ Comments:
 
 38. ( BUG! ) CardBuilderGUI after editCard in GUI Shows both cards: old and new. It doesn't changed after reload program
 
-39. (Exception) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed after answer completely shown
+39. ( FIXED! ) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed after answer completely shown
 
-30. ( BUG ) на последней карточке включается флажок "карточки закончились", из-за этого не корректно работает на последней карточке кнопка: подсказка
+30. ( FIXED! ) кнопка подсказка: при работе с ответами из нескольких слов не корректно выводятся пробелы между словами
+            при выводе последнего слова, проверить счётчики!
+
+31. ( BUG! ) hint button: after answer's completely shown, next click gives empty answer
+
