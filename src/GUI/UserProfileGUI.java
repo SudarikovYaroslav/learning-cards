@@ -139,7 +139,7 @@ public class UserProfileGUI implements GUI {
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
                 TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI());
-                trainingGUI.simpleTrainingGO();
+                trainingGUI.trainingGO();
             }
         }
     }
@@ -149,7 +149,7 @@ public class UserProfileGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI());
-            trainingGUI.multiTrainingGO();
+            trainingGUI.trainingGO();
         }
     }
 

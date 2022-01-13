@@ -130,7 +130,7 @@ Comments:
         () ("Add to the Fails repetition list");
         (done) ("Finish Training");
         (done) ("Next Card");
-        () ("Miss the Card");
+        (done) ("Miss the Card");
 
 30. ( FIXED! ) Start Training in UserProfileGUI mast't begin without select dictionary!
 
@@ -156,8 +156,17 @@ Comments:
 
 40. ( FIXED! ) hint button: after answer's completely shown, next click gives empty answer
 
-41. ( in process) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
+41. ( FIXED! ) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
     throws IndexOutOfBoundsException!
 
+42. () Make a FailsRepetitionGUI
+
+43. In FailsRepetitionGUI realise buttons:
+    - Take constructor from the TrainingGUI. It marks: "To the fails repetition"
+    -
+    -
+    -
+
+44. (in progress) UserProfileGUI/button: MultiTraining
 
 

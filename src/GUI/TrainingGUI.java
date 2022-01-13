@@ -45,15 +45,17 @@ public class TrainingGUI implements GUI {
 
 
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI) {
+        // сделать из всех словарей один и присвоить его переменной trainingDictionary;
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
-        this.dictionaries = dictionaries;
+        trainingDictionary = buildMultiDictionary(dictionaries);
         this.previousGUI = previousGUI;
-        availableCards = getDictionariesSize(dictionaries); // ? getDictionariesSize() method is below
+        availableCards = getDictionariesSize(dictionaries);
     }
 
 
+    // Remove This constructor to the Fails RepetitionGUI;
     // have to get fails repetition list from user
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, User user){
         this.basicGUI = basicGUI;
@@ -112,13 +114,8 @@ public class TrainingGUI implements GUI {
         basicGUI.go();
     }
 
-
-    public void multiTrainingGO(){
-        go();
-    }
-
-
-    public void simpleTrainingGO(){
+    
+    public void trainingGO(){
         go();
         frontArea.setText(trainingDictionary.nextCard());
     }
@@ -142,6 +139,17 @@ public class TrainingGUI implements GUI {
        return new Dictionary(dictionary);
     }
 
+
+    private Dictionary buildMultiDictionary(ArrayList<Dictionary> dictionaries){
+
+        Dictionary multiDictionary = new Dictionary("TempMultiDictionary");
+        for (Dictionary dic : dictionaries){
+            for (Card card : dic.getCards()){
+                multiDictionary.addCard(card);
+            }
+        }
+        return multiDictionary;
+    }
 
     private class ShowAnswerListener implements ActionListener{
         @Override

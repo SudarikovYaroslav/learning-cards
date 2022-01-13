@@ -138,7 +138,6 @@ public class Dictionary implements Serializable {
     }
 
 
-    // Throws IndexOutOfBoundsException from one word section when pushed after answer completely shown
     public String giveHint(){
         String hint = "";
 
@@ -166,7 +165,7 @@ public class Dictionary implements Serializable {
                     hint = word.substring(0, hintCounter += pos);
                 }
 
-            } else { // Answer contains more then one word (In progress!!! Other part works correctly !!!)
+            } else {
                 StringBuilder answerBuilder = new StringBuilder();
                 int nextWordIndex = 0;
 

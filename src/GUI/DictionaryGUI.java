@@ -160,7 +160,7 @@ public class DictionaryGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI());
-            trainingGUI.simpleTrainingGO();
+            trainingGUI.trainingGO();
         }
     }
 
