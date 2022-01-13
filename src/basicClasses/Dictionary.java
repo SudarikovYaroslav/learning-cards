@@ -141,6 +141,7 @@ public class Dictionary implements Serializable {
 
         if ((!isCardsRunOut) && (!isAnswerShown)){
             String[] arr = giveAnswer().split(" ");
+            isAnswerShown = false;
 
             // one word in answer
             if (arr.length == 1){
@@ -163,19 +164,21 @@ public class Dictionary implements Serializable {
                 }
 
             } else { // Answer contains more then one word (In progress!!! Other part works correctly !!!)
-                hintCounter++;
-                int wordNumber = 0;
                 StringBuilder answerBuilder = new StringBuilder();
+                int nextWordIndex = 0;
 
-                while (wordNumber < hintCounter){
-                    answerBuilder.append(arr[wordNumber]);
-                    if (wordNumber < arr.length){
-                        answerBuilder.append(" ");
+                if (hintCounter < arr.length){
+                    hintCounter++;
+                    while (nextWordIndex < hintCounter) {
+                        answerBuilder.append(arr[nextWordIndex]);
+                        if (hintCounter < arr.length){
+                            answerBuilder.append(" ");
+                        }
+                        nextWordIndex++;
                     }
-                    wordNumber++;
                 }
 
-                return ;
+                return answerBuilder.toString();
             }
         } else {
             if (isCardsRunOut){
