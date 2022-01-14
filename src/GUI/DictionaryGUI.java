@@ -159,7 +159,7 @@ public class DictionaryGUI implements GUI {
     private class StartTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI());
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI(), currentUser);
             trainingGUI.trainingGO();
         }
     }

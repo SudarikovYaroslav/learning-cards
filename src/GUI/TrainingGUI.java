@@ -16,53 +16,47 @@ import java.util.ArrayList;
 // to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in the next program update.
 public class TrainingGUI implements GUI {
 
-    private View view;
-    private Controller controller;
+    private final View view;
+    private final Controller controller;
     private final BasicGUI basicGUI;
     private GUI previousGUI;
     private JTextArea frontArea;
     private JTextArea backArea;
-    private Card currentCard;
-    private int currentCardIndex;
     private Dictionary trainingDictionary;
-    private ArrayList<Dictionary> dictionaries;
-    private ArrayList<Card> missedCards;
-    private ArrayList<Card> fails;
-    private User user; // ?
-    private int availableCards; // ?
-    private int counter; // ?
+    private User user;
+    private final boolean isFailsListUsed;
 
+// The field User user; Must be initialized in eny cases in all constructors
 
-
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, Dictionary dictionary, GUI previousGUI) {
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, Dictionary dictionary, GUI previousGUI, User user) {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
         trainingDictionary = copyFoTraining(dictionary);
         this.previousGUI = previousGUI;
-        availableCards = dictionary.getSize(); // ?
+        isFailsListUsed = false;
     }
 
 
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI) {
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI, User user) {
         // сделать из всех словарей один и присвоить его переменной trainingDictionary;
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
         trainingDictionary = buildMultiDictionary(dictionaries);
         this.previousGUI = previousGUI;
-        availableCards = getDictionariesSize(dictionaries);
+        isFailsListUsed = false;
     }
 
 
-    // Remove This constructor to the Fails RepetitionGUI;
-    // have to get fails repetition list from user
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, User user){
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
-        this.user = user; // perhaps instead user field it should init field ArrayList<Card> fails = user.getFailsList();
+        this.user = user;
+        isFailsListUsed = true;
     }
+
 
     public void go(){
         view.setCurrentGUI(basicGUI);
@@ -92,14 +86,23 @@ public class TrainingGUI implements GUI {
 
         JButton showAnswerButton = new JButton("Show an answer");
         JButton giveHintButton = new JButton("Give a hint");
-        JButton failsListButton = new JButton("Add to the Fails repetition list");
+        JButton failsListButton = null;
+        if (isFailsListUsed) {
+            failsListButton = new JButton("Delete from Fails List");
+        } else {
+            failsListButton = new JButton("Add to the Fails repetition list");
+        }
         JButton finishTrainingButton = new JButton("Finish Training");
         JButton nexCardButton = new JButton("Next Card");
         JButton missCardButton = new JButton("Miss the Card");
 
         showAnswerButton.addActionListener(new ShowAnswerListener());
         giveHintButton.addActionListener(new GiveHintListener());
-        failsListButton.addActionListener(new FailsListListener());
+        if (isFailsListUsed) {
+            failsListButton.addActionListener(new FailsListDeleterListener());
+        } else {
+            failsListButton.addActionListener(new FailsListAdderListener());
+        }
         finishTrainingButton.addActionListener(new FinishTrainingListener());
         nexCardButton.addActionListener(new NextCardListener());
         missCardButton.addActionListener(new MissCardListener());
@@ -121,7 +124,12 @@ public class TrainingGUI implements GUI {
     }
 
 
-    public void failsRepetitionGO(){ go(); }
+    public void startFailsRepetition(){
+        go();
+        // interaction with fails List which should be loaded by using controller
+        // and placed in the trainingDictionary field
+        frontArea.setText(trainingDictionary.nextCard());
+    }
 
 
     private int getDictionariesSize(ArrayList<Dictionary> dictionaries){
@@ -167,7 +175,17 @@ public class TrainingGUI implements GUI {
     }
 
 
-    private class FailsListListener implements ActionListener{
+    private class FailsListAdderListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // Dictionary/ getCurrentCard(): may be returned wrong card! Must check it in .txt file!
+            String message = controller.addToTheFailsList(user, trainingDictionary.getCurrentCard());
+            view.printMessage(message);
+        }
+    }
+
+
+    private class FailsListDeleterListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
 

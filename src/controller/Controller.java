@@ -7,7 +7,10 @@ import model.facade.ControllerFacade;
 import model.Model;
 import view.View;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Controller {
@@ -16,6 +19,7 @@ public class Controller {
     private ControllerFacade facade;
     private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
     private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
+    private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file and for mapping when read it from file
 
 
     public void addModel(Model model){
@@ -157,6 +161,53 @@ public class Controller {
             success = facade.editCard(dicTXT, front, back);
         }
         return success;
+    }
+
+
+    public String addToTheFailsList(User user, Card card){
+
+        File failsListTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
+        BufferedReader reader;
+        boolean success = false;
+        StringBuilder messageBuilder = new StringBuilder();
+
+        if (!failsListTXT.exists()){
+            try {
+                if (failsListTXT.createNewFile()){
+                    messageBuilder.append("File: ").append(failsListTXT.getAbsolutePath()).append(" has been successfully created\n");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                reader = new BufferedReader(new FileReader(failsListTXT));
+                String data;
+
+                while ((data = reader.readLine()) != null){
+                    String[] arr = data.split(dividerKey);
+
+                    if (arr[0].equals(card.getFront())){
+                        messageBuilder.append("This card's already in Fails Repetition List");
+                       return messageBuilder.toString();
+                    }
+                }
+
+                reader.close();
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        success = facade.addToTheFailsList(failsListTXT, card);
+
+        if (success){
+            messageBuilder.append("The Card has been successfully wrote in Fails List");
+            return messageBuilder.toString();
+        } else {
+            messageBuilder.append("Operation failed! (((");
+            return messageBuilder.toString();
+        }
     }
 
 }

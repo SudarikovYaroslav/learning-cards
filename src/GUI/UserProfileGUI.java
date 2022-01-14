@@ -138,7 +138,7 @@ public class UserProfileGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
-                TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI());
+                TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI(), user);
                 trainingGUI.trainingGO();
             }
         }
@@ -148,7 +148,7 @@ public class UserProfileGUI implements GUI {
     private class MultiTrainingListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI());
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI(), user);
             trainingGUI.trainingGO();
         }
     }
@@ -175,8 +175,8 @@ public class UserProfileGUI implements GUI {
     private class StartFailsRepetitionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, user);
-            trainingGUI.failsRepetitionGO();
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI,view, controller, user);
+            trainingGUI.startFailsRepetition();
         }
     }
 }

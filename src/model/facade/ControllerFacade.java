@@ -53,4 +53,9 @@ public class ControllerFacade extends Facade{
     public boolean editCard(File dictionaryTXT, String front, String back){
         return model.editCard(dictionaryTXT, front, back);
     }
+
+
+    public boolean addToTheFailsList(File failsListTXT, Card card){
+        return model.addToTheFailsList(failsListTXT, card);
+    }
 }

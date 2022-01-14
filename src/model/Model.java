@@ -326,4 +326,21 @@ public class Model {
 
         return success;
     }
+
+
+    public boolean addToTheFailsList(File failsListTXT, Card card){
+        BufferedWriter writer;
+        boolean success = false;
+
+        try {
+            writer = new BufferedWriter(new FileWriter(failsListTXT, true));
+            writer.write(card.getFront() + dividerKey + card.getBack());
+            writer.close();
+            success = true;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return success;
+    }
 }

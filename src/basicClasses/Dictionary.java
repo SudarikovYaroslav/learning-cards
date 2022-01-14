@@ -202,4 +202,9 @@ public class Dictionary implements Serializable {
     public int getSize(){
         return cards.size();
     }
+
+
+    public Card getCurrentCard(){
+        return cards.get(counter - 1);
+    }
 }
