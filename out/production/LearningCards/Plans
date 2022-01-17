@@ -159,14 +159,15 @@ Comments:
 41. ( FIXED! ) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
     throws IndexOutOfBoundsException!
 
-42. () Make a FailsRepetitionGUI
+42. ( in progress ) Make FailsRepetition
+    (done) change FailsButton in TrainingGUI, when Fails Repetition starts
+    (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
+    (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
+    (done) add to the fails list repetition process
+    (!???!) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+            BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
 
-43. In FailsRepetitionGUI realise buttons:
-    - Take constructor from the TrainingGUI. It marks: "To the fails repetition"
-    -
-    -
-    -
+43. ( DONE! ) UserProfileGUI/button: MultiTraining
 
-44. ( DONE! ) UserProfileGUI/button: MultiTraining
-
+44. FailsList repetition process: похоже не очень хорошая реализация получилась в первой версии. Подумат как можно сделать подругому
 

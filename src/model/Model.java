@@ -334,7 +334,7 @@ public class Model {
 
         try {
             writer = new BufferedWriter(new FileWriter(failsListTXT, true));
-            writer.write(card.getFront() + dividerKey + card.getBack());
+            writer.write(card.getFront() + dividerKey + card.getBack() + "\n");
             writer.close();
             success = true;
         } catch (IOException e){

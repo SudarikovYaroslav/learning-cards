@@ -35,6 +35,7 @@ public class TrainingGUI implements GUI {
         trainingDictionary = copyFoTraining(dictionary);
         this.previousGUI = previousGUI;
         isFailsListUsed = false;
+        this.user = user;
     }
 
 
@@ -46,20 +47,23 @@ public class TrainingGUI implements GUI {
         trainingDictionary = buildMultiDictionary(dictionaries);
         this.previousGUI = previousGUI;
         isFailsListUsed = false;
+        this.user = user;
     }
 
 
+    // This constructor used only for init FailsTraining
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, User user){
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
         this.user = user;
         isFailsListUsed = true;
+        trainingDictionary = loadFailsDictionary(user);
     }
 
 
     public void go(){
-        view.setCurrentGUI(basicGUI);
+        view.setCurrentGUI(this);
         basicGUI.clear();
         basicGUI.frame.setTitle("Training");
 
@@ -159,6 +163,11 @@ public class TrainingGUI implements GUI {
         return multiDictionary;
     }
 
+
+    private Dictionary loadFailsDictionary(User user){
+        return controller.loadFailsDictionary(user);
+    }
+
     private class ShowAnswerListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -178,7 +187,6 @@ public class TrainingGUI implements GUI {
     private class FailsListAdderListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            // Dictionary/ getCurrentCard(): may be returned wrong card! Must check it in .txt file!
             String message = controller.addToTheFailsList(user, trainingDictionary.getCurrentCard());
             view.printMessage(message);
         }

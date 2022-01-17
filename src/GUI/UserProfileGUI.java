@@ -138,8 +138,14 @@ public class UserProfileGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
-                TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI(), user);
-                trainingGUI.trainingGO();
+                if (currentDictionary.getName().equals("FailsList")){
+                 // here should be run fails repetition training
+                    TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, user);
+                    failsTraining.go();
+                } else {
+                    TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI(), user);
+                    trainingGUI.trainingGO();
+                }
             }
         }
     }

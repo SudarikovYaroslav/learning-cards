@@ -161,10 +161,14 @@ Comments:
 
 42. ( in progress ) Make FailsRepetition
     (done) change FailsButton in TrainingGUI, when Fails Repetition starts
-    (Exception) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
-    ( in progress) add to the fails list repetition process
-    () start fails repetition
+    (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
+    (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
+    (done) add to the fails list repetition process
+    (in progress) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+            BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
 
 43. ( DONE! ) UserProfileGUI/button: MultiTraining
 
+44. FailsList repetition process: похоже не очень хорошая реализация получилась в первой версии. Подумат как можно сделать подругому
 
+45. () Button "Delete from Fails list"

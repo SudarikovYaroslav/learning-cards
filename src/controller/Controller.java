@@ -19,6 +19,7 @@ public class Controller {
     private ControllerFacade facade;
     private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
     private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
+    private final String failsListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/";
     private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file and for mapping when read it from file
 
 
@@ -203,11 +204,23 @@ public class Controller {
 
         if (success){
             messageBuilder.append("The Card has been successfully wrote in Fails List");
-            return messageBuilder.toString();
         } else {
             messageBuilder.append("Operation failed! (((");
-            return messageBuilder.toString();
         }
+        return messageBuilder.toString();
+    }
+
+
+    public Dictionary loadFailsDictionary(User user){
+        File failsTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
+
+        if (!failsTXT.exists()){
+            view.printMessage("User: " + user.getName() + " have no fails cards.");
+        } else {
+
+        }
+
+
     }
 
 }
