@@ -3,19 +3,12 @@ Comments:
 через модел/вьюФасад. Но на сколько я понимаю, это должно быть реализовано с помощью паттерна наблюдатель
 и у вью не должно быть никакой возможности обращаться к модел. В общем нужно будет разобраться с этим вопросом.
 
-
 1. ( DONE! ) Наладить взаимодействие модулей MVC друг с другом;
 
-2. ( In progress! ) Make model
+2. ( DONE! ) Make model
    (Done!) create a Facade pattern to deal with interface
-   - create an Observer pattern
    done! сделать сохранение пользовательских данных на ПК;
    done! сделать загрузку пользовательских данны из ПК в программу;
-   - сделать проверку на наличие рабочих папок и файлов и их создание (по умолчанию в моих документах):
-      // При инициализации модели должен проверить наличие папки "Learning Cards" в папке "Repo" на рабочем столе, при необходимости создать её; (Есть план дальнейшей модернизации)
-      // Внутри "Learning Cards" проверяем наличие папки "Users", при отсутствии создать.
-      // Внутри папки пользователи храняться Юзеры в виде папок с именами пользователей, внутри которых хранятся файлы,
-         с именами словарей, в которых будут сериализованы их карточки и файл "All Users.txt" в котором будут записаны все имена пользователей
 
 3. ( DONE! ) Make GUI
 
@@ -58,13 +51,13 @@ Comments:
     done! DictionaryBuilderGUI;
 
 
-7. Добавить логику в слушателей во всех базовых классах GUI в модуле view
+7. ( DONE! ) Добавить логику в слушателей во всех базовых классах GUI в модуле view
     done! BasicGUI;
     done! progress UserBuilderGUI;
     done! progress UserSelectGUI;
     done! UserProfileGui;
     done! DictionaryBuilderGUI;
-    (in process) TrainingGUI;
+    done! TrainingGUI;
     done! DictionaryGUI;
     done! CardBuilderGUI;
     done! DictionaryBuilderGUI
@@ -103,7 +96,7 @@ Comments:
 
 19. ( DONE! ) DictionaryGUI add CancelButton
 
-20. ( in progress )Доделать UserProfileGUI (multiTraining, failsRepetition)
+20. ( DONE! )Доделать UserProfileGUI (multiTraining, failsRepetition)
 
 21. Попробовать заменить модификаторы доступа модели на package, чтобы они были доступны только для фасадов
 
@@ -124,10 +117,10 @@ Comments:
 
 28. ( DONE! ) В тренингГУИ поменять местами кнопки
 
-29. ( In Progress ) TrainingGUI make all buttons - processes:
+29. ( DONE! ) TrainingGUI make all buttons - processes:
         (done) ("Show an answer");
         (done) ("Give a hint");
-        () ("Add to the Fails repetition list");
+        (done) ("Add to the Fails repetition list");
         (done) ("Finish Training");
         (done) ("Next Card");
         (done) ("Miss the Card");
@@ -159,16 +152,19 @@ Comments:
 41. ( FIXED! ) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
     throws IndexOutOfBoundsException!
 
-42. ( in progress ) Make FailsRepetition
+42. ( DONE ) Make FailsRepetition
     (done) change FailsButton in TrainingGUI, when Fails Repetition starts
     (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
     (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
     (done) add to the fails list repetition process
-    (in progress) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+    (done) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
             BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
-
+    ( FIXED! ) during failsRepetition when clicked the button "Finish training": throws  NullPointerException
 43. ( DONE! ) UserProfileGUI/button: MultiTraining
 
-44. FailsList repetition process: похоже не очень хорошая реализация получилась в первой версии. Подумат как можно сделать подругому
+44. ( DONE! ) Button "Delete from Fails list"
 
-45. () Button "Delete from Fails list"
+45. ( FIXED ) When FailsRepetition starts by the FailsList Dictionary from Dictionaries list, the
+            button "Add to the fails repetition list" doesn't changed to the "Remove from fails repetition list"
+
+46. ( FIXED! ) When fails training starts after some card was deleted from it: Front area is clear instead next card - front message

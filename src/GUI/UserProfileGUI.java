@@ -138,10 +138,10 @@ public class UserProfileGUI implements GUI {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
-                if (currentDictionary.getName().equals("FailsList")){
+                if (currentDictionary.getName().equals("FailsList.txt")){
                  // here should be run fails repetition training
-                    TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, user);
-                    failsTraining.go();
+                    TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, view.getCurrentGUI(), user);
+                    failsTraining.startFailsRepetition();
                 } else {
                     TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI(), user);
                     trainingGUI.trainingGO();
@@ -181,7 +181,7 @@ public class UserProfileGUI implements GUI {
     private class StartFailsRepetitionListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI,view, controller, user);
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI,view, controller, view.getCurrentGUI(), user);
             trainingGUI.startFailsRepetition();
         }
     }

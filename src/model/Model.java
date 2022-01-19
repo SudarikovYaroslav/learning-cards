@@ -343,4 +343,64 @@ public class Model {
 
         return success;
     }
+
+
+    public Dictionary loadFailsDictionary(File failsTXT){
+        Dictionary failsDictionary = new Dictionary("Fails Dictionary");
+
+        BufferedReader reader;
+        String data;
+        Card failCard;
+
+        try {
+            reader = new BufferedReader(new FileReader(failsTXT));
+
+            while ((data = reader.readLine()) != null){
+                String[] arr = data.split(dividerKey);
+                failCard = new Card(arr[0], arr[1]);
+                failsDictionary.addCard(failCard);
+            }
+
+            reader.close();
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return failsDictionary;
+    }
+
+
+    public String deleteFromFailsList(File failsListTXT, Card card){
+        String message = "Operation failed";
+        ArrayList<String> data = new ArrayList<>()  ;
+        String line;
+        BufferedReader reader;
+        BufferedWriter writer;
+
+        try {
+            reader = new BufferedReader(new FileReader(failsListTXT));
+
+            while ((line = reader.readLine()) != null){
+                String[] arr = line.split(dividerKey);
+                if (!arr[0].equals(card.getFront())){
+                    data.add(line);
+                }
+            }
+
+            reader.close();
+            writer = new BufferedWriter(new FileWriter(failsListTXT, false));
+
+            for (String s : data){
+                writer.write(s + "\n");
+            }
+
+            writer.close();
+            message = "Operation was successfully completed";
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return message;
+    }
 }

@@ -52,10 +52,11 @@ public class TrainingGUI implements GUI {
 
 
     // This constructor used only for init FailsTraining
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, User user){
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, GUI previousGUI, User user){
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
+        this.previousGUI = previousGUI;
         this.user = user;
         isFailsListUsed = true;
         trainingDictionary = loadFailsDictionary(user);
@@ -196,7 +197,8 @@ public class TrainingGUI implements GUI {
     private class FailsListDeleterListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            String message = controller.deleteFromFailsList(user, trainingDictionary.getCurrentCard());
+            view.printMessage(message);
         }
     }
 

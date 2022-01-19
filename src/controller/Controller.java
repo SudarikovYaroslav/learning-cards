@@ -1,5 +1,6 @@
 package controller;
 
+import GUI.TrainingGUI;
 import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
@@ -166,7 +167,6 @@ public class Controller {
 
 
     public String addToTheFailsList(User user, Card card){
-
         File failsListTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
         BufferedReader reader;
         boolean success = false;
@@ -213,14 +213,28 @@ public class Controller {
 
     public Dictionary loadFailsDictionary(User user){
         File failsTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
+        Dictionary result = null;
 
         if (!failsTXT.exists()){
             view.printMessage("User: " + user.getName() + " have no fails cards.");
         } else {
+            result = facade.loadFailsDictionary(failsTXT);
+        }
+        return result;
+    }
 
+
+    public String deleteFromFailsList(User user, Card card){
+        File failsListTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
+        String message = "Operation failed ((";
+
+        if (!failsListTXT.exists()){
+            message = "Fails list doesn't contains selected card";
+        } else {
+            message = facade.deleteFromFailsList(failsListTXT, card);
         }
 
-
+        return message;
     }
 
 }

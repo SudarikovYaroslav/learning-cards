@@ -103,7 +103,7 @@ Comments:
 
 19. ( DONE! ) DictionaryGUI add CancelButton
 
-20. ( in progress )Доделать UserProfileGUI (multiTraining, failsRepetition)
+20. ( DONE! )Доделать UserProfileGUI (multiTraining, failsRepetition)
 
 21. Попробовать заменить модификаторы доступа модели на package, чтобы они были доступны только для фасадов
 
@@ -124,10 +124,10 @@ Comments:
 
 28. ( DONE! ) В тренингГУИ поменять местами кнопки
 
-29. ( In Progress ) TrainingGUI make all buttons - processes:
+29. ( DONE! ) TrainingGUI make all buttons - processes:
         (done) ("Show an answer");
         (done) ("Give a hint");
-        () ("Add to the Fails repetition list");
+        (done) ("Add to the Fails repetition list");
         (done) ("Finish Training");
         (done) ("Next Card");
         (done) ("Miss the Card");
@@ -164,10 +164,14 @@ Comments:
     (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
     (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
     (done) add to the fails list repetition process
-    (!???!) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+    (done) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
             BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
-
+    ( FIXED! ) during failsRepetition when clicked the button "Finish training": throws  NullPointerException
 43. ( DONE! ) UserProfileGUI/button: MultiTraining
 
-44. FailsList repetition process: похоже не очень хорошая реализация получилась в первой версии. Подумат как можно сделать подругому
+44. ( DONE! ) Button "Delete from Fails list"
 
+45. ( FIXED ) When FailsRepetition starts by the FailsList Dictionary from Dictionaries list, the
+            button "Add to the fails repetition list" doesn't changed to the "Remove from fails repetition list"
+
+46. ( BUG ) When fails training starts after some card was deleted from it: Front area is clear instead next card - front message

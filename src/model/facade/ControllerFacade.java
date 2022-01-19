@@ -4,7 +4,7 @@ import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 
 public class ControllerFacade extends Facade{
@@ -57,5 +57,15 @@ public class ControllerFacade extends Facade{
 
     public boolean addToTheFailsList(File failsListTXT, Card card){
         return model.addToTheFailsList(failsListTXT, card);
+    }
+
+
+    public Dictionary loadFailsDictionary(File failsTXT){
+        return model.loadFailsDictionary(failsTXT);
+    }
+
+
+    public String deleteFromFailsList(File failsListTXT, Card card){
+        return model.deleteFromFailsList(failsListTXT, card);
     }
 }
