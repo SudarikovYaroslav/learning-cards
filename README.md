@@ -1,2 +1,2 @@
-# LearningCards
+# main.LearningCards
 My learning prject

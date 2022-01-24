@@ -1,0 +1,3 @@
+Dog151-De.V,i,D.eR-546Собака
+Cat151-De.V,i,D.eR-546котик
+Pet151-De.V,i,D.eR-546Home animal

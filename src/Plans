@@ -1,0 +1,170 @@
+Comments:
+Чую, делаю неправильно. Сейчас вью получает всю необходимую информацию о состоянии модели путём запросов
+через модел/вьюФасад. Но на сколько я понимаю, это должно быть реализовано с помощью паттерна наблюдатель
+и у вью не должно быть никакой возможности обращаться к модел. В общем нужно будет разобраться с этим вопросом.
+
+1. ( DONE! ) Наладить взаимодействие модулей MVC друг с другом;
+
+2. ( DONE! ) Make model
+   (Done!) create a Facade pattern to deal with interface
+   done! сделать сохранение пользовательских данных на ПК;
+   done! сделать загрузку пользовательских данны из ПК в программу;
+
+3. ( DONE! ) Make GUI
+
+4. ( DONE! ) Divide the GUI into a view and a controller
+
+5.  ( DONE! ) Сделать классы базовых GUI во view;
+    done! BasicGUI;
+    done! CardBuilderGUI;
+    done! DictionaryGUI;
+    done! ExceptionsGUI;
+    done! TrainingGUI;
+    done! UserBuilderGUI;
+    done! UserProfileGuI;
+    done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
+
+
+
+6. ( DONE! )
+  a) (DONE!) Добавить внутренние классы слушателей для всех интерактивных объектов во всех базовых GUI:
+    done! BasicGUI;
+    done! CardBuilderGUI;
+    done! DictionaryGUI;
+    done! ExceptionsGUI;
+    done! TrainingGUI;
+    done! UserBuilderGUI;
+    done! UserProfileGuI;
+    done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
+
+  b) (DONE!) Назначить всем интерактивным объектам слушателей
+    done! BasicGUI;
+    done! CardBuilderGUI;
+    done! DictionaryGUI;
+    done! ExceptionsGUI;
+    done! TrainingGUI;
+    done! UserBuilderGUI;
+    done! UserProfileGuI;
+    done! UserSelectGUI;
+    done! DictionaryBuilderGUI;
+
+
+7. ( DONE! ) Добавить логику в слушателей во всех базовых классах GUI в модуле view
+    done! BasicGUI;
+    done! progress UserBuilderGUI;
+    done! progress UserSelectGUI;
+    done! UserProfileGui;
+    done! DictionaryBuilderGUI;
+    done! TrainingGUI;
+    done! DictionaryGUI;
+    done! CardBuilderGUI;
+    done! DictionaryBuilderGUI
+    done! ExceptionsGUI;
+
+8. ( DONE! ) Сделать рефакторинг GUI:
+   done! сделать отдельный BasicGUI с фреймом, меню бар и главной панелью
+   done! унаследовать все GUI от BasicGUI
+   done! UserSelectGUI;
+   done! UserProfileGui;
+   done! TrainingGUI;
+   done! DictionaryGUI;
+   done! CardBuilderGUI;
+
+9. ( DONE! ) Наладить взаимодейтвие Controller с фасадом модели
+
+10. (пока решил не делать, может в обновлении добавлю) Наладить наблюдение View за состоянием модели
+
+11. ( Done! ) Solve problem with UserProfileGUI. Check problem in class comments
+
+12. ( DONE! ) Problem with updating available users list after creating new user
+
+13. ( DONE! ) createUser() in model troubles with adding new User in UserSelectGUI usersList
+
+14. ( DONE! ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user. Trouble in model deleteUser();
+
+15. ( FIXED! ) BUG !!!
+    ( fixed! ) it seems some troubles with text area! It list there is no null checking!!!
+    ( fixed! ) DictionaryBuilderGUI/ button "Create new Dictionary": nothing happens;
+
+16. ( FIXED! ) validation after entered Dictionary name doesn't work at all cases
+
+17. ( DONE! ) In userProfileGUI should add an "Edit Dictionary" button. Доделать экшен лисенер
+
+18. ( DONE! )Troubles with DictionaryGUI: when it runs from UserProfileGUI, GUI doesn't repaints.
+
+19. ( DONE! ) DictionaryGUI add CancelButton
+
+20. ( DONE! )Доделать UserProfileGUI (multiTraining, failsRepetition)
+
+21. Попробовать заменить модификаторы доступа модели на package, чтобы они были доступны только для фасадов
+
+22. ( FIXED! ) UserProfileGUI: при нажатии на кнопку "редактировать словарь" на только что созданном словаре,
+    не переходит в интерфейс словаря
+
+23. ( FIXED!) In CardBuilderGUI double buttons set
+
+24. ( FIXED! ) In CardBuilderGUI in JTextAreas font size is too big
+
+25. ( FIXED!) In CardBuilderGUI in JList shows cards binary names instead card's sizes
+
+26. ( DONE! ) Добавить в кардбилдер проверку на пустые поля
+
+27. ( FIXED! ):
+    (fixed) new card sometimes wrights in one line;
+    (fixed) удалённая карточка не удаляется из списка карточек словаря;
+
+28. ( DONE! ) В тренингГУИ поменять местами кнопки
+
+29. ( DONE! ) TrainingGUI make all buttons - processes:
+        (done) ("Show an answer");
+        (done) ("Give a hint");
+        (done) ("Add to the Fails repetition list");
+        (done) ("Finish Training");
+        (done) ("Next Card");
+        (done) ("Miss the Card");
+
+30. ( FIXED! ) Start Training in UserProfileGUI mast't begin without select dictionary!
+
+31. ( FIXED! ) In multiTraining NullPointerException when the button "Finish Training" pressed
+
+32. ( FIXED! ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue press the button
+
+33. ( FIXED! ) GiveHintButton: works after second press
+
+34. ( FIXED! ) GiveHintButton: works incorrectly with long one word answer
+
+35. ( FIXED! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead: previous word plus next word;
+
+36. ( FIXED! ) TrainingGUI: when cards run out and the button Show an Answer pushed: throws IndexOutOfBoundsException
+
+37. ( FIXED! ) If you finished a training in some Dictionary. If you try to repeat training with this dictionary in the same session
+             when it'll starts, you'll see "Cards run out";
+
+38. ( FIXED! ) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed after answer completely shown
+
+39. ( FIXED! ) кнопка подсказка: при работе с ответами из нескольких слов не корректно выводятся пробелы между словами
+            при выводе последнего слова, проверить счётчики!
+
+40. ( FIXED! ) hint button: after answer's completely shown, next click gives empty answer
+
+41. ( FIXED! ) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
+    throws IndexOutOfBoundsException!
+
+42. ( DONE ) Make FailsRepetition
+    (done) change FailsButton in TrainingGUI, when Fails Repetition starts
+    (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
+    (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
+    (done) add to the fails list repetition process
+    (done) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+            BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
+    ( FIXED! ) during failsRepetition when clicked the button "Finish training": throws  NullPointerException
+43. ( DONE! ) UserProfileGUI/button: MultiTraining
+
+44. ( DONE! ) Button "Delete from Fails list"
+
+45. ( FIXED ) When FailsRepetition starts by the FailsList Dictionary from Dictionaries list, the
+            button "Add to the fails repetition list" doesn't changed to the "Remove from fails repetition list"
+
+46. ( FIXED! ) When fails training starts after some card was deleted from it: Front area is clear instead next card - front message
