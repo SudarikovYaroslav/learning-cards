@@ -1,2 +1,2 @@
 # main.LearningCards
-My learning prject
+My learning PetProject
