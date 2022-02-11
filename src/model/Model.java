@@ -11,27 +11,23 @@ import java.util.Set;
 
 
 public class Model {
-
     private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file and for mapping when read it from file
-    private ArrayList<User> availableUsersList;
-    private Set<User> loadedUsersHash = new HashSet<>();
+    private final ArrayList<User> availableUsersList;
+    private final Set<User> loadedUsersHash = new HashSet<>();
 
     private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
     private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
-
 
     public Model() {
         availableUsersList = new ArrayList<>();
         loadUsersList();
     }
 
-
     public ArrayList<User> getAvailableUsersList() {
         return availableUsersList;
     }
 
-
-    private void loadUsersList(){
+    private void loadUsersList() {
         availableUsersList.clear();
         BufferedReader reader;
         String line;
@@ -39,19 +35,17 @@ public class Model {
         try {
             reader = new BufferedReader(new FileReader(allUsersListPath));
 
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 availableUsersList.add(new User(line));
             }
 
             reader.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public void createUser(User user){
-        // Create a user.name folder if it doesn't exist
+    public void createUser(User user) {
         File newUser = new File(usersFolderPath + "/" + user.getName());
         BufferedWriter writer;
         try {
@@ -61,17 +55,16 @@ public class Model {
 
             newUser.mkdir();
             availableUsersList.add(user);
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
+    public User getUser(String userName) {
 
-    public User getUser(String userName){
-
-        for(User user : loadedUsersHash){
-            if (user.getName().equals(userName)){
+        for (User user : loadedUsersHash) {
+            if (user.getName().equals(userName)) {
                 return user;
             }
         }
@@ -81,20 +74,19 @@ public class Model {
         return user;
     }
 
-
-    private User loadUser(String userName){
+    private User loadUser(String userName) {
         User user = new User(userName);
         File usersDir = new File(usersFolderPath);
         File dictionariesDir = new File(usersFolderPath + "/" + userName + "/");
         File[] allUsers = usersDir.listFiles();
 
         if (allUsers != null) {
-            for (File file : allUsers){
-                if (file.getName().equals(userName)){
+            for (File file : allUsers) {
+                if (file.getName().equals(userName)) {
                     File[] userDictionariesTXT = dictionariesDir.listFiles();
 
                     if (userDictionariesTXT != null) {
-                        for (File dictionaryTXT : userDictionariesTXT){
+                        for (File dictionaryTXT : userDictionariesTXT) {
                             Dictionary currentDictionary = new Dictionary(dictionaryTXT.getName());
                             readTxtCardsToDic(dictionaryTXT, currentDictionary);
                             user.addDictionary(currentDictionary);
@@ -108,8 +100,7 @@ public class Model {
         return user;
     }
 
-
-    private void readTxtCardsToDic(File dictionaryTXT, Dictionary dictionary){
+    private void readTxtCardsToDic(File dictionaryTXT, Dictionary dictionary) {
         BufferedReader reader;
         Card currentCard;
         String frontSize;
@@ -129,31 +120,30 @@ public class Model {
 
             reader.close();
 
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
-    public boolean deleteUser(User user){
+    public boolean deleteUser(User user) {
         boolean successful = false;
         File userToDelete = new File(usersFolderPath + "/" + user.getName());
         File[] dictionaries = userToDelete.listFiles();
 
-       if (dictionaries.length != 0) {
-           for (File dictionary : dictionaries) {
-               dictionary.delete();
-           }
-       }
+        if (dictionaries.length != 0) {
+            for (File dictionary : dictionaries) {
+                dictionary.delete();
+            }
+        }
 
         successful = userToDelete.delete();
 
-        if (successful){
+        if (successful) {
 
             //availableUsersList.remove(user); не понимаю в чём проблема, но пользователь user не удаляется этой строчкой!!
             //!! CROOKED CRUTCH!! But it's worked correctly!!
-            for (int i = 0; i < availableUsersList.size(); i++){
-                if (availableUsersList.get(i).getName().equals(user.getName())){
+            for (int i = 0; i < availableUsersList.size(); i++) {
+                if (availableUsersList.get(i).getName().equals(user.getName())) {
                     availableUsersList.remove(i);
                 }
             }
@@ -164,12 +154,12 @@ public class Model {
                 try {
                     writer = new BufferedWriter(new FileWriter(allUsersListPath, false));
 
-                    for (User u : availableUsersList){
+                    for (User u : availableUsersList) {
                         writer.write(u.getName() + "\n");
                     }
 
                     writer.close();
-                }catch (IOException e){
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
@@ -180,8 +170,7 @@ public class Model {
         return successful;
     }
 
-
-    public boolean createDictionary(User user,String dictionaryName){
+    public boolean createDictionary(User user, String dictionaryName) {
         boolean success = false;
         Dictionary dictionary = new Dictionary(dictionaryName + ".txt");
         user.addDictionary(dictionary);
@@ -189,18 +178,15 @@ public class Model {
         File newDictionaryTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionaryName + ".txt");
 
         try {
-           newDictionaryTXT.createNewFile();
-           success = true;
-        }catch (IOException e){
+            newDictionaryTXT.createNewFile();
+            success = true;
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return success;
     }
 
-
-
-
-    public boolean deleteDictionary(User user, Dictionary dictionary){
+    public boolean deleteDictionary(User user, Dictionary dictionary) {
         File removingDictionary = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
         ArrayList<Dictionary> dictionaries = user.getDictionaries();
 
@@ -214,8 +200,7 @@ public class Model {
         return removingDictionary.delete();
     }
 
-
-     private void recreateAvailableUsersListFile(){
+    private void recreateAvailableUsersListFile() {
         File toDelete = new File(allUsersListPath);
         toDelete.delete();
         File newUserList = new File(allUsersListPath);
@@ -227,16 +212,15 @@ public class Model {
         }
     }
 
-
-    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide){
+    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide) {
         File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
         BufferedWriter writer;
         boolean success = false;
 
-        if (!dicTXT.exists()){
+        if (!dicTXT.exists()) {
             try {
                 dicTXT.createNewFile();
-            } catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -249,15 +233,14 @@ public class Model {
             writer.write(frontSide + dividerKey + backSide + "\n");
             success = true;
             writer.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return success;
     }
 
-
-    public boolean deleteCard(File dicTXT, Card card){
+    public boolean deleteCard(File dicTXT, Card card) {
         boolean success = false;
         ArrayList<String> strCards = new ArrayList<>();
         BufferedReader reader;
@@ -266,7 +249,7 @@ public class Model {
         try {
             reader = new BufferedReader(new FileReader(dicTXT));
             String line;
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
 
                 String[] arr = line.split(dividerKey);
 
@@ -277,20 +260,19 @@ public class Model {
             reader.close();
 
             writer = new BufferedWriter(new FileWriter(dicTXT, false));
-            for (String str : strCards){
+            for (String str : strCards) {
                 writer.write(str + "\n");
             }
             writer.close();
             success = true;
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return success;
     }
 
-
-    public boolean editCard(File dictionaryTXT, String front, String back){
+    public boolean editCard(File dictionaryTXT, String front, String back) {
         boolean success = false;
         ArrayList<String> cardsStr = new ArrayList<>();
         BufferedReader reader;
@@ -300,10 +282,10 @@ public class Model {
         try {
             reader = new BufferedReader(new FileReader(dictionaryTXT));
 
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 String[] arr = line.split(dividerKey);
 
-                if (arr[0].equals(front)){
+                if (arr[0].equals(front)) {
                     line = front + dividerKey + back;
                 }
 
@@ -314,21 +296,20 @@ public class Model {
 
             writer = new BufferedWriter(new FileWriter(dictionaryTXT, false));
 
-            for (String data : cardsStr){
+            for (String data : cardsStr) {
                 writer.write(data + "\n");
             }
 
             writer.close();
             success = true;
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return success;
     }
 
-
-    public boolean addToTheFailsList(File failsListTXT, Card card){
+    public boolean addToTheFailsList(File failsListTXT, Card card) {
         BufferedWriter writer;
         boolean success = false;
 
@@ -337,15 +318,14 @@ public class Model {
             writer.write(card.getFront() + dividerKey + card.getBack() + "\n");
             writer.close();
             success = true;
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return success;
     }
 
-
-    public Dictionary loadFailsDictionary(File failsTXT){
+    public Dictionary loadFailsDictionary(File failsTXT) {
         Dictionary failsDictionary = new Dictionary("Fails Dictionary");
 
         BufferedReader reader;
@@ -355,7 +335,7 @@ public class Model {
         try {
             reader = new BufferedReader(new FileReader(failsTXT));
 
-            while ((data = reader.readLine()) != null){
+            while ((data = reader.readLine()) != null) {
                 String[] arr = data.split(dividerKey);
                 failCard = new Card(arr[0], arr[1]);
                 failsDictionary.addCard(failCard);
@@ -363,17 +343,16 @@ public class Model {
 
             reader.close();
 
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return failsDictionary;
     }
 
-
-    public String deleteFromFailsList(File failsListTXT, Card card){
+    public String deleteFromFailsList(File failsListTXT, Card card) {
         String message = "Operation failed";
-        ArrayList<String> data = new ArrayList<>()  ;
+        ArrayList<String> data = new ArrayList<>();
         String line;
         BufferedReader reader;
         BufferedWriter writer;
@@ -381,9 +360,9 @@ public class Model {
         try {
             reader = new BufferedReader(new FileReader(failsListTXT));
 
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 String[] arr = line.split(dividerKey);
-                if (!arr[0].equals(card.getFront())){
+                if (!arr[0].equals(card.getFront())) {
                     data.add(line);
                 }
             }
@@ -391,13 +370,13 @@ public class Model {
             reader.close();
             writer = new BufferedWriter(new FileWriter(failsListTXT, false));
 
-            for (String s : data){
+            for (String s : data) {
                 writer.write(s + "\n");
             }
 
             writer.close();
             message = "Operation was successfully completed";
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

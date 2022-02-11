@@ -1,9 +1,11 @@
 package GUI;
+
 import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
 import controller.Controller;
 import view.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,22 +13,20 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-// Perhaps this class designed not correctly, because during training time it won't be ask controller to show
-// next card for example. I decided to do most operations directly inside this class because it have all information
-// to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in the next program update.
+/** Perhaps this class designed not correctly, because during training time it won't be ask controller to show
+    next card for example. I decided to do most operations directly inside this class because it have all information
+    to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in the next program update.*/
 public class TrainingGUI implements GUI {
-
+    /** The field User user; Must be initialized in eny cases in all constructors*/
+    private final User user;
     private final View view;
     private final Controller controller;
     private final BasicGUI basicGUI;
-    private GUI previousGUI;
+    private final GUI previousGUI;
     private JTextArea frontArea;
     private JTextArea backArea;
-    private Dictionary trainingDictionary;
-    private User user;
+    private final Dictionary trainingDictionary;
     private final boolean isFailsListUsed;
-
-// The field User user; Must be initialized in eny cases in all constructors
 
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, Dictionary dictionary, GUI previousGUI, User user) {
         this.basicGUI = basicGUI;
@@ -37,7 +37,6 @@ public class TrainingGUI implements GUI {
         isFailsListUsed = false;
         this.user = user;
     }
-
 
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI, User user) {
         // сделать из всех словарей один и присвоить его переменной trainingDictionary;
@@ -50,9 +49,8 @@ public class TrainingGUI implements GUI {
         this.user = user;
     }
 
-
-    // This constructor used only for init FailsTraining
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, GUI previousGUI, User user){
+    /** This constructor used only for init FailsTraining*/
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, GUI previousGUI, User user) {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
@@ -62,18 +60,17 @@ public class TrainingGUI implements GUI {
         trainingDictionary = loadFailsDictionary(user);
     }
 
-
-    public void go(){
+    public void go() {
         view.setCurrentGUI(this);
         basicGUI.clear();
         basicGUI.frame.setTitle("Training");
 
-        frontArea = new JTextArea(5,15);
+        frontArea = new JTextArea(5, 15);
         frontArea.setFont(basicGUI.bigFont);
         frontArea.setLineWrap(true);
         frontArea.setEditable(false);
 
-        backArea = new JTextArea(5,15);
+        backArea = new JTextArea(5, 15);
         backArea.setFont(basicGUI.bigFont);
         backArea.setLineWrap(true);
         backArea.setEditable(false);
@@ -122,70 +119,62 @@ public class TrainingGUI implements GUI {
         basicGUI.go();
     }
 
-    
-    public void trainingGO(){
+    public void trainingGO() {
         go();
         frontArea.setText(trainingDictionary.nextCard());
     }
 
-
-    public void startFailsRepetition(){
+    /** interaction with fails List which should be loaded by using controller
+        and placed in the trainingDictionary field*/
+    public void startFailsRepetition() {
         go();
-        // interaction with fails List which should be loaded by using controller
-        // and placed in the trainingDictionary field
         frontArea.setText(trainingDictionary.nextCard());
     }
 
-
-    private int getDictionariesSize(ArrayList<Dictionary> dictionaries){
+    private int getDictionariesSize(ArrayList<Dictionary> dictionaries) {
         int totalSize = 0;
 
-        for (Dictionary dictionary : dictionaries){
+        for (Dictionary dictionary : dictionaries) {
             totalSize += dictionary.getSize();
         }
 
         return totalSize;
     }
 
-
-    private Dictionary copyFoTraining(Dictionary dictionary){
-       return new Dictionary(dictionary);
+    private Dictionary copyFoTraining(Dictionary dictionary) {
+        return new Dictionary(dictionary);
     }
 
-
-    private Dictionary buildMultiDictionary(ArrayList<Dictionary> dictionaries){
+    private Dictionary buildMultiDictionary(ArrayList<Dictionary> dictionaries) {
 
         Dictionary multiDictionary = new Dictionary("TempMultiDictionary");
-        for (Dictionary dic : dictionaries){
-            for (Card card : dic.getCards()){
+        for (Dictionary dic : dictionaries) {
+            for (Card card : dic.getCards()) {
                 multiDictionary.addCard(card);
             }
         }
         return multiDictionary;
     }
 
-
-    private Dictionary loadFailsDictionary(User user){
+    private Dictionary loadFailsDictionary(User user) {
         return controller.loadFailsDictionary(user);
     }
 
-    private class ShowAnswerListener implements ActionListener{
+    private class ShowAnswerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             backArea.setText(trainingDictionary.giveAnswer());
         }
     }
 
-
-    private class  GiveHintListener implements ActionListener{
+    private class GiveHintListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             backArea.setText(trainingDictionary.giveHint());
         }
     }
 
-
-    private class FailsListAdderListener implements ActionListener{
+    private class FailsListAdderListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String message = controller.addToTheFailsList(user, trainingDictionary.getCurrentCard());
@@ -193,8 +182,7 @@ public class TrainingGUI implements GUI {
         }
     }
 
-
-    private class FailsListDeleterListener implements ActionListener{
+    private class FailsListDeleterListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String message = controller.deleteFromFailsList(user, trainingDictionary.getCurrentCard());
@@ -202,16 +190,14 @@ public class TrainingGUI implements GUI {
         }
     }
 
-
-    private class FinishTrainingListener implements ActionListener{
+    private class FinishTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             previousGUI.go();
         }
     }
 
-
-    private class NextCardListener implements ActionListener{
+    private class NextCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             frontArea.setText(trainingDictionary.nextCard());
@@ -219,8 +205,7 @@ public class TrainingGUI implements GUI {
         }
     }
 
-
-    private class MissCardListener implements ActionListener{
+    private class MissCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             trainingDictionary.missCard();

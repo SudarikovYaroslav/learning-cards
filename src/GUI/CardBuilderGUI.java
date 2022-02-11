@@ -1,9 +1,11 @@
 package GUI;
+
 import basicClasses.Card;
 import basicClasses.Dictionary;
 import basicClasses.User;
 import controller.Controller;
 import view.View;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,13 +32,12 @@ public class CardBuilderGUI implements GUI {
         editableCard = null;
     }
 
-
-    public void go(){
+    public void go() {
         view.setCurrentGUI(this);
         basicGUI.clear();
         basicGUI.frame.setTitle("Card Builder");
 
-        frontSide = new JTextArea(9,30);
+        frontSide = new JTextArea(9, 30);
         frontSide.setLineWrap(true);
         frontSide.setWrapStyleWord(true);
         frontSide.setFont(font);
@@ -45,8 +46,7 @@ public class CardBuilderGUI implements GUI {
         frontScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         frontScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-
-        backSide = new JTextArea(9 ,30);
+        backSide = new JTextArea(9, 30);
         backSide.setLineWrap(true);
         backSide.setWrapStyleWord(true);
         backSide.setFont(font);
@@ -81,7 +81,6 @@ public class CardBuilderGUI implements GUI {
         basicGUI.go();
     }
 
-
     private class CreateCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -99,7 +98,6 @@ public class CardBuilderGUI implements GUI {
         }
     }
 
-
     private class EditCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -108,7 +106,7 @@ public class CardBuilderGUI implements GUI {
 
             if ((front.length() > 0) && (back.length() > 0)) {
                 boolean success = controller.editCard(currentUser, dictionary, front, back);
-                if (success){
+                if (success) {
                     dictionary.editCard(editableCard, front, back);
                     DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
                     dictionaryGUI.go();
@@ -119,16 +117,14 @@ public class CardBuilderGUI implements GUI {
         }
     }
 
-
-    private class DeleteCardListener implements ActionListener{
+    private class DeleteCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     }
 
-
-    private class CancelListener implements ActionListener{
+    private class CancelListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             DictionaryGUI dictionaryGUI = new DictionaryGUI(basicGUI, dictionary, currentUser, view, controller);
@@ -136,9 +132,8 @@ public class CardBuilderGUI implements GUI {
         }
     }
 
-
-    //This method called from DictionaryGUI to start editCard process
-    protected void editCard(Card card){
+    /**This method called from DictionaryGUI to start editCard process*/
+    protected void editCard(Card card) {
         editableCard = card;
         go();
         frontSide.setText(card.getFront());

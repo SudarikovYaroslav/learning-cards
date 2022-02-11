@@ -1,6 +1,5 @@
 package GUI;
 
-import basicClasses.Dictionary;
 import basicClasses.User;
 import controller.Controller;
 import view.View;
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class DictionaryBuilderGUI implements GUI{
+public class DictionaryBuilderGUI implements GUI {
 
     private final BasicGUI basicGUI;
     private final Controller controller;
@@ -56,26 +55,25 @@ public class DictionaryBuilderGUI implements GUI{
         basicGUI.go();
     }
 
-
-    private class TextFieldListener implements ActionListener{
+    private class TextFieldListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             dictionaryName = jTextField.getText();
-            messageLabel .setText("Dictionary name accepted!");
+            messageLabel.setText("Dictionary name accepted!");
             basicGUI.go();
         }
     }
 
-
-    private class CreateButtonListener implements ActionListener{
+    private class CreateButtonListener implements ActionListener {
         boolean success = false;
+
         @Override
         public void actionPerformed(ActionEvent e) {
             if (dictionaryName != null) {
                 success = controller.createDictionary(currentUser, dictionaryName);
 
                 if (success) {
-                    UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI,controller,currentUser,view);
+                    UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, controller, currentUser, view);
                     userProfileGUI.go();
                 }
 
@@ -86,11 +84,10 @@ public class DictionaryBuilderGUI implements GUI{
         }
     }
 
-
-    private class CancelButtonListener implements ActionListener{
+    private class CancelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI,controller,currentUser,view);
+            UserProfileGUI userProfileGUI = new UserProfileGUI(basicGUI, controller, currentUser, view);
             userProfileGUI.go();
         }
     }

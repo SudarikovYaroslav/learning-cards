@@ -21,11 +21,9 @@ public class ExceptionsGUI implements GUI {
         this.view = view;
     }
 
-
-
-    // Важно ! При запуске ExceptionsGUI не передавать во view.currentGUI на него ссылку, инача не получиться
-    // вернуться на предыдущий GUI
-    public void go(){
+    /** Важно ! При запуске ExceptionsGUI не передавать во view.currentGUI на него ссылку, инача не получиться
+        вернуться на предыдущий GUI*/
+    public void go() {
         basicGUI.clear();
         JTextArea textArea = new JTextArea(message);
         JButton okButton = new JButton("OK");
@@ -35,8 +33,7 @@ public class ExceptionsGUI implements GUI {
         basicGUI.go();
     }
 
-
-    private class OKListener implements ActionListener{
+    private class OKListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             previousGUI.go();

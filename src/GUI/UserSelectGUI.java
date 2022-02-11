@@ -1,4 +1,5 @@
 package GUI;
+
 import basicClasses.User;
 import controller.Controller;
 import view.View;
@@ -11,16 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// Problem with updating available users list after creating new user
-
 public class UserSelectGUI implements GUI {
-
     private final BasicGUI basicGUI;
     private final Controller controller;
     private final View view;
     private JList<String> usersJList;
-    private User chosenUser; // Used in JList
-
+    private User chosenUser;
 
     public UserSelectGUI(BasicGUI basicGUI, Controller controller, View view) {
         this.basicGUI = basicGUI;
@@ -28,7 +25,7 @@ public class UserSelectGUI implements GUI {
         this.view = view;
     }
 
-    public void go(){
+    public void go() {
         view.setCurrentGUI(this);
         basicGUI.clear();
 
@@ -76,8 +73,7 @@ public class UserSelectGUI implements GUI {
         basicGUI.go();
     }
 
-
-    private String[] getUsersNames(ArrayList<User> users){
+    private String[] getUsersNames(ArrayList<User> users) {
         String[] usersNames = new String[users.size()];
 
         for (int i = 0; i < users.size(); i++) {
@@ -87,18 +83,17 @@ public class UserSelectGUI implements GUI {
         return usersNames;
     }
 
-
-    private class UsersSelectionListener implements ListSelectionListener{
+    private class UsersSelectionListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (!e.getValueIsAdjusting()){
+            if (!e.getValueIsAdjusting()) {
                 String selectedUserName = (String) usersJList.getSelectedValue();
                 chosenUser = controller.getUser(selectedUserName);
             }
         }
     }
 
-    private class SelectUserButtonListener implements ActionListener{
+    private class SelectUserButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (chosenUser != null) {
@@ -108,7 +103,7 @@ public class UserSelectGUI implements GUI {
         }
     }
 
-    private class AddNewUserListener implements ActionListener{
+    private class AddNewUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             UserBuilderGUI userBuilderGUI = new UserBuilderGUI(basicGUI, controller, view);
@@ -116,18 +111,16 @@ public class UserSelectGUI implements GUI {
         }
     }
 
-
-    private class DeleteUserListener implements ActionListener{
+    private class DeleteUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (chosenUser != null) {
                 boolean success = false;
                 success = controller.deleteUser(chosenUser);
-                if (success){
+                if (success) {
                     view.printMessage("User: " + chosenUser.getName() + " has been successfully deleted!");
                 }
             }
         }
     }
-
 }

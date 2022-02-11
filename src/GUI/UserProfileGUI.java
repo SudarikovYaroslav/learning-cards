@@ -1,4 +1,5 @@
 package GUI;
+
 import basicClasses.Dictionary;
 import basicClasses.User;
 import controller.Controller;
@@ -14,14 +15,12 @@ import java.util.ArrayList;
 
 
 public class UserProfileGUI implements GUI {
-
-    private View view;
-    private Controller controller;
+    private final View view;
+    private final Controller controller;
     private final BasicGUI basicGUI;
-    private User user;
+    private final User user;
     private JList<String> dictionariesJList;
-    private JLabel label;
-    private ArrayList<Dictionary> userDictionaries;
+    private final ArrayList<Dictionary> userDictionaries;
     private Dictionary currentDictionary;
 
     public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
@@ -34,13 +33,12 @@ public class UserProfileGUI implements GUI {
         currentDictionary = null;
     }
 
-
-    public void go(){
+    public void go() {
         basicGUI.clear();
         view.setCurrentGUI(this);
         basicGUI.frame.setTitle(user.getName() + " profile");
 
-        label = new JLabel("Your Dictionaries");
+        JLabel label = new JLabel("Your Dictionaries");
 
         createDictionariesJList();
         dictionariesJList.setVisibleRowCount(16);
@@ -83,8 +81,7 @@ public class UserProfileGUI implements GUI {
         basicGUI.go();
     }
 
-
-    private void createDictionariesJList(){
+    private void createDictionariesJList() {
         String[] dictionariesNames = new String[userDictionaries.size()];
 
         for (int i = 0; i < dictionariesNames.length; i++) {
@@ -95,15 +92,14 @@ public class UserProfileGUI implements GUI {
         dictionariesJList = new JList<>(dictionariesNames);
     }
 
-
     private class JListListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (! e.getValueIsAdjusting()){
+            if (!e.getValueIsAdjusting()) {
                 String selectedDictionaryName = dictionariesJList.getSelectedValue();
 
-                for (Dictionary dic : userDictionaries){
-                    if (dic.getName().equals(selectedDictionaryName + ".txt")){
+                for (Dictionary dic : userDictionaries) {
+                    if (dic.getName().equals(selectedDictionaryName + ".txt")) {
                         currentDictionary = dic;
                         return;
                     }
@@ -113,8 +109,7 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class EditDictionaryListener implements ActionListener{
+    private class EditDictionaryListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
@@ -124,8 +119,7 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class ChangeUserListener implements ActionListener{
+    private class ChangeUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);
@@ -133,13 +127,12 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class StartTrainingListener implements ActionListener{
+    private class StartTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
-                if (currentDictionary.getName().equals("FailsList.txt")){
-                 // here should be run fails repetition training
+                if (currentDictionary.getName().equals("FailsList.txt")) {
+                    // here should be run fails repetition training
                     TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, view.getCurrentGUI(), user);
                     failsTraining.startFailsRepetition();
                 } else {
@@ -150,8 +143,7 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class MultiTrainingListener implements ActionListener{
+    private class MultiTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI(), user);
@@ -159,8 +151,7 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class DeleteDictionaryListener implements ActionListener{
+    private class DeleteDictionaryListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             controller.deleteDictionary(user, currentDictionary);
@@ -168,20 +159,18 @@ public class UserProfileGUI implements GUI {
         }
     }
 
-
-    private class CreateNewDictionaryListener implements ActionListener{
+    private class CreateNewDictionaryListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            DictionaryBuilderGUI dictionaryBuilderGUI = new DictionaryBuilderGUI(basicGUI, controller,view, user);
+            DictionaryBuilderGUI dictionaryBuilderGUI = new DictionaryBuilderGUI(basicGUI, controller, view, user);
             dictionaryBuilderGUI.go();
         }
     }
 
-
-    private class StartFailsRepetitionListener implements ActionListener{
+    private class StartFailsRepetitionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI,view, controller, view.getCurrentGUI(), user);
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, view.getCurrentGUI(), user);
             trainingGUI.startFailsRepetition();
         }
     }

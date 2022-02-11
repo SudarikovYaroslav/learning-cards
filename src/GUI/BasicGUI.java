@@ -19,12 +19,11 @@ public class BasicGUI implements GUI {
     Font bigFont;
     View view;
 
-
     public ViewFacade getViewFacade() {
         return viewFacade;
     }
 
-    public BasicGUI(ViewFacade facade, View view){
+    public BasicGUI(ViewFacade facade, View view) {
         this.viewFacade = facade;
         this.view = view;
         frame = new JFrame();
@@ -40,26 +39,25 @@ public class BasicGUI implements GUI {
         menuBar.add(mainMenu);
     }
 
-
-    // Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
-    // серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК
-    public void go(){
+    /** Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
+        серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК*/
+    public void go() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.getContentPane().add(BorderLayout.EAST, buttonsPanel);
         frame.setJMenuBar(menuBar);
-        frame.setSize(580,500);
+        frame.setSize(580, 500);
         frame.setVisible(true);
     }
 
-    class menuExitItemListener implements ActionListener {
+    static class menuExitItemListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
         }
     }
 
-    public void clear(){
+    public void clear() {
         frame.remove(mainPanel);
         frame.remove(buttonsPanel);
         frame.repaint();
@@ -68,13 +66,14 @@ public class BasicGUI implements GUI {
         createPanels();
     }
 
-    private void createPanels(){
+    private void createPanels() {
         mainPanel = new JPanel();
         mainPanel.setBackground(Color.LIGHT_GRAY);
 
         buttonsPanel = new JPanel();
         buttonsPanel.setBackground(Color.CYAN);
-        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));mainPanel = new JPanel();
+        buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+        mainPanel = new JPanel();
         mainPanel.setBackground(Color.LIGHT_GRAY);
 
         buttonsPanel = new JPanel();

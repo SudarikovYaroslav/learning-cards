@@ -10,12 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UserBuilderGUI implements GUI {
-
-    private View view;
+    private final View view;
     private final BasicGUI basicGUI;
     private final Controller controller;
     private JTextField nameField;
-
 
     public UserBuilderGUI(BasicGUI basicGUI, Controller controller, View view) {
         this.basicGUI = basicGUI;
@@ -23,8 +21,7 @@ public class UserBuilderGUI implements GUI {
         this.view = view;
     }
 
-
-    public void go(){
+    public void go() {
         view.setCurrentGUI(this);
         basicGUI.clear();
 
@@ -46,7 +43,6 @@ public class UserBuilderGUI implements GUI {
         basicGUI.go();
     }
 
-
     private class CreateUserListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -59,7 +55,7 @@ public class UserBuilderGUI implements GUI {
         }
     }
 
-    private class CancelListener implements ActionListener{
+    private class CancelListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             UserSelectGUI userSelectGUI = new UserSelectGUI(basicGUI, controller, view);

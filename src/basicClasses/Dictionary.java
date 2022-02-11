@@ -1,4 +1,5 @@
 package basicClasses;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +18,6 @@ public class Dictionary implements Serializable {
     private boolean isCardsRunOut;
     private boolean isAnswerShown;
 
-
     public Dictionary(String name) {
         this.name = name;
         cards = new LinkedList<>();
@@ -28,9 +28,8 @@ public class Dictionary implements Serializable {
         isAnswerShown = false;
     }
 
-
-    // This constructor used to build clone of dicForCloning
-    public Dictionary(Dictionary dicForCloning){
+    /** This constructor used to build clone of dicForCloning*/
+    public Dictionary(Dictionary dicForCloning) {
         name = dicForCloning.getName();
         cards = new LinkedList<>();
         cards.addAll(dicForCloning.getCards());
@@ -41,27 +40,25 @@ public class Dictionary implements Serializable {
         isAnswerShown = false;
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public LinkedList<Card> getCards() {
         return cards;
     }
 
-    // perhaps I should delete this method because it won't be used
-    public void createNewCard(){
+    /** perhaps I should delete this method because it won't be used*/
+    public void createNewCard() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String front = null;
         String back = null;
 
-        try{
+        try {
             front = reader.readLine();
             back = reader.readLine();
             reader.close();
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
@@ -69,10 +66,9 @@ public class Dictionary implements Serializable {
         cards.add(newCard);
     }
 
-
-    public void editCard(Card changedCard, String front, String back){
-        for (Card card : cards){
-            if (card.getFront().equals(changedCard.getFront())){
+    public void editCard(Card changedCard, String front, String back) {
+        for (Card card : cards) {
+            if (card.getFront().equals(changedCard.getFront())) {
                 card.setFront(front);
                 card.setBack(back);
                 return;
@@ -80,18 +76,15 @@ public class Dictionary implements Serializable {
         }
     }
 
-
-    public void addCard(Card card){
+    public void addCard(Card card) {
         cards.add(card);
     }
 
-
-    public void shuffleCards(){
+    public void shuffleCards() {
         Collections.shuffle(cards);
     }
 
-
-    public String nextCard(){
+    public String nextCard() {
         hintCounter = 0;
         isAnswerShown = false;
         String front = "";
@@ -110,7 +103,7 @@ public class Dictionary implements Serializable {
             counter++;
         }
 
-        if ( front.length() == 0 ){
+        if (front.length() == 0) {
             isCardsRunOut = true;
             front = "All cards run out";
         }
@@ -118,8 +111,7 @@ public class Dictionary implements Serializable {
         return front;
     }
 
-
-    public String giveAnswer(){
+    public String giveAnswer() {
         isAnswerShown = true;
         if (!isCardsRunOut) {
             if (counter > cards.size()) {
@@ -132,25 +124,23 @@ public class Dictionary implements Serializable {
         }
     }
 
-
-    public void missCard(){
-       missedCards.add(cards.get(counter - 1));
+    public void missCard() {
+        missedCards.add(cards.get(counter - 1));
     }
 
-
-    public String giveHint(){
+    public String giveHint() {
         String hint = "";
 
-        if ((!isCardsRunOut) && (!isAnswerShown)){
+        if ((!isCardsRunOut) && (!isAnswerShown)) {
             String[] arr = giveAnswer().split(" ");
             isAnswerShown = false;
 
             // one word in answer
-            if (arr.length == 1){
+            if (arr.length == 1) {
                 hintCounter++;
                 String word = arr[0];
 
-                if (word.length() < 6){ // short word
+                if (word.length() < 6) { // short word
 
                     hint = word.substring(0, hintCounter);
 
@@ -158,7 +148,7 @@ public class Dictionary implements Serializable {
 
                     int pos = 2;
 
-                    while (hintCounter + pos > word.length()){
+                    while (hintCounter + pos > word.length()) {
                         pos--;
                     }
 
@@ -169,11 +159,11 @@ public class Dictionary implements Serializable {
                 StringBuilder answerBuilder = new StringBuilder();
                 int nextWordIndex = 0;
 
-                if (hintCounter < arr.length){
+                if (hintCounter < arr.length) {
                     hintCounter++;
                     while (nextWordIndex < hintCounter) {
                         answerBuilder.append(arr[nextWordIndex]);
-                        if (nextWordIndex < arr.length){
+                        if (nextWordIndex < arr.length) {
                             answerBuilder.append(" ");
                         }
                         nextWordIndex++;
@@ -183,14 +173,14 @@ public class Dictionary implements Serializable {
                 return answerBuilder.toString();
             }
         } else {
-            if (isCardsRunOut){
+            if (isCardsRunOut) {
                 return "";
             } else {
                 return giveAnswer();
             }
         }
 
-        if (hint.length() != giveAnswer().length()){
+        if (hint.length() != giveAnswer().length()) {
             isAnswerShown = false;
             return hint;
         } else {
@@ -198,13 +188,11 @@ public class Dictionary implements Serializable {
         }
     }
 
-
-    public int getSize(){
+    public int getSize() {
         return cards.size();
     }
 
-
-    public Card getCurrentCard(){
+    public Card getCurrentCard() {
         return cards.get(counter - 1);
     }
 }

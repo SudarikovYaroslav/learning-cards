@@ -36,7 +36,7 @@ public class DictionaryGUI implements GUI {
         cards = dictionary.getCards();
     }
 
-    public void go(){
+    public void go() {
         view.setCurrentGUI(this);
         basicGUI.clear();
 
@@ -81,8 +81,7 @@ public class DictionaryGUI implements GUI {
         basicGUI.go();
     }
 
-
-    private String[] getCardText(Card[] cards){
+    private String[] getCardText(Card[] cards) {
         String[] cardText = new String[cards.length];
 
         for (int i = 0; i < cards.length; i++) {
@@ -92,13 +91,11 @@ public class DictionaryGUI implements GUI {
         return cardText;
     }
 
-
-    private String[] getJListEntry(Dictionary dictionary){
+    private String[] getJListEntry(Dictionary dictionary) {
         Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
         String[] jListEntry = getCardText(listEntries);
         return jListEntry;
     }
-
 
     private class CardListSelectionListener implements ListSelectionListener {
         @Override
@@ -106,8 +103,8 @@ public class DictionaryGUI implements GUI {
             if (!e.getValueIsAdjusting()) {
                 String cardFront = cardsJList.getSelectedValue();
 
-                for (Card card : cards){
-                    if (card.getFront().equals(cardFront)){
+                for (Card card : cards) {
+                    if (card.getFront().equals(cardFront)) {
                         currentCard = card;
                         return;
                     }
@@ -116,24 +113,22 @@ public class DictionaryGUI implements GUI {
         }
     }
 
-
-    private class CreateCardListener implements ActionListener{
+    private class CreateCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            CardBuilderGUI cardBuilderGUI = new CardBuilderGUI(basicGUI, currentUser,dictionary, view, controller);
+            CardBuilderGUI cardBuilderGUI = new CardBuilderGUI(basicGUI, currentUser, dictionary, view, controller);
             cardBuilderGUI.go();
         }
     }
 
-
-    private class DeleteCardListener implements ActionListener{
+    private class DeleteCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (currentCard != null) {
 
                 boolean success = controller.deleteCard(currentUser, dictionary, currentCard);
 
-                if (!success){
+                if (!success) {
                     view.printMessage("The card hasn't been deleted! Something wrong (((");
                 } else {
                     dictionary.getCards().remove(currentCard);
@@ -144,19 +139,17 @@ public class DictionaryGUI implements GUI {
         }
     }
 
-
-    private class EditCardListener implements ActionListener{
+    private class EditCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (currentCard != null){
+            if (currentCard != null) {
                 CardBuilderGUI cardBuilderGUI = new CardBuilderGUI(basicGUI, currentUser, dictionary, view, controller);
                 cardBuilderGUI.editCard(currentCard);
             }
         }
     }
 
-
-    private class StartTrainingListener implements ActionListener{
+    private class StartTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI(), currentUser);
@@ -164,14 +157,12 @@ public class DictionaryGUI implements GUI {
         }
     }
 
-
-    private class ChangeNameListener implements ActionListener{
+    private class ChangeNameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
     }
-
 
     private class CancelListener implements ActionListener {
         @Override
@@ -180,5 +171,4 @@ public class DictionaryGUI implements GUI {
             userProfileGUI.go();
         }
     }
-
 }
