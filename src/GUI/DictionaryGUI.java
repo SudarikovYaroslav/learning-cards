@@ -1,9 +1,9 @@
 package GUI;
 
-import basicClasses.Card;
-import basicClasses.Dictionary;
-import basicClasses.User;
 import controller.Controller;
+import model.basicClasses.Card;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
 import view.View;
 
 import javax.swing.*;
@@ -17,13 +17,13 @@ import java.util.LinkedList;
 public class DictionaryGUI implements GUI {
 
     private final BasicGUI basicGUI;
-    private Dictionary dictionary;
-    private View view;
-    private Controller controller;
-    private User currentUser;
+    private final Dictionary dictionary;
+    private final View view;
+    private final Controller controller;
+    private final User currentUser;
+    private final LinkedList<Card> cards;
     private JList<String> cardsJList;
     private Card currentCard;
-    private LinkedList<Card> cards;
 
     public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
         this.basicGUI = basicGUI;
@@ -42,9 +42,6 @@ public class DictionaryGUI implements GUI {
 
         basicGUI.frame.setTitle("Dictionary: " + dictionary.getName().substring(0, dictionary.getName().length() - 4));
 
-        // JList
-        /*Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
-        String[] jListEntry = getCardText(listEntries);*/
         cardsJList = new JList<>(getJListEntry(dictionary));
         JScrollPane listScroller = new JScrollPane(cardsJList);
         listScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -76,6 +73,7 @@ public class DictionaryGUI implements GUI {
         basicGUI.buttonsPanel.add(deleteCardButton);
         basicGUI.buttonsPanel.add(editCardButton);
         basicGUI.buttonsPanel.add(startTrainingButton);
+        basicGUI.buttonsPanel.add(changeDictionaryName);
         basicGUI.buttonsPanel.add(cancelButton);
 
         basicGUI.go();
@@ -93,8 +91,7 @@ public class DictionaryGUI implements GUI {
 
     private String[] getJListEntry(Dictionary dictionary) {
         Card[] listEntries = dictionary.getCards().toArray(new Card[0]);
-        String[] jListEntry = getCardText(listEntries);
-        return jListEntry;
+        return getCardText(listEntries);
     }
 
     private class CardListSelectionListener implements ListSelectionListener {
@@ -152,7 +149,8 @@ public class DictionaryGUI implements GUI {
     private class StartTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI(), currentUser);
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, dictionary, view.getCurrentGUI(),
+                    currentUser);
             trainingGUI.trainingGO();
         }
     }
@@ -160,7 +158,7 @@ public class DictionaryGUI implements GUI {
     private class ChangeNameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            System.out.println("THIS FEATURE DOESN'T WORK YET!");
         }
     }
 

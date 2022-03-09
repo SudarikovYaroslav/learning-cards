@@ -1,7 +1,7 @@
 package GUI;
 
-import basicClasses.User;
 import controller.Controller;
+import model.basicClasses.User;
 import view.View;
 
 import javax.swing.*;

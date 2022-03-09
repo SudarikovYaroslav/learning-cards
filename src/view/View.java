@@ -1,12 +1,12 @@
 package view;
 
-import GUI.ExceptionsGUI;
-import GUI.GUI;
-import controller.Controller;
-import model.facade.ViewFacade;
-import model.Model;
 import GUI.BasicGUI;
+import GUI.GUI;
+import GUI.MessagesGUI;
 import GUI.UserSelectGUI;
+import controller.Controller;
+import model.Model;
+import model.facade.ViewFacade;
 
 public class View {
     private ViewFacade facade;
@@ -30,15 +30,15 @@ public class View {
     }
 
     public void printMessage(String message) {
-        ExceptionsGUI exceptionsGUI = new ExceptionsGUI(basicGUI, currentGUI, message, this);
-        exceptionsGUI.go();
-    }
-
-    public void setCurrentGUI(GUI gui) {
-        currentGUI = gui;
+        MessagesGUI messagesGUI = new MessagesGUI(basicGUI, currentGUI, message, this);
+        messagesGUI.go();
     }
 
     public GUI getCurrentGUI() {
         return currentGUI;
+    }
+
+    public void setCurrentGUI(GUI gui) {
+        currentGUI = gui;
     }
 }

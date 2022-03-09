@@ -1,8 +1,8 @@
 package model;
 
-import basicClasses.Card;
-import basicClasses.Dictionary;
-import basicClasses.User;
+import model.basicClasses.Card;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,12 +11,14 @@ import java.util.Set;
 
 
 public class Model {
-    private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file and for mapping when read it from file
+    private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file
+    // and for mapping when read it from file
     private final ArrayList<User> availableUsersList;
     private final Set<User> loadedUsersHash = new HashSet<>();
 
-    private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
-    private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
+    private final String rootPath = new File("").getAbsolutePath();
+    private final String allUsersListPath = rootPath + "/data/AllUsersList.txt";
+    private final String usersFolderPath = rootPath + "/data/Users";
 
     public Model() {
         availableUsersList = new ArrayList<>();
@@ -140,7 +142,8 @@ public class Model {
 
         if (successful) {
 
-            //availableUsersList.remove(user); не понимаю в чём проблема, но пользователь user не удаляется этой строчкой!!
+            //availableUsersList.remove(user); не понимаю в чём проблема, но пользователь user не удаляется этой
+            // строчкой!!
             //!! CROOKED CRUTCH!! But it's worked correctly!!
             for (int i = 0; i < availableUsersList.size(); i++) {
                 if (availableUsersList.get(i).getName().equals(user.getName())) {
@@ -175,7 +178,8 @@ public class Model {
         Dictionary dictionary = new Dictionary(dictionaryName + ".txt");
         user.addDictionary(dictionary);
 
-        File newDictionaryTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionaryName + ".txt");
+        File newDictionaryTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionaryName +
+                ".txt");
 
         try {
             newDictionaryTXT.createNewFile();
@@ -187,7 +191,8 @@ public class Model {
     }
 
     public boolean deleteDictionary(User user, Dictionary dictionary) {
-        File removingDictionary = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+        File removingDictionary = new File(usersFolderPath + "/" + user.getName() + "/" +
+                dictionary.getName());
         ArrayList<Dictionary> dictionaries = user.getDictionaries();
 
         for (Dictionary dic : dictionaries) {
@@ -381,5 +386,9 @@ public class Model {
         }
 
         return message;
+    }
+
+    public String getUsersFolderPath() {
+        return usersFolderPath;
     }
 }

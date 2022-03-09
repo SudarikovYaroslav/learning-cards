@@ -1,31 +1,33 @@
 package controller;
 
-import basicClasses.Card;
-import basicClasses.Dictionary;
-import basicClasses.User;
-import model.facade.ControllerFacade;
 import model.Model;
+import model.basicClasses.Card;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
+import model.facade.ControllerFacade;
 import view.View;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
 
 public class Controller {
 
-    /** Used for dived Card's size, when write it in file and for mapping when read it from file*/
+    /**
+     * Used for dived Card's size, when write it in file and for mapping when read it from file
+     */
     private static final String dividerKey = "151-De.V,i,D.eR-546";
     private View view;
     private ControllerFacade facade;
-    private final String allUsersListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/AllUsersList.txt";
-    private final String usersFolderPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/Users";
-    private final String failsListPath = "C:/Users/Yaroslav/Desktop/Repo/LearningCards/data/";
+    private String usersFolderPath;
 
     public void addModel(Model model) {
         facade = new ControllerFacade();
         facade.setModel(model);
+        usersFolderPath = facade.getUsersFolderPath();
     }
 
     public void addView(View view) {
@@ -37,11 +39,12 @@ public class Controller {
         File[] files = root.listFiles();
         boolean alreadyExists = false;
 
-
-        for (File file : files) {
-            if (file.getName().equals(user.getName())) {
-                alreadyExists = true;
-                break;
+        if (files != null) {
+            for (File file : files) {
+                if (file.getName().equals(user.getName())) {
+                    alreadyExists = true;
+                    break;
+                }
             }
         }
 
@@ -100,10 +103,12 @@ public class Controller {
         File userFolder = new File(usersFolderPath + "/" + user.getName());
         File[] usersDictionaries = userFolder.listFiles();
 
-        for (File file : usersDictionaries) {
-            if (file.getName().equals(dictionary.getName())) {
-                checkExistence = true;
-                break;
+        if (usersDictionaries != null) {
+            for (File file : usersDictionaries) {
+                if (file.getName().equals(dictionary.getName())) {
+                    checkExistence = true;
+                    break;
+                }
             }
         }
 
@@ -164,7 +169,8 @@ public class Controller {
         if (!failsListTXT.exists()) {
             try {
                 if (failsListTXT.createNewFile()) {
-                    messageBuilder.append("File: ").append(failsListTXT.getAbsolutePath()).append(" has been successfully created\n");
+                    messageBuilder.append("File: ").append(failsListTXT.getAbsolutePath()).append(" has been " +
+                            "successfully created\n");
                 }
             } catch (IOException e) {
                 e.printStackTrace();

@@ -1,10 +1,10 @@
 package model.facade;
 
-import basicClasses.Card;
-import basicClasses.Dictionary;
-import basicClasses.User;
+import model.basicClasses.Card;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class ControllerFacade extends Facade {
@@ -55,5 +55,9 @@ public class ControllerFacade extends Facade {
 
     public String deleteFromFailsList(File failsListTXT, Card card) {
         return model.deleteFromFailsList(failsListTXT, card);
+    }
+
+    public String getUsersFolderPath() {
+        return model.getUsersFolderPath();
     }
 }

@@ -1,7 +1,7 @@
 package GUI;
 
-import basicClasses.User;
 import controller.Controller;
+import model.basicClasses.User;
 import view.View;
 
 import javax.swing.*;
@@ -31,8 +31,8 @@ public class UserSelectGUI implements GUI {
 
         basicGUI.frame.setTitle("Learning Cars");
 
-        // наверное нужно убрать ViewFacade из BasicGIU и вообще удалить этот класс, по идее его вообще не должно было бы быть, а view жолжна получать всё информацию
-        // от модели с помощью паттерна наблюдатель;
+        // наверное нужно убрать ViewFacade из BasicGIU и вообще удалить этот класс, по идее его вообще не должно было
+        // бы быть, а view жолжна получать всё информацию от модели с помощью паттерна наблюдатель;
         ArrayList<User> users = basicGUI.viewFacade.getUsersList();
         String[] availableUsers = getUsersNames(users);
 
@@ -87,7 +87,7 @@ public class UserSelectGUI implements GUI {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {
-                String selectedUserName = (String) usersJList.getSelectedValue();
+                String selectedUserName = usersJList.getSelectedValue();
                 chosenUser = controller.getUser(selectedUserName);
             }
         }

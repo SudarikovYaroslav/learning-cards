@@ -1,6 +1,6 @@
 package model.facade;
 
-import basicClasses.User;
+import model.basicClasses.User;
 
 import java.util.ArrayList;
 

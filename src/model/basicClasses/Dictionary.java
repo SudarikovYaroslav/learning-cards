@@ -1,4 +1,4 @@
-package basicClasses;
+package model.basicClasses;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,9 @@ public class Dictionary implements Serializable {
         isAnswerShown = false;
     }
 
-    /** This constructor used to build clone of dicForCloning*/
+    /**
+     * This constructor used to build clone of dicForCloning
+     */
     public Dictionary(Dictionary dicForCloning) {
         name = dicForCloning.getName();
         cards = new LinkedList<>();
@@ -48,7 +50,9 @@ public class Dictionary implements Serializable {
         return cards;
     }
 
-    /** perhaps I should delete this method because it won't be used*/
+    /**
+     * perhaps I should delete this method because it won't be used
+     */
     public void createNewCard() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String front = null;
@@ -128,6 +132,14 @@ public class Dictionary implements Serializable {
         missedCards.add(cards.get(counter - 1));
     }
 
+    // Метод рабочий, но конструкция не очень удачная, надо бы избавиться от вложенных ифов. Может исправлю позже.
+    /**
+     * This method gives a different hints in different cases:
+     * - shot word: a hint is one next letter;
+     * - long word: a hint is three next letters;
+     * - shot text: a hint is one word;
+     * - long text: a hint is three next words; // НУЖНО ДОДЕЛАТЬ ЭТОТ ВАРИАНТ, ОН ВООБЩЕ НЕ РЕАЛИЗОВАН!!!!!!
+     * */
     public String giveHint() {
         String hint = "";
 
@@ -135,16 +147,16 @@ public class Dictionary implements Serializable {
             String[] arr = giveAnswer().split(" ");
             isAnswerShown = false;
 
-            // one word in answer
+            // if answer consists of one word
             if (arr.length == 1) {
                 hintCounter++;
                 String word = arr[0];
 
-                if (word.length() < 6) { // short word
+                if (word.length() < 6) { // if answer's a short word
 
                     hint = word.substring(0, hintCounter);
 
-                } else { // long word
+                } else { //if answer's one long word
 
                     int pos = 2;
 

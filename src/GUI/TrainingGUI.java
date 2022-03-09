@@ -1,9 +1,9 @@
 package GUI;
 
-import basicClasses.Card;
-import basicClasses.Dictionary;
-import basicClasses.User;
 import controller.Controller;
+import model.basicClasses.Card;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
 import view.View;
 
 import javax.swing.*;
@@ -13,22 +13,25 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-/** Perhaps this class designed not correctly, because during training time it won't be ask controller to show
-    next card for example. I decided to do most operations directly inside this class because it have all information
-    to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in the next program update.*/
+/**
+ * Perhaps this class designed not correctly, because during training time it won't be ask controller to show
+ * next card for example. I decided to do most operations directly inside this class because it have all information
+ * to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in one of the next program
+ * updates.
+ */
 public class TrainingGUI implements GUI {
-    /** The field User user; Must be initialized in eny cases in all constructors*/
     private final User user;
     private final View view;
     private final Controller controller;
     private final BasicGUI basicGUI;
     private final GUI previousGUI;
-    private JTextArea frontArea;
-    private JTextArea backArea;
     private final Dictionary trainingDictionary;
     private final boolean isFailsListUsed;
+    private JTextArea frontArea;
+    private JTextArea backArea;
 
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, Dictionary dictionary, GUI previousGUI, User user) {
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, Dictionary dictionary, GUI previousGUI,
+                       User user) {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
@@ -38,8 +41,8 @@ public class TrainingGUI implements GUI {
         this.user = user;
     }
 
-    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries, GUI previousGUI, User user) {
-        // сделать из всех словарей один и присвоить его переменной trainingDictionary;
+    public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, ArrayList<Dictionary> dictionaries,
+                       GUI previousGUI, User user) {
         this.basicGUI = basicGUI;
         this.view = view;
         this.controller = controller;
@@ -49,7 +52,9 @@ public class TrainingGUI implements GUI {
         this.user = user;
     }
 
-    /** This constructor used only for init FailsTraining*/
+    /**
+     * This constructor used only for init FailsTraining
+     */
     public TrainingGUI(BasicGUI basicGUI, View view, Controller controller, GUI previousGUI, User user) {
         this.basicGUI = basicGUI;
         this.view = view;
@@ -124,8 +129,10 @@ public class TrainingGUI implements GUI {
         frontArea.setText(trainingDictionary.nextCard());
     }
 
-    /** interaction with fails List which should be loaded by using controller
-        and placed in the trainingDictionary field*/
+    /**
+     * interaction with fails List which should be loaded by using controller
+     * and placed in the trainingDictionary field
+     */
     public void startFailsRepetition() {
         go();
         frontArea.setText(trainingDictionary.nextCard());

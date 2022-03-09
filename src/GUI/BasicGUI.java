@@ -19,10 +19,6 @@ public class BasicGUI implements GUI {
     Font bigFont;
     View view;
 
-    public ViewFacade getViewFacade() {
-        return viewFacade;
-    }
-
     public BasicGUI(ViewFacade facade, View view) {
         this.viewFacade = facade;
         this.view = view;
@@ -39,8 +35,14 @@ public class BasicGUI implements GUI {
         menuBar.add(mainMenu);
     }
 
-    /** Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
-        серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК*/
+    public ViewFacade getViewFacade() {
+        return viewFacade;
+    }
+
+    /**
+     * Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
+     * серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК
+     */
     public void go() {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
@@ -48,13 +50,6 @@ public class BasicGUI implements GUI {
         frame.setJMenuBar(menuBar);
         frame.setSize(580, 500);
         frame.setVisible(true);
-    }
-
-    static class menuExitItemListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
     }
 
     public void clear() {
@@ -79,5 +74,12 @@ public class BasicGUI implements GUI {
         buttonsPanel = new JPanel();
         buttonsPanel.setBackground(Color.CYAN);
         buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+    }
+
+    static class menuExitItemListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
     }
 }

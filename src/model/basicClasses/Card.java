@@ -1,4 +1,4 @@
-package basicClasses;
+package model.basicClasses;
 
 public class Card {
     private String front;
@@ -13,12 +13,12 @@ public class Card {
         return front;
     }
 
-    public String getBack() {
-        return back;
-    }
-
     public void setFront(String front) {
         this.front = front;
+    }
+
+    public String getBack() {
+        return back;
     }
 
     public void setBack(String back) {

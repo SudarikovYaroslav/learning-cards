@@ -82,7 +82,8 @@ Comments:
 
 13. ( DONE! ) createUser() in model troubles with adding new User in UserSelectGUI usersList
 
-14. ( DONE! ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user. Trouble in model deleteUser();
+14. ( DONE! ) UserSelectedGUI deleteUser() It work, but JList in GUI doesn't change after successful delete user.
+              Trouble in model deleteUser();
 
 15. ( FIXED! ) BUG !!!
     ( fixed! ) it seems some troubles with text area! It list there is no null checking!!!
@@ -129,35 +130,40 @@ Comments:
 
 31. ( FIXED! ) In multiTraining NullPointerException when the button "Finish Training" pressed
 
-32. ( FIXED! ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue press the button
+32. ( FIXED! ) GiveHint button: in TrainingGUI throws IndexOutOfBoundsException when answer is end and you continue
+               press the button
 
 33. ( FIXED! ) GiveHintButton: works after second press
 
 34. ( FIXED! ) GiveHintButton: works incorrectly with long one word answer
 
-35. ( FIXED! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead: previous word plus next word;
+35. ( FIXED! ) GiveHintButton: when works with several words answer, give a hint directly with one next word instead:
+               previous word plus next word;
 
 36. ( FIXED! ) TrainingGUI: when cards run out and the button Show an Answer pushed: throws IndexOutOfBoundsException
 
-37. ( FIXED! ) If you finished a training in some Dictionary. If you try to repeat training with this dictionary in the same session
-             when it'll starts, you'll see "Cards run out";
+37. ( FIXED! ) If you finished a training in some Dictionary. If you try to repeat training with this dictionary in the
+               same session when it'll starts, you'll see "Cards run out";
 
-38. ( FIXED! ) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed after answer completely shown
+38. ( FIXED! ) in TrainingGUI hintButton: Throws IndexOutOfBoundsException from one word section when button pushed
+               after answer completely shown
 
 39. ( FIXED! ) кнопка подсказка: при работе с ответами из нескольких слов не корректно выводятся пробелы между словами
-            при выводе последнего слова, проверить счётчики!
+               при выводе последнего слова, проверить счётчики!
 
 40. ( FIXED! ) hint button: after answer's completely shown, next click gives empty answer
 
 41. ( FIXED! ) Training: And again )))! When cars run out, and trying click some of buttons: nextCard or giveHint,
-    throws IndexOutOfBoundsException!
+               throws IndexOutOfBoundsException!
 
 42. ( DONE ) Make FailsRepetition
-    (done) change FailsButton in TrainingGUI, when Fails Repetition starts
-    (FIXED) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
-    (FIXED) After card added to the fails repetition list, after click button OK nothing happen. Should return to the TrainingGUI
-    (done) add to the fails list repetition process
-    (done) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries list.
+    ( done ) change FailsButton in TrainingGUI, when Fails Repetition starts
+    ( FIXED ) Controller/addToTheFailsList(User user, Card card); throws NullPointerException
+    ( FIXED ) After card added to the fails repetition list, after click button OK nothing happen. Should return to the
+              TrainingGUI
+    ( done ) add to the fails list repetition process
+    ( done ) start fails repetition. Perhaps it doesn't need, because fails list added as a Dictionary in Dictionaries
+             list.
             BUT! May be I need hide this list from all dictionaries list. Perhaps create this file in other place.
     ( FIXED! ) during failsRepetition when clicked the button "Finish training": throws  NullPointerException
 43. ( DONE! ) UserProfileGUI/button: MultiTraining
@@ -167,4 +173,5 @@ Comments:
 45. ( FIXED ) When FailsRepetition starts by the FailsList Dictionary from Dictionaries list, the
             button "Add to the fails repetition list" doesn't changed to the "Remove from fails repetition list"
 
-46. ( FIXED! ) When fails training starts after some card was deleted from it: Front area is clear instead next card - front message
+46. ( FIXED! ) When fails training starts after some card was deleted from it: Front area is clear instead next card -
+               front message

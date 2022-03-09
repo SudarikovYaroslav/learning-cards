@@ -7,22 +7,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ExceptionsGUI implements GUI {
+public class MessagesGUI implements GUI {
 
     private final BasicGUI basicGUI;
     private final String message;
-    private GUI previousGUI;
-    private View view;
+    private final GUI previousGUI;
+    private final View view;
 
-    public ExceptionsGUI(BasicGUI basicGUI, GUI previousGUI, String message, View view) {
+    public MessagesGUI(BasicGUI basicGUI, GUI previousGUI, String message, View view) {
         this.basicGUI = basicGUI;
         this.previousGUI = previousGUI;
         this.message = message;
         this.view = view;
     }
 
-    /** Важно ! При запуске ExceptionsGUI не передавать во view.currentGUI на него ссылку, инача не получиться
-        вернуться на предыдущий GUI*/
+    /**
+     * Важно! При запуске MessagesGUI не передавать во view.currentGUI на него ссылку, инача не получиться
+     * вернуться на предыдущий GUI
+     */
     public void go() {
         basicGUI.clear();
         JTextArea textArea = new JTextArea(message);

@@ -1,8 +1,8 @@
 package GUI;
 
-import basicClasses.Dictionary;
-import basicClasses.User;
 import controller.Controller;
+import model.basicClasses.Dictionary;
+import model.basicClasses.User;
 import view.View;
 
 import javax.swing.*;
@@ -19,8 +19,8 @@ public class UserProfileGUI implements GUI {
     private final Controller controller;
     private final BasicGUI basicGUI;
     private final User user;
-    private JList<String> dictionariesJList;
     private final ArrayList<Dictionary> userDictionaries;
+    private JList<String> dictionariesJList;
     private Dictionary currentDictionary;
 
     public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
@@ -136,7 +136,8 @@ public class UserProfileGUI implements GUI {
                     TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, view.getCurrentGUI(), user);
                     failsTraining.startFailsRepetition();
                 } else {
-                    TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary, view.getCurrentGUI(), user);
+                    TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, currentDictionary,
+                            view.getCurrentGUI(), user);
                     trainingGUI.trainingGO();
                 }
             }
@@ -146,7 +147,8 @@ public class UserProfileGUI implements GUI {
     private class MultiTrainingListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries, view.getCurrentGUI(), user);
+            TrainingGUI trainingGUI = new TrainingGUI(basicGUI, view, controller, userDictionaries,
+                    view.getCurrentGUI(), user);
             trainingGUI.trainingGO();
         }
     }
