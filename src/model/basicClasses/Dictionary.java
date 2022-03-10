@@ -54,9 +54,9 @@ public class Dictionary implements Serializable {
         return cards;
     }
 
-    /**
-     * perhaps I should delete this method because it won't be used
-     */
+    // Пока метод не используется, новые карточки сразу вписываются в фал на ПК, но пока решил оставить, т.к есть
+    // идея сделать, чтобы программа работал полностью из оперативной памяти, без промежуточных записей новых карточек
+    // в файл, и там он понадобится. Запись при этом будет происходить только один раз при выходе из программы.
     public void createNewCard() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String front = null;
@@ -136,7 +136,7 @@ public class Dictionary implements Serializable {
         missedCards.add(cards.get(counter - 1));
     }
 
-    // Метод рабочий, но конструкция не очень удачная, надо бы избавиться от вложенных ифов. Может исправлю позже.
+    // Метод рабочий, но конструкция не очень удачная, надо бы написать как-то проще. Может исправлю позже.
     /**
      * This method gives a different hints in different cases:
      * - shot word: a hint is one next letter;
@@ -171,12 +171,13 @@ public class Dictionary implements Serializable {
                     hint = word.substring(0, hintCounter += pos);
                 }
 
-            } else {
-                StringBuilder answerBuilder = new StringBuilder();
+            } else if (arr.length < 10) {
+                StringBuilder answerBuilder = new StringBuilder(); // if answer's a shot text
                 int nextWordIndex = 0;
 
                 if (hintCounter < arr.length) {
                     hintCounter++;
+
                     while (nextWordIndex < hintCounter) {
                         answerBuilder.append(arr[nextWordIndex]);
                         if (nextWordIndex < arr.length) {
@@ -185,9 +186,36 @@ public class Dictionary implements Serializable {
                         nextWordIndex++;
                     }
                 }
+
                 if (nextWordIndex == arr.length) isAnswerShown = true;
+
+                return answerBuilder.toString();
+
+            } else {
+                StringBuilder answerBuilder = new StringBuilder(); // if answer's a long text
+                int nextWordIndex = 0;
+
+                if (hintCounter < arr.length) {
+                    hintCounter += 3;
+
+                    while (hintCounter > arr.length) {
+                        hintCounter--;
+                    }
+
+                    while (nextWordIndex < hintCounter) {
+                        answerBuilder.append(arr[nextWordIndex]);
+                        if (nextWordIndex < arr.length) {
+                            answerBuilder.append(" ");
+                        }
+                        nextWordIndex++;
+                    }
+                }
+
+                if (nextWordIndex == arr.length) isAnswerShown = true;
+
                 return answerBuilder.toString();
             }
+
         } else {
             if (isCardsRunOut) {
                 return "";
