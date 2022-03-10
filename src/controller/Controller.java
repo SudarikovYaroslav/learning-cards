@@ -13,7 +13,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Controller {
 
     /**
@@ -73,17 +72,8 @@ public class Controller {
     }
 
     public boolean createDictionary(User user, String newDictionaryName) {
-        ArrayList<Dictionary> existsDictionaries = user.getDictionaries();
-        boolean alreadyExist = false;
+        boolean alreadyExist = checkDictionaryExistence(user, newDictionaryName);
         boolean success = false;
-
-
-        for (Dictionary dictionary : existsDictionaries) {
-            if (dictionary.getName().equals(newDictionaryName + ".txt")) {
-                alreadyExist = true;
-                break;
-            }
-        }
 
         if (newDictionaryName.length() == 0) {
             view.printMessage("The Dictionary name should contains at list one symbol!");
@@ -228,5 +218,35 @@ public class Controller {
         }
 
         return message;
+    }
+
+    public boolean setDictionaryName(User user, Dictionary dictionary, String newName) {
+        boolean alreadyExists = checkDictionaryExistence(user, newName);
+        boolean success = false;
+
+        if (alreadyExists) {
+            view.printMessage("Dictionary with this name already exist! Please choose another dictionary name");
+            return false;
+        } else if (user.getName().length() == 0) {
+            view.printMessage("Dictionary name should contain at list a one symbol!");
+            return false;
+        } else {
+            success = facade.setDictionaryName(user, dictionary, newName + ".txt");
+        }
+
+        return success;
+    }
+
+    private boolean checkDictionaryExistence(User user, String dictionaryName) {
+        ArrayList<Dictionary> existsDictionaries = user.getDictionaries();
+        boolean alreadyExist = false;
+
+        for (Dictionary dictionary : existsDictionaries) {
+            if (dictionary.getName().equals(dictionaryName + ".txt")) {
+                alreadyExist = true;
+                break;
+            }
+        }
+        return alreadyExist;
     }
 }

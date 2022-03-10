@@ -60,4 +60,8 @@ public class ControllerFacade extends Facade {
     public String getUsersFolderPath() {
         return model.getUsersFolderPath();
     }
+
+    public boolean setDictionaryName(User user, Dictionary dictionary, String newDictionaryName) {
+        return model.setDictionaryName(user, dictionary, newDictionaryName);
+    }
 }

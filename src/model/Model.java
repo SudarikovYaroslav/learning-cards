@@ -5,6 +5,9 @@ import model.basicClasses.Dictionary;
 import model.basicClasses.User;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -390,5 +393,20 @@ public class Model {
 
     public String getUsersFolderPath() {
         return usersFolderPath;
+    }
+
+    public boolean setDictionaryName(User user, Dictionary dictionary, String newDictionaryName) {
+        boolean success = false;
+
+        Path source = Paths.get(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
+        try {
+            Files.move(source, source.resolveSibling(newDictionaryName));
+            dictionary.setName(newDictionaryName);
+            success = true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return success;
     }
 }

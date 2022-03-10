@@ -11,10 +11,10 @@ import java.util.LinkedList;
 public class Dictionary implements Serializable {
 
     private String name;
-    private LinkedList<Card> cards;
+    private final LinkedList<Card> cards;
     private int counter;
     private int hintCounter;
-    private ArrayList<Card> missedCards;
+    private final ArrayList<Card> missedCards;
     private boolean isCardsRunOut;
     private boolean isAnswerShown;
 
@@ -44,6 +44,10 @@ public class Dictionary implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public LinkedList<Card> getCards() {

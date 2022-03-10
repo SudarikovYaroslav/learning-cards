@@ -158,7 +158,9 @@ public class DictionaryGUI implements GUI {
     private class ChangeNameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("THIS FEATURE DOESN'T WORK YET!");
+            RenameDictionaryGUI renameDictionaryGUI = new RenameDictionaryGUI(basicGUI, dictionary, currentUser, view,
+                    controller);
+            renameDictionaryGUI.go();
         }
     }
 
