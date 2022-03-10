@@ -14,8 +14,10 @@ import java.util.Set;
 
 
 public class Model {
-    private static final String dividerKey = "151-De.V,i,D.eR-546"; // Used for dived Card's size, when write it in file
-    // and for mapping when read it from file
+    /**
+     * dividerKey must be used for dived Card's sizes, when write it in a file and for mapping when read it from a file.
+     */
+    private static final String DIVIDER_KEY = "151-De.V,i,D.eR-546";
     private final ArrayList<User> availableUsersList;
     private final Set<User> loadedUsersHash = new HashSet<>();
 
@@ -113,10 +115,10 @@ public class Model {
 
         try {
             reader = new BufferedReader(new FileReader(dictionaryTXT));
-            String line = null;
+            String line;
 
             while ((line = reader.readLine()) != null) {
-                String[] arr = line.split(dividerKey);
+                String[] arr = line.split(DIVIDER_KEY);
                 frontSize = arr[0];
                 backSize = arr[1];
                 currentCard = new Card(frontSize, backSize);
@@ -135,41 +137,35 @@ public class Model {
         File userToDelete = new File(usersFolderPath + "/" + user.getName());
         File[] dictionaries = userToDelete.listFiles();
 
-        if (dictionaries.length != 0) {
-            for (File dictionary : dictionaries) {
-                dictionary.delete();
-            }
-        }
-
-        successful = userToDelete.delete();
-
-        if (successful) {
-
-            //availableUsersList.remove(user); не понимаю в чём проблема, но пользователь user не удаляется этой
-            // строчкой!!
-            //!! CROOKED CRUTCH!! But it's worked correctly!!
-            for (int i = 0; i < availableUsersList.size(); i++) {
-                if (availableUsersList.get(i).getName().equals(user.getName())) {
-                    availableUsersList.remove(i);
+        if (dictionaries != null) {
+            if (dictionaries.length != 0) {
+                for (File dictionary : dictionaries) {
+                    dictionary.delete();
                 }
             }
-            //
 
-            if (availableUsersList.size() != 0) {
-                BufferedWriter writer;
-                try {
-                    writer = new BufferedWriter(new FileWriter(allUsersListPath, false));
+            successful = userToDelete.delete();
 
-                    for (User u : availableUsersList) {
-                        writer.write(u.getName() + "\n");
+            if (successful) {
+
+                availableUsersList.remove(user);
+
+                if (availableUsersList.size() != 0) {
+                    BufferedWriter writer;
+                    try {
+                        writer = new BufferedWriter(new FileWriter(allUsersListPath, false));
+
+                        for (User u : availableUsersList) {
+                            writer.write(u.getName() + "\n");
+                        }
+
+                        writer.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } else {
+                    recreateAvailableUsersListFile();
                 }
-            } else {
-                recreateAvailableUsersListFile();
             }
         }
 
@@ -238,7 +234,7 @@ public class Model {
 
         try {
             writer = new BufferedWriter(new FileWriter(dicTXT, true));
-            writer.write(frontSide + dividerKey + backSide + "\n");
+            writer.write(frontSide + DIVIDER_KEY + backSide + "\n");
             success = true;
             writer.close();
         } catch (IOException e) {
@@ -259,7 +255,7 @@ public class Model {
             String line;
             while ((line = reader.readLine()) != null) {
 
-                String[] arr = line.split(dividerKey);
+                String[] arr = line.split(DIVIDER_KEY);
 
                 if (!arr[0].equals(card.getFront())) {
                     strCards.add(line);
@@ -291,10 +287,10 @@ public class Model {
             reader = new BufferedReader(new FileReader(dictionaryTXT));
 
             while ((line = reader.readLine()) != null) {
-                String[] arr = line.split(dividerKey);
+                String[] arr = line.split(DIVIDER_KEY);
 
                 if (arr[0].equals(front)) {
-                    line = front + dividerKey + back;
+                    line = front + DIVIDER_KEY + back;
                 }
 
                 cardsStr.add(line);
@@ -323,7 +319,7 @@ public class Model {
 
         try {
             writer = new BufferedWriter(new FileWriter(failsListTXT, true));
-            writer.write(card.getFront() + dividerKey + card.getBack() + "\n");
+            writer.write(card.getFront() + DIVIDER_KEY + card.getBack() + "\n");
             writer.close();
             success = true;
         } catch (IOException e) {
@@ -344,7 +340,7 @@ public class Model {
             reader = new BufferedReader(new FileReader(failsTXT));
 
             while ((data = reader.readLine()) != null) {
-                String[] arr = data.split(dividerKey);
+                String[] arr = data.split(DIVIDER_KEY);
                 failCard = new Card(arr[0], arr[1]);
                 failsDictionary.addCard(failCard);
             }
@@ -369,7 +365,7 @@ public class Model {
             reader = new BufferedReader(new FileReader(failsListTXT));
 
             while ((line = reader.readLine()) != null) {
-                String[] arr = line.split(dividerKey);
+                String[] arr = line.split(DIVIDER_KEY);
                 if (!arr[0].equals(card.getFront())) {
                     data.add(line);
                 }
