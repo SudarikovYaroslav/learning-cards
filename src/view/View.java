@@ -6,7 +6,7 @@ import GUI.MessagesGUI;
 import GUI.UserSelectGUI;
 import controller.Controller;
 import model.Model;
-import model.facade.ViewFacade;
+import model.ViewFacade;
 
 public class View {
     private ViewFacade facade;

@@ -1,7 +1,7 @@
 package GUI;
 
 import controller.Controller;
-import model.facade.ViewFacade;
+import model.ViewFacade;
 import view.View;
 
 import javax.swing.*;

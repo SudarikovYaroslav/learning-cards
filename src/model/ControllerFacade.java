@@ -1,4 +1,4 @@
-package model.facade;
+package model;
 
 import model.basicClasses.Card;
 import model.basicClasses.Dictionary;

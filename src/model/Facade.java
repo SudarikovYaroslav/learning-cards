@@ -1,6 +1,4 @@
-package model.facade;
-
-import model.Model;
+package model;
 
 public abstract class Facade {
     Model model;

@@ -30,11 +30,11 @@ public class Model {
         loadUsersList();
     }
 
-    public ArrayList<User> getAvailableUsersList() {
+    protected ArrayList<User> getAvailableUsersList() {
         return availableUsersList;
     }
 
-    private void loadUsersList() {
+    protected void loadUsersList() {
         availableUsersList.clear();
         BufferedReader reader;
         String line;
@@ -52,7 +52,7 @@ public class Model {
         }
     }
 
-    public void createUser(User user) {
+    protected void createUser(User user) {
         File newUser = new File(usersFolderPath + "/" + user.getName());
         BufferedWriter writer;
         try {
@@ -68,7 +68,7 @@ public class Model {
 
     }
 
-    public User getUser(String userName) {
+    protected User getUser(String userName) {
 
         for (User user : loadedUsersHash) {
             if (user.getName().equals(userName)) {
@@ -132,7 +132,7 @@ public class Model {
         }
     }
 
-    public boolean deleteUser(User user) {
+    protected boolean deleteUser(User user) {
         boolean successful = false;
         File userToDelete = new File(usersFolderPath + "/" + user.getName());
         File[] dictionaries = userToDelete.listFiles();
@@ -172,7 +172,7 @@ public class Model {
         return successful;
     }
 
-    public boolean createDictionary(User user, String dictionaryName) {
+    protected boolean createDictionary(User user, String dictionaryName) {
         boolean success = false;
         Dictionary dictionary = new Dictionary(dictionaryName + ".txt");
         user.addDictionary(dictionary);
@@ -189,7 +189,7 @@ public class Model {
         return success;
     }
 
-    public boolean deleteDictionary(User user, Dictionary dictionary) {
+    protected boolean deleteDictionary(User user, Dictionary dictionary) {
         File removingDictionary = new File(usersFolderPath + "/" + user.getName() + "/" +
                 dictionary.getName());
         ArrayList<Dictionary> dictionaries = user.getDictionaries();
@@ -216,7 +216,7 @@ public class Model {
         }
     }
 
-    public boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide) {
+    protected boolean createCard(User user, Dictionary dictionary, String frontSide, String backSide) {
         File dicTXT = new File(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());
         BufferedWriter writer;
         boolean success = false;
@@ -244,7 +244,7 @@ public class Model {
         return success;
     }
 
-    public boolean deleteCard(File dicTXT, Card card) {
+    protected boolean deleteCard(File dicTXT, Card card) {
         boolean success = false;
         ArrayList<String> strCards = new ArrayList<>();
         BufferedReader reader;
@@ -276,7 +276,7 @@ public class Model {
         return success;
     }
 
-    public boolean editCard(File dictionaryTXT, String front, String back) {
+    protected boolean editCard(File dictionaryTXT, String front, String back) {
         boolean success = false;
         ArrayList<String> cardsStr = new ArrayList<>();
         BufferedReader reader;
@@ -313,7 +313,7 @@ public class Model {
         return success;
     }
 
-    public boolean addToTheFailsList(File failsListTXT, Card card) {
+    protected boolean addToTheFailsList(File failsListTXT, Card card) {
         BufferedWriter writer;
         boolean success = false;
 
@@ -329,7 +329,7 @@ public class Model {
         return success;
     }
 
-    public Dictionary loadFailsDictionary(File failsTXT) {
+    protected Dictionary loadFailsDictionary(File failsTXT) {
         Dictionary failsDictionary = new Dictionary("Fails Dictionary");
 
         BufferedReader reader;
@@ -354,7 +354,7 @@ public class Model {
         return failsDictionary;
     }
 
-    public String deleteFromFailsList(File failsListTXT, Card card) {
+    protected String deleteFromFailsList(File failsListTXT, Card card) {
         String message = "Operation failed";
         ArrayList<String> data = new ArrayList<>();
         String line;
@@ -387,11 +387,11 @@ public class Model {
         return message;
     }
 
-    public String getUsersFolderPath() {
+    protected String getUsersFolderPath() {
         return usersFolderPath;
     }
 
-    public boolean setDictionaryName(User user, Dictionary dictionary, String newDictionaryName) {
+    protected boolean setDictionaryName(User user, Dictionary dictionary, String newDictionaryName) {
         boolean success = false;
 
         Path source = Paths.get(usersFolderPath + "/" + user.getName() + "/" + dictionary.getName());

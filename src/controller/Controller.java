@@ -4,7 +4,7 @@ import model.Model;
 import model.basicClasses.Card;
 import model.basicClasses.Dictionary;
 import model.basicClasses.User;
-import model.facade.ControllerFacade;
+import model.ControllerFacade;
 import view.View;
 
 import java.io.BufferedReader;
