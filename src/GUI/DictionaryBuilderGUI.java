@@ -19,7 +19,10 @@ public class DictionaryBuilderGUI implements GUI {
     private JTextField jTextField;
     private JLabel messageLabel;
 
-    public DictionaryBuilderGUI(BasicGUI basicGUI, Controller controller, View view, User currentUser) {
+    public DictionaryBuilderGUI(BasicGUI basicGUI,
+                                Controller controller,
+                                View view,
+                                User currentUser) {
         this.basicGUI = basicGUI;
         this.controller = controller;
         this.view = view;

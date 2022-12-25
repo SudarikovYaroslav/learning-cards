@@ -40,7 +40,7 @@ public class BasicGUI implements GUI {
     }
 
     /**
-     * Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это пораждает
+     * Важно! при вызове go() в BasicGUI, не передавать его во view.currentGUI, это порождает
      * серьёзный сбой в работе exceptionsGUI при нажатии кнопки ОК
      */
     public void go() {

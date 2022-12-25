@@ -22,7 +22,7 @@ public class MessagesGUI implements GUI {
     }
 
     /**
-     * Важно! При запуске MessagesGUI не передавать во view.currentGUI на него ссылку, инача не получиться
+     * Важно! При запуске MessagesGUI не передавать во view.currentGUI на него ссылку, иначе не получиться
      * вернуться на предыдущий GUI
      */
     public void go() {

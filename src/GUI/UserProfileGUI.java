@@ -15,6 +15,9 @@ import java.util.ArrayList;
 
 
 public class UserProfileGUI implements GUI {
+
+    public static final String POSTFIX = ".txt";
+
     private final View view;
     private final Controller controller;
     private final BasicGUI basicGUI;
@@ -23,7 +26,10 @@ public class UserProfileGUI implements GUI {
     private JList<String> dictionariesJList;
     private Dictionary currentDictionary;
 
-    public UserProfileGUI(BasicGUI basicGUI, Controller controller, User currentUser, View view) {
+    public UserProfileGUI(BasicGUI basicGUI,
+                          Controller controller,
+                          User currentUser,
+                          View view) {
         this.basicGUI = basicGUI;
         this.controller = controller;
         user = currentUser;
@@ -69,7 +75,6 @@ public class UserProfileGUI implements GUI {
         createNewDictionaryButton.addActionListener(new CreateNewDictionaryListener());
         startFailsRepetitionButton.addActionListener(new StartFailsRepetitionListener());
 
-
         basicGUI.buttonsPanel.add(createNewDictionaryButton);
         basicGUI.buttonsPanel.add(editDictionaryButton);
         basicGUI.buttonsPanel.add(deleteDictionaryButton);
@@ -85,7 +90,7 @@ public class UserProfileGUI implements GUI {
         String[] dictionariesNames = new String[userDictionaries.size()];
 
         for (int i = 0; i < dictionariesNames.length; i++) {
-            String[] arr = userDictionaries.get(i).getName().split(".txt");
+            String[] arr = userDictionaries.get(i).getName().split(POSTFIX);
             dictionariesNames[i] = arr[0];
         }
 
@@ -99,12 +104,11 @@ public class UserProfileGUI implements GUI {
                 String selectedDictionaryName = dictionariesJList.getSelectedValue();
 
                 for (Dictionary dic : userDictionaries) {
-                    if (dic.getName().equals(selectedDictionaryName + ".txt")) {
+                    if (dic.getName().equals(selectedDictionaryName + POSTFIX)) {
                         currentDictionary = dic;
                         return;
                     }
                 }
-
             }
         }
     }
@@ -132,7 +136,6 @@ public class UserProfileGUI implements GUI {
         public void actionPerformed(ActionEvent e) {
             if (currentDictionary != null) {
                 if (currentDictionary.getName().equals("FailsList.txt")) {
-                    // here should be run fails repetition training
                     TrainingGUI failsTraining = new TrainingGUI(basicGUI, view, controller, view.getCurrentGUI(), user);
                     failsTraining.startFailsRepetition();
                 } else {

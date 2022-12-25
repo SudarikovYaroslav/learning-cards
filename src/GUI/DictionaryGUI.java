@@ -25,7 +25,11 @@ public class DictionaryGUI implements GUI {
     private JList<String> cardsJList;
     private Card currentCard;
 
-    public DictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
+    public DictionaryGUI(BasicGUI basicGUI,
+                         Dictionary dictionary,
+                         User currentUser,
+                         View view,
+                         Controller controller) {
         this.basicGUI = basicGUI;
         this.dictionary = dictionary;
         this.currentUser = currentUser;

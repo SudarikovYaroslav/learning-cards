@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Controller {
 
     /**
-     * Used for dived Card's size, when write it in file and for mapping when read it from file
+     * dividerKey used for dived Card's size, when write it in file and for mapping when read it from file
      */
     private static final String dividerKey = "151-De.V,i,D.eR-546";
     private View view;
@@ -209,7 +209,7 @@ public class Controller {
 
     public String deleteFromFailsList(User user, Card card) {
         File failsListTXT = new File(usersFolderPath + "/" + user.getName() + "/FailsList.txt");
-        String message = "Operation failed ((";
+        String message;
 
         if (!failsListTXT.exists()) {
             message = "Fails list doesn't contains selected card";
@@ -222,7 +222,7 @@ public class Controller {
 
     public boolean setDictionaryName(User user, Dictionary dictionary, String newName) {
         boolean alreadyExists = checkDictionaryExistence(user, newName);
-        boolean success = false;
+        boolean success;
 
         if (alreadyExists) {
             view.printMessage("Dictionary with this name already exist! Please choose another dictionary name");

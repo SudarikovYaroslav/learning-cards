@@ -29,10 +29,8 @@ public class UserSelectGUI implements GUI {
         view.setCurrentGUI(this);
         basicGUI.clear();
 
-        basicGUI.frame.setTitle("Learning Cars");
+        basicGUI.frame.setTitle("Learning Cards");
 
-        // наверное нужно убрать ViewFacade из BasicGIU и вообще удалить этот класс, по идее его вообще не должно было
-        // бы быть, а view жолжна получать всё информацию от модели с помощью паттерна наблюдатель;
         ArrayList<User> users = basicGUI.viewFacade.getUsersList();
         String[] availableUsers = getUsersNames(users);
 

@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 
 public class RenameDictionaryGUI implements GUI {
 
+    public static final int POSTFIX_LENGTH = 4;
+
     private final BasicGUI basicGUI;
     private final Dictionary dictionary;
     private final User currentUser;
@@ -21,7 +23,11 @@ public class RenameDictionaryGUI implements GUI {
     private JTextField textField;
     private JLabel label;
 
-    public RenameDictionaryGUI(BasicGUI basicGUI, Dictionary dictionary, User currentUser, View view, Controller controller) {
+    public RenameDictionaryGUI(BasicGUI basicGUI,
+                               Dictionary dictionary,
+                               User currentUser,
+                               View view,
+                               Controller controller) {
         this.basicGUI = basicGUI;
         this.dictionary = dictionary;
         this.currentUser = currentUser;
@@ -34,7 +40,8 @@ public class RenameDictionaryGUI implements GUI {
         basicGUI.clear();
         view.setCurrentGUI(this);
 
-        basicGUI.frame.setTitle("Dictionary: " + dictionary.getName().substring(0, dictionary.getName().length() - 4));
+        basicGUI.frame.setTitle("Dictionary: "
+                + dictionary.getName().substring(0, dictionary.getName().length() - POSTFIX_LENGTH));
 
         label = new JLabel("Enter new Dictionary name please and push \"Enter\" button:");
 

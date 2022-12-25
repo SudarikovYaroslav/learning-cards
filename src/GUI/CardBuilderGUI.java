@@ -23,7 +23,10 @@ public class CardBuilderGUI implements GUI {
     private JTextArea backSide;
     private Card editableCard;
 
-    public CardBuilderGUI(BasicGUI basicGUI, User currentUser, Dictionary dictionary, View view,
+    public CardBuilderGUI(BasicGUI basicGUI,
+                          User currentUser,
+                          Dictionary dictionary,
+                          View view,
                           Controller controller) {
         this.basicGUI = basicGUI;
         this.dictionary = dictionary;
@@ -50,7 +53,6 @@ public class CardBuilderGUI implements GUI {
         backSide.setLineWrap(true);
         backSide.setWrapStyleWord(true);
         backSide.setFont(font);
-        //backSide.setFont(basicGUI.bigFont);
         JScrollPane backScroller = new JScrollPane(backSide);
         backScroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         backScroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -129,7 +131,7 @@ public class CardBuilderGUI implements GUI {
         }
     }
 
-    private class DeleteCardListener implements ActionListener {
+    private static class DeleteCardListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 

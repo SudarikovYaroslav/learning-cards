@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 /**
  * Perhaps this class designed not correctly, because during training time it won't be ask controller to show
- * next card for example. I decided to do most operations directly inside this class because it have all information
- * to do this tasks by itself. But may be it's not rely good decision and I'll refactor it in one of the next program
+ * next card for example. I decided to do most operations directly inside this class because it has all information
+ * to do this tasks by itself. But maybe it's not perfect decision, and I'll refactor it in one of the next program
  * updates.
  */
 public class TrainingGUI implements GUI {
